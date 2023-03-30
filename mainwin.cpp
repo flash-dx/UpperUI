@@ -17,7 +17,7 @@ MainWin::MainWin(QWidget *parent) :
     UIHandler::contentHeight = UIHandler::screenHeight - UIHandler::headerHeight - FOOTER_HEIGHT;
 
     ui->stackedWidget->setGeometry(0,UIHandler::headerHeight,UIHandler::contentWidth,UIHandler::contentHeight);
-    ui->MainWin_lbFooterBG->setGeometry(0,UIHandler::headerHeight+UIHandler::contentHeight,UIHandler::contentWidth,UIHandler::footerHeight);
+    ui->MainWin_lbFooterBG->setGeometry(0,UIHandler::screenHeight-FOOTER_HEIGHT,UIHandler::screenWidth,FOOTER_HEIGHT);
 
     ui->MainWin_btSetup->setGeometry((UIHandler::screenWidth/3-338)/2+10,UIHandler::screenHeight-FOOTER_HEIGHT+14,BOTTOM_BUTTON_WIDTH,BOTTOMBUTTON_HEIGHT);
     ui->MainWin_btSetup->setStyleSheet("QPushButton {font-size:60px;padding-left:30;color:#a7a7a7;background: url(:/images/setuprelease.png)}");
