@@ -12,16 +12,16 @@ HomeStartup::HomeStartup(QWidget *parent) :
     ui(new Ui::HomeStartup)
 {
     ui->setupUi(this);
-    ui->Home_Startup_lbLogo->setGeometry((UIHandler::contentWidth*5/6-804)/2,(UIHandler::contentHeight*7/8-190)/2,804,190);
-    ui->Home_Startup_btOpenDoor->setGeometry((UIHandler::contentWidth*5/6-230)/2,(UIHandler::contentHeight*7/8-230)/2 - 100,230,230);
+    ui->Home_Startup_lbLogo->setGeometry((UIHandler::screenWidth-804)/2,(UIHandler::contentHeight*7/8-190)/2,804,190);
+    ui->Home_Startup_btOpenDoor->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2 - 100,230,230);
     ui->Home_Startup_btOpenDoor->setVisible(false);
 
     movie = new QMovie(":/images/opendoorAmi.gif");
-    ui->Home_Startup_lbGif->setGeometry((UIHandler::contentWidth*5/6-230)/2,(UIHandler::contentHeight*7/8-230)/2 - 100,230,230);
+    ui->Home_Startup_lbGif->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2 - 100,230,230);
     ui->Home_Startup_lbGif->setMovie(movie);
     ui->Home_Startup_lbGif->setVisible(false);
 
-    ui->Home_Startup_lbDoorTips->setGeometry((UIHandler::contentWidth*5/6-600)/2,ui->Home_Startup_btOpenDoor->y()+250,600,400);
+    ui->Home_Startup_lbDoorTips->setGeometry((UIHandler::screenWidth-600)/2,ui->Home_Startup_btOpenDoor->y()+250,600,400);
     ui->Home_Startup_lbDoorTips->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
     ui->Home_Startup_lbDoorTips->setVisible(false);
     ui->Home_Startup_lbDoorTips->setWordWrap(true);

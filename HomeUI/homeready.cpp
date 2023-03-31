@@ -15,12 +15,12 @@ HomeReady::HomeReady(QWidget *parent) :
     ui(new Ui::HomeReady)
 {
     ui->setupUi(this);
-    ui->Home_HomeReady_btStart->setGeometry((UIHandler::contentWidth*5/6-219)/2-100,(UIHandler::contentHeight*7/8-224)/2-100,219,224);
-    ui->Home_HomeReady_lbTips->setGeometry((UIHandler::contentWidth*5/6-350)/2-100,ui->Home_HomeReady_btStart->y()+250,350,200);
+    ui->Home_HomeReady_btStart->setGeometry((UIHandler::screenWidth-219)/2-100,(UIHandler::contentHeight*7/8-224)/2-100,219,224);
+    ui->Home_HomeReady_lbTips->setGeometry((UIHandler::screenWidth-350)/2-100,ui->Home_HomeReady_btStart->y()+250,350,200);
     ui->Home_HomeReady_lbTips->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
     ui->Home_HomeReady_lbTips->setWordWrap(true);
 
-    ui->Home_HomeReady_btCancelTest->setGeometry(UIHandler::contentWidth*5/6-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
+    ui->Home_HomeReady_btCancelTest->setGeometry(UIHandler::screenWidth-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
     ui->Home_HomeReady_lbBK1->setGeometry(ui->Home_HomeReady_btStart->x()-368-80,(UIHandler::contentHeight*7/8-457)/2-50,368,457);
     ui->Home_HomeReady_lbBK2->setGeometry(ui->Home_HomeReady_btStart->x()+219+80,(UIHandler::contentHeight*7/8-457)/2-50,368,457);
     ui->Home_HomeReady_btPen->setGeometry(ui->Home_HomeReady_lbBK2->x()+368+100,(UIHandler::contentHeight*7/8-76)/2-50,75,76);

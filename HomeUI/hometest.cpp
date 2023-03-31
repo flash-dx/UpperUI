@@ -17,7 +17,7 @@ HomeTest::HomeTest(QWidget *parent) :
     ui(new Ui::HomeTest)
 {
     ui->setupUi(this);
-    ui->Home_HomeTest_btCancelTest->setGeometry(UIHandler::contentWidth*5/6-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
+    ui->Home_HomeTest_btCancelTest->setGeometry(UIHandler::screenWidth-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
     ui->Home_HomeTest_lbBK1->setGeometry(358+OFFSET_X,224+OFFSET_Y,368,457);
     ui->Home_HomeTest_lbBK2->setGeometry(1195+OFFSET_X,224+OFFSET_Y,368,457);
     ui->Home_HomeTest_lbTestName->setGeometry(368+OFFSET_X,250+OFFSET_Y,348,130);

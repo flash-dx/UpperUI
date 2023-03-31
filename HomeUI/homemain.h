@@ -31,18 +31,13 @@ signals:
 protected:
     void showEvent(QShowEvent *event);
     virtual void hideEvent(QHideEvent *event) Q_DECL_OVERRIDE ;
-    virtual void timerEvent(QTimerEvent *e) Q_DECL_OVERRIDE;
 
 private slots:
-    void on_HomeMain_pb_PowerOff_clicked();
-    void on_HomeMain_pb_quit_clicked();
     void UpdateUI(int machineNo);
     void TestProgress(int complete, int total, int machineNo);
     void slot_btnGrpClicked(QAbstractButton*);
     void slot_clearTestProcess( int machineNo);
     void slot_DoorKeyDown(int machineNo);
-
-    void on_HomeMain_pb_allMac_clicked();
 
 private:
     Ui::HomeMain *ui;

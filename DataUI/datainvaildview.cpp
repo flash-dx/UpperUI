@@ -29,7 +29,7 @@ DataInvaildView::DataInvaildView(QWidget *parent) :
     int contentWidth = UIHandler::contentWidth;
     int contentHeight = UIHandler::contentHeight;
     if (winIndex == 1){
-        contentWidth = UIHandler::contentWidth*5/6;
+        contentWidth = UIHandler::screenWidth;
         contentHeight = UIHandler::contentHeight*7/8;
     }
 

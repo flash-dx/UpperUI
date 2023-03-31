@@ -30,6 +30,11 @@ protected:
 private slots:
     void on_machine_Clicked(int machineNo);
     void slot_DoorKeyDown(int machineNo);
+
+    void on_pBtn_PowerOff_clicked();
+
+    void on_pBtn_loginOut_clicked();
+
 private:
     explicit HomeAllMachine(QWidget *parent = nullptr);
 private:

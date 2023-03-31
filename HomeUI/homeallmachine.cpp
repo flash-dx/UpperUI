@@ -19,6 +19,12 @@ HomeAllMachine::HomeAllMachine(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    int ypos = UIHandler::contentHeight - 90 - 30;
+    ui->pBtn_PowerOff->setGeometry(UIHandler::screenWidth-279-50,ypos,279,90);
+    ui->pBtn_loginOut->setGeometry(ui->pBtn_PowerOff->geometry().x(),ypos-ui->pBtn_PowerOff->geometry().height()-50,279,90);
+    UIHandler::setBtTextCenter(ui->pBtn_loginOut, 1,"background-image: url(:/images/btclose_homemain.png);text-align:left;");
+    UIHandler::setBtTextCenter(ui->pBtn_PowerOff, 35,"background-image: url(:/images/btexit_homemain.png);text-align:left;");
+
 }
 
 void HomeAllMachine::initUi()
@@ -350,6 +356,9 @@ void HomeAllMachine::showEvent(QShowEvent *event)
 {
     UIHandler::NotifyTitle("idle",5);
 
+    ui->pBtn_loginOut->setText(tr("退出登录"));
+    ui->pBtn_PowerOff->setText(tr("关机"));
+
     initUi();
 
     connect(UIHandler::getPtr(),&UIHandler::UpdateUI,this,[=](int machineNo){
@@ -464,6 +473,10 @@ void HomeAllMachine::hideEvent(QHideEvent *event)
            continue;
        else
        {
+            if(!listObj[0]->objectName().isEmpty())
+            {
+                continue;
+            }
             int count = listObj[0]->children().count();
             if(count > 0)
             {
@@ -491,10 +504,21 @@ bool HomeAllMachine::eventFilter(QObject *obj, QEvent *event)
 
 void HomeAllMachine::on_machine_Clicked(int machineNo)
 {
+    UIHandler::GoPage(UIHandler::PageId::Page_Home_Main);
     HomeMain::getPtr()->switchDisplay(machineNo);
 }
 
 void HomeAllMachine::slot_DoorKeyDown(int machineNo)
 {
     HomeMain::getPtr()->switchDisplay(machineNo);
+}
+
+void HomeAllMachine::on_pBtn_PowerOff_clicked()
+{
+    //TwoBtnMessageBox::display(tr("您将关机？"),tr("取消"),tr("确认"));
+}
+
+void HomeAllMachine::on_pBtn_loginOut_clicked()
+{
+     emit UIHandler::getPtr()->EnterLogin(true);
 }

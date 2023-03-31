@@ -15,7 +15,7 @@ E04::E04(QWidget *parent) :
     ui->Home_E04_lbError->setAlignment(Qt::AlignCenter);
     ui->Home_E04_lbError->setWordWrap(true);
     ui->Home_E04_lbError->setStyleSheet("color:red;");
-    ui->Home_E04_lbMessage->setGeometry(0,ui->Home_E04_lbError->y()+120,UIHandler::contentWidth*5/6,400);
+    ui->Home_E04_lbMessage->setGeometry(0,ui->Home_E04_lbError->y()+120,UIHandler::screenWidth,400);
     ui->Home_E04_lbMessage->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
     ui->Home_E04_lbMessage->setWordWrap(true);
     ui->Home_E04_lbMessage->setVisible(false);

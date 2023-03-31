@@ -13,16 +13,16 @@ HomeIdle::HomeIdle(QWidget *parent) :
 {
     ui->setupUi(this);
     setStyleSheet("background-color:#f5f5f5");
-    ui->Home_Idle_btOpenDoor->setGeometry((UIHandler::contentWidth*5/6-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
-    ui->Home_Idle_lbBoxState->setGeometry((UIHandler::contentWidth*5/6-600)/2,ui->Home_Idle_btOpenDoor->y()+250,600,400);
+    ui->Home_Idle_btOpenDoor->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
+    ui->Home_Idle_lbBoxState->setGeometry((UIHandler::screenWidth-600)/2,ui->Home_Idle_btOpenDoor->y()+250,600,400);
     ui->Home_Idle_lbBoxState->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
     ui->Home_Idle_lbBoxState->setWordWrap(true);
     ui->Home_Idle_lbBoxState->setText(tr("未检测到试剂盒"));
-    ui->Home_Idle_btReady->setGeometry(UIHandler::contentWidth*5/6-299-171,UIHandler::contentHeight*7/8-106-40-106-30-106-30,299,106);
+    ui->Home_Idle_btReady->setGeometry(UIHandler::screenWidth-299-171,UIHandler::contentHeight*7/8-106-40-106-30-106-30,299,106);
     ui->Home_Idle_btReady->setText(tr("试剂盒就绪"));
     ui->Home_Idle_btPen->setGeometry(ui->Home_Idle_btOpenDoor->x()+350,ui->Home_Idle_btOpenDoor->y()+(224-70)/2,75,76);
     movie = new QMovie(":/images/opendoorAmi.gif");
-    ui->Home_Idle_lbGif->setGeometry((UIHandler::contentWidth*5/6-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
+    ui->Home_Idle_lbGif->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
     ui->Home_Idle_lbGif->setMovie(movie);
     ui->Home_Idle_lbGif->setVisible(false);
 

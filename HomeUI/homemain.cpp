@@ -122,7 +122,6 @@ void HomeMain::switchDisplay(int machiNo)
 void HomeMain::showEvent(QShowEvent *event){
     Q_UNUSED(event);
     UIHandler::NotifyTitle("idle",5);
-    ui->HomeMain_lb_user->setText(UIHandler::getDisplayUser());
     qDebug()<<"HomeMain showEvent"<<this->geometry();
     connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,[=](int result, const QString &win){
         if (win != "HomeMain" || result!=2) return;
@@ -151,10 +150,6 @@ void HomeMain::showEvent(QShowEvent *event){
             }
         }
     }
-
-    UIHandler::setBtTextCenter(ui->HomeMain_pb_allMac, 75,"background-image: url(:/images/btexit_homemain.png);text-align:left;");
-    UIHandler::setBtTextCenter(ui->HomeMain_pb_PowerOff, 75,"background-image: url(:/images/btclose_homemain.png);text-align:left;");
-    UIHandler::setBtTextCenter(ui->HomeMain_pb_quit, 55,"background-image: url(:/images/btexit_homemain.png);text-align:left;");
 }
 
 void HomeMain::hideEvent(QHideEvent *event)
@@ -162,14 +157,6 @@ void HomeMain::hideEvent(QHideEvent *event)
    Q_UNUSED(event);
    TwoBtnMessageBox::getPtr()->disconnect(this);
    UIHandler::getPtr()->disconnect(this);
-}
-
-void HomeMain::timerEvent(QTimerEvent *e)
-{
-    Q_UNUSED(e);
-    QDateTime dt = QDateTime::currentDateTime();
-    ui->HomeMain_lb_time ->setText(dt.time().toString("hh:mm:ss"));
-    ui->HomeMain_lb_data->setText(dt.date().toString(tr("yyyy年MM月dd日")));
 }
 
 void HomeMain::addSubMachineBtn()
@@ -248,28 +235,6 @@ void HomeMain::initStyle()
 {
     m_btnGroup = new QButtonGroup(this);
 
-
-    //ui->HomeMain_pb_PowerOff->setFont(QFont("song", 30));
-
-    ui->HomeMain_pb_PowerOff->setText(tr("关机"));
-    ui->HomeMain_pb_quit->setText(tr("退出登录"));
-    ui->HomeMain_pb_allMac->setText(tr("首页"));
-
-
-    ui->HomeMain_pb_PowerOff->setFixedSize(279,90);
-    ui->HomeMain_pb_quit->setFixedSize(279,90);
-    ui->HomeMain_pb_allMac->setFixedSize(279,90);
-
-    ui->HomeMain_lb_time->setAlignment(Qt::AlignCenter);
-    ui->HomeMain_lb_data->setAlignment(Qt::AlignCenter);
-    ui->HomeMain_lb_user->setAlignment(Qt::AlignCenter);
-
-    ui->HomeMain_lb_data->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-    ui->HomeMain_lb_data->setStyleSheet("font-size: 30px;color: #b5b5b5;background: transparent;");
-    ui->HomeMain_lb_time->setAlignment(Qt::AlignCenter);
-    ui->HomeMain_lb_time->setStyleSheet("font-size: 60px;color: #b5b5b5;background: transparent;");
-    ui->HomeMain_lb_user->setStyleSheet("font-size: 60px;color: #b5b5b5;background: transparent;");
-
     m_StackWidget = new QStackedWidget(ui->page_main);
     m_layout = new QVBoxLayout(ui->page_main) ;
     m_BtnWidget = new QWidget(ui->page_main);
@@ -331,51 +296,6 @@ void HomeMain::initStyle()
     ui->stackedWidget->setCurrentWidget(ui->page_allMachine);
 }
 
-void HomeMain::on_HomeMain_pb_PowerOff_clicked()
-{
-#ifdef QT_DEBUG
-    UIHandler::DebugMedianMachine(1,489);
-    return;
-#endif
-    if(UIHandler::hasTesting())
-    {
-        OneBtnMessageBox::display(tr("请等待测试完成或取消测试才可关机"),tr("关闭"),":/images/backTestbt3.png");
-        return;
-    }
-
-    QList<int> list = UIHandler::getHasBoxNoList();
-
-
-    int size = list.size();
-
-    if( size > 0)
-    {
-        QString str;
-        for (int var = 0; var < size; ++var)
-        {
-            str += QString::number(list[var]) ;
-            if(var != size -1)
-                str += ",";
-        }
-
-        OneBtnMessageBox::display(tr("请取出以下机器")+str+tr("里的试剂盒才可关机"),tr("关闭"),":/images/backTestbt3.png");
-        return;
-    }
-
-    TwoBtnMessageBox::display(tr("您将关机？"),tr("取消"),tr("确认"),"HomeMain");
-}
-
-void HomeMain::on_HomeMain_pb_quit_clicked()
-{
-
-    if(UIHandler::hasTesting())
-    {
-        OneBtnMessageBox::display(tr("请等待测试完成或取消测试才可退出登录"),tr("关闭"),":/images/backTestbt3.png");
-        return;
-    }
-    UIHandler::GoPage(UIHandler::PageId::Page_Home_Login);
-}
-
 void HomeMain::UpdateUI(int machineNo){
     if (machineNo != UIHandler::getCurrMachineId())
         return;
@@ -435,12 +355,6 @@ void HomeMain::slot_clearTestProcess(int machineNo)
        if(QString::compare(m_btnGroup->buttons().at(var)->objectName() ,QString::number(machineNo)) == 0 )
            dynamic_cast<ProgressButton *>(m_btnGroup->buttons().at(var))->changeValue(0);
     }
-}
-
-
-void HomeMain::on_HomeMain_pb_allMac_clicked()
-{
-   ui->stackedWidget->setCurrentWidget(ui->page_allMachine);
 }
 
 void HomeMain::slot_DoorKeyDown(int machineNo)
