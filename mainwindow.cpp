@@ -45,10 +45,10 @@ void MainWindow::UISetup()
 {
     int screenWidth = QGuiApplication::screens().at(0)->geometry().width();
     int screenHeight = QGuiApplication::screens().at(0)->geometry().height();
-    screenWidth = 1920;
-    screenHeight = 1080;
+    //screenWidth = 1920;
+    //screenHeight = 1080;
 
-    //showFullScreen();
+    showFullScreen();
 
     UIHandler::screenWidth = screenWidth;
     UIHandler::screenHeight = screenHeight;
