@@ -23,6 +23,7 @@ public:
         Page_One_Idle,
         Page_One_BoxReady,
         Page_One_Test,
+        Page_Home_AllMachine,
         Page_Home_Main,
         Page_Home_Login,
         Page_Home_E04,

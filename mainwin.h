@@ -2,6 +2,7 @@
 #define MAINWIN_H
 
 #include <QDialog>
+#include "uihandler.h"
 
 namespace Ui {
 class MainWin;
@@ -22,6 +23,10 @@ private slots:
     void on_MainWin_btHome_clicked();
 
     void on_MainWin_btData_clicked();
+
+    void FooterSetEnabled(bool enable);
+
+    void GoPage(UIHandler::PageId id);
 
 private:
     Ui::MainWin *ui;
