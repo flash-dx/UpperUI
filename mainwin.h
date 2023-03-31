@@ -16,6 +16,13 @@ public:
     ~MainWin();
     static MainWin *getPtr();
 
+private slots:
+    void on_MainWin_btSetup_clicked();
+
+    void on_MainWin_btHome_clicked();
+
+    void on_MainWin_btData_clicked();
+
 private:
     Ui::MainWin *ui;
 };

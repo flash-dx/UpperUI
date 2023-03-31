@@ -96,11 +96,6 @@ void UIHandler::Init(){
     getUserList();
 }
 
-void UIHandler::GoLogin(bool bEnter)
-{
-    emit UIHandler::getPtr()->EnterLogin(bEnter);
-}
-
 void UIHandler::GoPage(PageId id)
 {
     emit UIHandler::getPtr()->Go(id);

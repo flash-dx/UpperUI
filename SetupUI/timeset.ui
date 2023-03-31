@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TimeSet</class>
+ <widget class="QDialog" name="TimeSet">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1796</width>
+    <height>841</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>30</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background:rgb(250, 250, 250)</string>
+  </property>
+  <widget class="QCalendarWidget" name="calendarWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>601</width>
+     <height>471</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu</family>
+     <pointsize>18</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="tabletTracking">
+    <bool>false</bool>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="statusTip">
+    <string notr="true"/>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">/*
+QCalendarWidget
+{  
+    font: 18pt &quot;Ubuntu&quot;;
+} 
+
+QCalendarWidget QAbstractItemView:enabled{color:#000000;
+                                                                                          background-color:#ffffff;
+                                                                                          selection-color: white;
+                                                                                          selection-background-color:rgb(48,140,198);}
+QToolButton#qt_calendar_prevmonth {
+background-color:rgb(246, 245, 244);
+    qproperty-icon: url(:/images/row3.png);
+}
+
+QToolButton#qt_calendar_nextmonth {
+background-color:rgb(246, 245, 244);
+    qproperty-icon:url(:/images/row1.png);
+}
+
+QCalendarWidget QToolButton{
+     background-color:rgb(246, 245, 244);
+     height:60px;
+     width:200px;
+    color:#000000;
+    font: 34pt &quot;Ubuntu&quot;;
+}
+/X
+QCalendarWidget QToolButton:hover{
+border: 1px solid rgb(26, 95, 180);
+}
+X/
+QCalendarWidget QToolButton QMenu{
+background-color:rgb(246, 245, 244);
+min-height: 60px;
+height:300px;
+width:200px;
+border:1px;
+}
+
+QCalendarWidget QToolButton QMenu::item:selected{
+color:#FFFFFF;
+background:rgb(26, 95, 180);
+}
+
+QCalendarView#qt_calendar_calendarview {
+  background-color:  #ffffff;          
+  alternate-background-color:#ffffff;   
+}
+
+QCalendarWidget QSpinBox#qt_calendar_yearedit{
+background-color:rgb(246, 245, 244);
+    height:34px;
+    whidth:125px;
+    selection-background-color:rgb(26, 95, 180);
+}
+
+QCalendarWidget QToolButton::menu-indicator#qt_calendar_monthbutton{
+    background-color:rgb(246, 245, 244);
+    height:34px;
+    whidth:125px;
+    subcontrol-position: right center;
+    subcontrol-origin: padding;
+    border:0px;
+}
+
+QCalendarWidget QAbstractItemView {
+    color: gray;
+}
+*/</string>
+   </property>
+   <property name="firstDayOfWeek">
+    <enum>Qt::Sunday</enum>
+   </property>
+   <property name="gridVisible">
+    <bool>false</bool>
+   </property>
+   <property name="selectionMode">
+    <enum>QCalendarWidget::SingleSelection</enum>
+   </property>
+   <property name="horizontalHeaderFormat">
+    <enum>QCalendarWidget::ShortDayNames</enum>
+   </property>
+   <property name="verticalHeaderFormat">
+    <enum>QCalendarWidget::NoVerticalHeader</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>1000</x>
+     <y>140</y>
+     <width>211</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>网络同步：</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>1260</x>
+     <y>150</y>
+     <width>91</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/images/lockcreenOFF.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
+    <rect>
+     <x>1200</x>
+     <y>250</y>
+     <width>441</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>35</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">selection-color: rgb(46, 52, 54);</string>
+   </property>
+   <item>
+    <property name="text">
+     <string>(CST+800)北京</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(JSC +900)东京</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(EDT- 400)纽约</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(CDT-500)芝加哥</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(MDT-600)丹佛</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(COT-500)波哥大</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(CDT-400)哈瓦那</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(EST-500)巴拿马</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(EST+200)巴黎</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(EST+200)布达佩斯</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(CEST+200)柏林</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>(MSK+300)莫斯科</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string/>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>1000</x>
+     <y>290</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>选择时区：</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>1380</x>
+     <y>700</y>
+     <width>301</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/images/back.png);</string>
+   </property>
+   <property name="text">
+    <string>   返回</string>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>1030</x>
+     <y>700</y>
+     <width>301</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>30</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/images/confirmbt.png);
+</string>
+   </property>
+   <property name="text">
+    <string>设置</string>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="timeScrollBarBk" native="true">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>220</y>
+     <width>371</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QWidget" name="timeScrollBar_Ap" native="true">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>70</y>
+      <width>111</width>
+      <height>222</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="timeScrollBar_hour" native="true">
+    <property name="geometry">
+     <rect>
+      <x>129</x>
+      <y>70</y>
+      <width>111</width>
+      <height>222</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="timeScrollBar_min" native="true">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>70</y>
+      <width>111</width>
+      <height>222</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="TimeScrollBar_Title">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>170</y>
+     <width>171</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>31</pointsize>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>设置时间</string>
+   </property>
+  </widget>
+  <zorder>label_2</zorder>
+  <zorder>label</zorder>
+  <zorder>pushButton_3</zorder>
+  <zorder>timeScrollBarBk</zorder>
+  <zorder>TimeScrollBar_Title</zorder>
+  <zorder>pushButton_2</zorder>
+  <zorder>comboBox</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>calendarWidget</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

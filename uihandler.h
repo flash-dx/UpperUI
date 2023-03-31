@@ -69,7 +69,6 @@ public:
 
     static UIHandler *getPtr();
     static void Init();
-    static void GoLogin(bool bEnter);
     static void GoPage(PageId id);
     static void FooterSetEnabled(bool enable);
     static void NotifyTitle(QString title, int type = 0);

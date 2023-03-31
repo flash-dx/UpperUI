@@ -1,6 +1,9 @@
 #include "logindlg.h"
 #include "ui_logindlg.h"
+
 #include "uihandler.h"
+#include "components/twobtnmessagebox.h"
+
 #include <QDebug>
 #include <QListView>
 #include <QPalette>
@@ -59,7 +62,48 @@ LoginDlg *LoginDlg::getPtr()
     return winptr;
 }
 
+void LoginDlg::showEvent(QShowEvent *event){
+    Q_UNUSED(event);
+    ui->LoginDlg_cbName->clear();
+    ui->LoginDlg_cbName->addItems(UIHandler::getLogUser());
+
+    ui->LoginDlg_cbName->setCurrentIndex(-1);
+    ui->LoginDlg_txtPassword->clear();
+
+    //connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&LoginDlg::TwoBtnMessageBox_Ack);
+}
+
+void LoginDlg::hideEvent(QHideEvent *event){
+    Q_UNUSED(event);
+    //TwoBtnMessageBox::getPtr()->disconnect(this);
+}
+
 void LoginDlg::on_LoginDlg_btLogin_clicked()
 {
-    emit UIHandler::getPtr()->EnterLogin(false);
+    int result = UIHandler::Login(ui->LoginDlg_cbName->currentText(),ui->LoginDlg_txtPassword->text());
+    if (result == 0)
+    {
+        ui->LoginDlg_lbMessage->setText("");
+        emit UIHandler::getPtr()->EnterLogin(false);
+    }
+    else if (result == 1)
+    {
+        ui->LoginDlg_lbMessage->setText(tr("密码错误！"));
+    }
+    else
+    {
+        ui->LoginDlg_lbMessage->setText(tr("帐号不存在！"));
+    }
+
+}
+
+void LoginDlg::on_LoginDlg_btQuit_clicked()
+{
+    TwoBtnMessageBox::display(tr("您将关机？"),tr("取消"),tr("确认"));
+}
+
+void LoginDlg::TwoBtnMessageBox_Ack(int ack)
+{
+    if (ack == 2)
+        UIHandler::PowerOff();
 }

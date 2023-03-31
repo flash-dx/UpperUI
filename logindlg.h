@@ -16,8 +16,16 @@ public:
     ~LoginDlg();
     static LoginDlg *getPtr();
 
+protected:
+    void showEvent(QShowEvent *event);
+    void hideEvent(QHideEvent *event);
+
 private slots:
     void on_LoginDlg_btLogin_clicked();
+
+    void on_LoginDlg_btQuit_clicked();
+
+    void TwoBtnMessageBox_Ack(int ack);
 
 private:
     Ui::LoginDlg *ui;
