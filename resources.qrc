@@ -114,5 +114,7 @@
         <file>images/wifiselect.png</file>
         <file>images/xiala.png</file>
         <file>DxUI.qss</file>
+        <file>images/battery.png</file>
+        <file>images/Eht.png</file>
     </qresource>
 </RCC>

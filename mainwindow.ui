@@ -66,10 +66,52 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="MainWindow_lbBattery">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>80</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>battery</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="MainWindow_lbWifi">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>110</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>wifi</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="MainWindow_lbEht">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>140</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>eht</string>
+    </property>
+   </widget>
    <zorder>MainWindow_lbTitleBG</zorder>
    <zorder>stackedWidget</zorder>
    <zorder>MainWindow_lbTime</zorder>
    <zorder>MainWindow_lbUser</zorder>
+   <zorder>MainWindow_lbBattery</zorder>
+   <zorder>MainWindow_lbWifi</zorder>
+   <zorder>MainWindow_lbEht</zorder>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
