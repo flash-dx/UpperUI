@@ -51,6 +51,7 @@ private:
     QButtonGroup *m_btnGroup;
     QPushButton *m_btnPre;
     QPushButton *m_btnNext;
+    QPushButton *m_btnPageMain;
     QStackedWidget * m_StackBtnWidget;
 
     void changePage();

@@ -56,6 +56,14 @@ HomeMain::HomeMain(QWidget *parent) :
         changePage();
     });
 
+    m_btnPageMain = new QPushButton();
+
+    connect(m_btnPageMain,&QPushButton::clicked,this,[=](){
+
+        UIHandler::GoPage(UIHandler::PageId::Page_Home_AllMachine);
+    });
+
+
     initStyle();
 
     addSubMachineBtn();
@@ -250,6 +258,11 @@ void HomeMain::initStyle()
     m_btnNext->setMaximumWidth(50);
     m_btnNext->setText(">>>>");
 
+
+    m_btnPageMain->setFixedSize(200,60);
+    m_btnPageMain->setMaximumWidth(50);
+    m_btnPageMain->setText(tr("首页"));
+
     m_StackBtnWidget->setMaximumHeight(60);
     //m_StackBtnWidget->setStyleSheet("background:red");
 
@@ -258,7 +271,7 @@ void HomeMain::initStyle()
     m_btnLayout->addWidget(m_StackBtnWidget);
 
     m_btnLayout->addWidget(m_btnNext);
-
+    m_btnLayout->addWidget(m_btnPageMain);
 
     m_btnLayout->setContentsMargins(0,0,20,0);
     m_BtnWidget->setLayout(m_btnLayout);
