@@ -20,10 +20,10 @@ HomeAllMachine::HomeAllMachine(QWidget *parent) :
     ui->setupUi(this);
 
     int ypos = UIHandler::contentHeight - 90 - 30;
-    ui->pBtn_PowerOff->setGeometry(UIHandler::screenWidth-279-50,ypos,279,90);
-    ui->pBtn_loginOut->setGeometry(ui->pBtn_PowerOff->geometry().x(),ypos-ui->pBtn_PowerOff->geometry().height()-50,279,90);
-    UIHandler::setBtTextCenter(ui->pBtn_loginOut, 1,"background-image: url(:/images/btclose_homemain.png);text-align:left;");
-    UIHandler::setBtTextCenter(ui->pBtn_PowerOff, 35,"background-image: url(:/images/btexit_homemain.png);text-align:left;");
+    ui->pBtn_PowerOff->setGeometry(UIHandler::screenWidth-90-50,ypos,90,90);
+    ui->pBtn_loginOut->setGeometry(ui->pBtn_PowerOff->geometry().x(),ypos-ui->pBtn_PowerOff->geometry().height()-50,90,90);
+    UIHandler::setBtTextCenter(ui->pBtn_loginOut, 1,"background-image: url(:/images/bt_LoginOut.png);text-align:left;");
+    UIHandler::setBtTextCenter(ui->pBtn_PowerOff, 35,"background-image: url(:/images/bt_poweroff .png);text-align:left;");
 
 }
 
@@ -49,7 +49,7 @@ void HomeAllMachine::initUi()
         }
         else if(size == 3)
         {
-             rect = QRect(20+tempx*(WIDTH+50),(this->height()-HEIGHT)/2,WIDTH,HEIGHT);
+             rect = QRect(50+tempx*(WIDTH+120),(this->height()-HEIGHT)/2,WIDTH,HEIGHT);
         }
 
          QWidget * tempWidget = new QWidget(this);
@@ -356,8 +356,8 @@ void HomeAllMachine::showEvent(QShowEvent *event)
 {
     UIHandler::NotifyTitle("idle",5);
 
-    ui->pBtn_loginOut->setText(tr("退出登录"));
-    ui->pBtn_PowerOff->setText(tr("关机"));
+//    ui->pBtn_loginOut->setText(tr("退出登录"));
+//    ui->pBtn_PowerOff->setText(tr("关机"));
 
     initUi();
 

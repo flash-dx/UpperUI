@@ -114,7 +114,11 @@
         <file>images/wifiselect.png</file>
         <file>images/xiala.png</file>
         <file>DxUI.qss</file>
+        <file>images/bt_LoginOut.png</file>
+        <file>images/bt_poweroff .png</file>
         <file>images/battery.png</file>
         <file>images/Eht.png</file>
+        <file>images/tip_ notDone.png</file>
+        <file>images/tip_done.png</file>
     </qresource>
 </RCC>
