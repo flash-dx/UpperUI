@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "uihandler.h"
 #include <QScreen>
@@ -66,6 +66,19 @@ void MainWindow::UISetup()
     ui->MainWindow_lbTime->setAlignment(Qt::AlignCenter);
     ui->MainWindow_lbTime->setStyleSheet("font-size: 30px; color: #b5b5b5; background: transparent;");
     ui->MainWindow_lbTime->setText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
+
+    ui->MainWindow_lbBattery->setText("");
+    ui->MainWindow_lbBattery->setGeometry(screenWidth - 410, (HEADER_HEIGHT-30)/2, 60, 30);
+    ui->MainWindow_lbBattery->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/battery.png);");
+
+    ui->MainWindow_lbEht->setText("");
+    ui->MainWindow_lbEht->setGeometry(screenWidth - 445, (HEADER_HEIGHT-30)/2, 30, 30);
+    ui->MainWindow_lbEht->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/Eht.png);");
+
+    ui->MainWindow_lbWifi->setText("");
+    ui->MainWindow_lbWifi->setGeometry(screenWidth - 480, (HEADER_HEIGHT-30)/2, 30, 30);
+    ui->MainWindow_lbWifi->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/sign0.png);");
+
 }
 
 void MainWindow::EnterLogin(bool bEnter)
