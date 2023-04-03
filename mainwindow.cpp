@@ -48,7 +48,7 @@ void MainWindow::UISetup()
     screenWidth = 1920;
     screenHeight = 1080;
 
-    showFullScreen();
+    //showFullScreen();
 
     UIHandler::screenWidth = screenWidth;
     UIHandler::screenHeight = screenHeight;
