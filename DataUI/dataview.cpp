@@ -34,7 +34,7 @@ DataView::DataView(QWidget *parent) :
     int spacing = 0;
     if(winIndex == 1)
         spacing = 70;
-
+    spacing =0 ;
     ui->Data_View_btBack->setGeometry(contentWidth-299-80+spacing,contentHeight-106-40,299,106);
     ui->Data_View_btCheck->setGeometry(ui->Data_View_btBack->x(),ui->Data_View_btBack->y()-106-30,299,106);
 
@@ -244,8 +244,10 @@ void DataView::updateUI()
     {
         testid = TestModel::getCurrTestId();
     }
-    ui->Data_View_lbPanelName->setText(TestModel::getTestPanelName(testid)+"   "+TestModel::getTestPanelCode(testid));
-    ui->Data_View_lbBoxSerial->setText(TestModel::getTestBoxSerial(testid));
+//    ui->Data_View_lbPanelName->setText(TestModel::getTestPanelName(testid)+"   "+TestModel::getTestPanelCode(testid));
+//    ui->Data_View_lbBoxSerial->setText(TestModel::getTestBoxSerial(testid));
+    ui->Data_View_lbPanelName->setText("呼吸道病原体8联检测");
+    ui->Data_View_lbBoxSerial->setText("Lot# 000001"+ QString(" 80021"));
     bool bValidcheck = TestModel::TestValidCheck(testid);
     if(bValidcheck)
     {
@@ -263,7 +265,10 @@ void DataView::updateUI()
     ui->Data_View_btRef->setObjectName(UIHandler::getItemName(2));
     connect(ui->Data_View_btRef,&QPushButton::clicked,this,&DataView::Item_clicked);
 
-    QStringList itemName = TestModel::getTestName(testid);
+    //QStringList itemName = TestModel::getTestName(testid);
+
+    QStringList itemName;
+    itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
 
     for (int i = 0; i < itemName.size(); i++){
         QPushButton *bt = new QPushButton(this);

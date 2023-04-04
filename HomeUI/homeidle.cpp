@@ -179,7 +179,7 @@ void HomeIdle::showEvent(QShowEvent *event){
         UIHandler::setBoxCode("");
     }
 
-    ui->Home_Idle_btReady->setVisible(false/*mode*/);
+    ui->Home_Idle_btReady->setVisible(mode);
     ui->Home_Idle_lbSequence->setVisible(false);
     ui->Home_Idle_cbSequence->setVisible(false);
     ui->Home_Idle_btSequence->setVisible(false);
@@ -309,8 +309,9 @@ void HomeIdle::Sample_Changed(QString res1, QString res2, QString res3)
 
 void HomeIdle::on_Home_Idle_btReady_clicked()
 {
-    UIHandler::setStage(HomeStage::Stage_ready);
+    UIHandler::setStage(HomeStage::Stage_result);
     UIHandler::getPtr()->UpdateUI(UIHandler::getCurrMachineId());
+    //emit UIHandler::getPtr()->TestProgress(50,100,UIHandler::getCurrMachineId());
 }
 
 void HomeIdle::on_Home_Idle_btSequence_clicked()

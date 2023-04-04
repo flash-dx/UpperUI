@@ -88,38 +88,39 @@ void DataLine::paintEvent(QPaintEvent *event)
     QString itemName = TestModel::getCurrItemName();
     int testid = TestModel::getCurrTestId();
     TestData *data = TestModel::getTestData(testid);
-    if (data == nullptr)
-        return;
+//    if (data == nullptr)
+//        return;
 
 
     QBrush oldBrush = paint.brush();
 
     int lineNo = 0;
 
-    for(auto it1:data->ItemidOfName[q2str(itemName)]){
 
-        //GlobalParam::ItemCode[itemid]);
-        for(auto it2: data->PosId){
-            if (/*data->PosId[it2.first*/it2.second == (it1)){
-                paint.drawText(130,yPos+50+lineNo*ySpacing,UIHandler::getItemCode(it1));
-                if (data->CT[it2.first] > 0)
-                    paint.drawText(360,yPos+50+lineNo*ySpacing,QString::number(static_cast<double>(data->CT[it2.first])/10));
-                else
-                    paint.drawText(360,yPos+50+lineNo*ySpacing,"ND");
+//    for(auto it1:data->ItemidOfName[q2str(itemName)]){
 
-                QString seriesName = QString("P%1").arg(it2.first);
-                foreach (QAbstractSeries *series, chart->series()){
-                    if (series->name() == seriesName){
-                        QLineSeries *line = static_cast<QLineSeries *>(series);
-                        QBrush *brush = new QBrush(line->color());
-                        paint.fillRect(440,yPos+50+lineNo*ySpacing-20,20,20,*brush);
-                        break;
-                    }
-                }
-                lineNo++;
-            }
-        }
-    }
+//        //GlobalParam::ItemCode[itemid]);
+//        for(auto it2: data->PosId){
+//            if (/*data->PosId[it2.first*/it2.second == (it1)){
+//                paint.drawText(130,yPos+50+lineNo*ySpacing,UIHandler::getItemCode(it1));
+//                if (data->CT[it2.first] > 0)
+//                    paint.drawText(360,yPos+50+lineNo*ySpacing,QString::number(static_cast<double>(data->CT[it2.first])/10));
+//                else
+//                    paint.drawText(360,yPos+50+lineNo*ySpacing,"ND");
+
+//                QString seriesName = QString("P%1").arg(it2.first);
+//                foreach (QAbstractSeries *series, chart->series()){
+//                    if (series->name() == seriesName){
+//                        QLineSeries *line = static_cast<QLineSeries *>(series);
+//                        QBrush *brush = new QBrush(line->color());
+//                        paint.fillRect(440,yPos+50+lineNo*ySpacing-20,20,20,*brush);
+//                        break;
+//                    }
+//                }
+//                lineNo++;
+//            }
+//        }
+//    }
     paint.setBrush(oldBrush);
 }
 
@@ -225,7 +226,9 @@ void DataLine::updateUI()
 
     updateChart();
 
-    QStringList itemName = TestModel::getTestName(TestModel::getCurrTestId());
+    //QStringList itemName = TestModel::getTestName(TestModel::getCurrTestId());
+    QStringList itemName;
+    itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
     itemName.prepend(UIHandler::getItemName(2));
 
     int dispCount = 7;
@@ -237,6 +240,7 @@ void DataLine::updateUI()
 
     if (winIndex == 1)
     {
+        dispCount =8;
         tempWidth = tempWidth * 5/6;
         tempHeight = tempHeight*7/8;
     }
@@ -244,7 +248,7 @@ void DataLine::updateUI()
 
     for (int i = 0; i < itemName.size(); i++){
         QPushButton *btn = new QPushButton(itemName[i], this);
-        btn->setGeometry(20+(tempWidth+xSpacing)*int(i%7),10 + (tempHeight+ySpacing)*int(i/7),tempWidth,tempHeight);
+        btn->setGeometry(20+(tempWidth+xSpacing)*int(i%dispCount),10 + (tempHeight+ySpacing)*int(i/dispCount),tempWidth,tempHeight);
         btn->setObjectName(itemName[i]);
         btn->setText(itemName[i]);
         if(itemName[i] == TestModel::getCurrItemName())

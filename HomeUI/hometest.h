@@ -3,7 +3,11 @@
 
 #include <QDialog>
 #include "uihandler.h"
-
+#include <QtCharts>
+#include <QtCharts/QChart>
+#include <QtCharts/QValueAxis>
+#include <QtCharts/QCategoryAxis>
+#include <QtCharts/QChartView>
 namespace Ui {
 class HomeTest;
 }
@@ -29,6 +33,12 @@ private slots:
     void UpdateUI();
 private:
     Ui::HomeTest *ui;
+    void initUi();
+    QChart *chart;
+    QChartView *chartView;
+    QValueAxis *axisX;
+    QCategoryAxis *axisY;
+
 };
 
 #endif // HOMETEST_H
