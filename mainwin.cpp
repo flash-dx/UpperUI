@@ -4,6 +4,7 @@
 
 #include "HomeUI/homeallmachine.h"
 #include "HomeUI/homemain.h"
+#include "HomeUI/homesubmachine.h"
 #include "DataUI/datamenu.h"
 #include "DataUI/dataline.h"
 #include "DataUI/dataview.h"
@@ -85,6 +86,7 @@ MainWin::MainWin(QWidget *parent) :
     ui->stackedWidget->addWidget(PIDParam::getPtr());
     ui->stackedWidget->addWidget(LogView::getPtr());
     ui->stackedWidget->addWidget(HomeAllMachine::getPtr());
+    ui->stackedWidget->addWidget(HomeSubMachine::getPtr());
 
     connect(UIHandler::getPtr(),&UIHandler::Go,this,&MainWin::GoPage);
     connect(UIHandler::getPtr(),&UIHandler::sig_FooterSetEnabled,this,&MainWin::FooterSetEnabled);
@@ -139,8 +141,8 @@ void MainWin::GoPage(UIHandler::PageId id)
     qDebug()<<"main GoPage,id="<<id<<ui->stackedWidget->currentWidget()->objectName();
     if (id == UIHandler::PageId::Page_Home_AllMachine && ui->stackedWidget->currentWidget() != HomeAllMachine::getPtr())
         ui->stackedWidget->setCurrentWidget(HomeAllMachine::getPtr());
-    else if (id == UIHandler::PageId::Page_Home_Main && ui->stackedWidget->currentWidget() != HomeMain::getPtr())
-        ui->stackedWidget->setCurrentWidget(HomeMain::getPtr());
+    else if (id == UIHandler::PageId::Page_Home_Main && ui->stackedWidget->currentWidget() != HomeSubMachine::getPtr())
+        ui->stackedWidget->setCurrentWidget(HomeSubMachine::getPtr());
     else if (id == UIHandler::PageId::Page_Data_Menu && ui->stackedWidget->currentWidget() != DataMenu::getPtr())
         ui->stackedWidget->setCurrentWidget(DataMenu::getPtr());
     else if (id == UIHandler::PageId::Page_Data_View && ui->stackedWidget->currentWidget() != DataView::getPtr())

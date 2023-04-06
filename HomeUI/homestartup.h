@@ -13,7 +13,7 @@ class HomeStartup : public QDialog
 {
     Q_OBJECT
 
-private:
+public:
     explicit HomeStartup(QWidget *parent = nullptr);
 public:
     ~HomeStartup();

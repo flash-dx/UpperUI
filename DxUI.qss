@@ -27,6 +27,7 @@ padding-left: 20px;
 padding-bottom: 4px;
 background: url(:/images/back.png);
 }
+
 /* components */
     /* ThreeQuery */
     QWidget#ThreeQuery {border-radius:22px;background:#f5f5f5;}
@@ -334,35 +335,28 @@ background: url(:/images/back.png);
     /* CameraSetup */
     QLabel#Setup_CameraSetup_lbCam {border: 1px solid gray;}
 
+QTabBar::tab{
+font-size: 20px;
+min-width: 145;
+min-height: 50;
+max-width: 145;
+max-height: 50;
+padding-left: 6px;
+}
 /*
-{
-    font-size: 30px;
-    color: #BDC8E2;
-    border-style: solid;
-    border-width: 2px;
-    border-color: aqua;
-    border-radius: 20px;
-
-    padding-left: 20px;
-    padding-top: 0px;
-
-    background-color: transparent;
-    background-image: url(:/images/setupmenu_user.png);
-    background-repeat: no-repeat;
-    background-position: center top;
-
-padding-right: 0px;
-subcontrol-origin: padding;
-subcontrol-position: top right;
-width: 71px;
-height: 71px;
-border-left-width: 1px;
-border-left-color: lightgray;
-border-left-style: solid;
-border-top-right-radius: 3px;
-border-bottom-right-radius: 3px;
-QComboBox QAbstractItemView::item:select {color: #000000; background-color: lightgreen;}
-gridline-color: #C07010;
-selection-background-color: rgb(130,190,100);
+QTabWidget::pane{
+background:rgba(14,73,122,0.4);
+border:none;
+}
+QTabBar::tab:!selected{
+background: rgba(20,45,86,0.5);
+color: rgba(255,255,255,0.5);
+}
+QTabBar::tab:hover{
+background: rgba(14,73,122,0.4);
+color: rgba(255,255,255,0.7);
 }
 */
+QPushButton#HomeSubMachine_btHome {
+border-image: url(:/images/home.png);
+}

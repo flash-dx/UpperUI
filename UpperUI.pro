@@ -76,7 +76,8 @@ SOURCES += \
     SetupUI/user.cpp \
     SetupUI/version.cpp \
     SetupUI/version2.cpp \
-    SetupUI/wifimenu.cpp
+    SetupUI/wifimenu.cpp \
+    HomeUI/homesubmachine.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -129,7 +130,8 @@ HEADERS += \
     SetupUI/user.h \
     SetupUI/version.h \
     SetupUI/version2.h \
-    SetupUI/wifimenu.h
+    SetupUI/wifimenu.h \
+    HomeUI/homesubmachine.h
 
 FORMS += \
         mainwindow.ui \
@@ -178,7 +180,8 @@ FORMS += \
     SetupUI/user.ui \
     SetupUI/version.ui \
     SetupUI/version2.ui \
-    SetupUI/wifimenu.ui
+    SetupUI/wifimenu.ui \
+    HomeUI/homesubmachine.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
