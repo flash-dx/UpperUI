@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>570</width>
+    <height>448</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -104,41 +104,19 @@
     <string>PushButton</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Home_HomeTest_lbBK1">
+  <widget class="QLabel" name="Home_HomeTest_lbTestProgress">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>180</y>
+     <x>100</x>
+     <y>300</y>
      <width>67</width>
      <height>17</height>
     </rect>
    </property>
    <property name="text">
-    <string/>
+    <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Home_HomeTest_lbBK2">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>190</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <zorder>Home_HomeTest_lbBK2</zorder>
-  <zorder>Home_HomeTest_lbBK1</zorder>
-  <zorder>Home_HomeTest_lbSampleCode</zorder>
-  <zorder>Home_HomeTest_lbSampleInfo</zorder>
-  <zorder>Home_HomeTest_lbSampleRemark</zorder>
-  <zorder>Home_HomeTest_lbTestName</zorder>
-  <zorder>Home_HomeTest_lbTestSerial</zorder>
-  <zorder>Home_HomeTest_lbTestType</zorder>
-  <zorder>Home_HomeTest_btCancelTest</zorder>
  </widget>
  <resources/>
  <connections/>

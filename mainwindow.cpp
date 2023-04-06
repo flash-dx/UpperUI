@@ -51,7 +51,6 @@ void MainWindow::UISetup()
 #else
     showFullScreen();
 #endif
-
     UIHandler::screenWidth = screenWidth;
     UIHandler::screenHeight = screenHeight;
     UIHandler::headerHeight = HEADER_HEIGHT;
