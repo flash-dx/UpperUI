@@ -142,12 +142,18 @@ void MainWin::FooterSetEnabled(bool enable)
     ui->MainWin_btData->setEnabled(enable);
 }
 
+static UIHandler::PageId HomePage = UIHandler::PageId::Page_Home_AllMachine;
 void MainWin::GoPage(UIHandler::PageId id)
 {
+    if (id == UIHandler::PageId::Page_Home_Main)
+        id = HomePage;
+    else if(id == UIHandler::PageId::Page_Home_AllMachine || id == UIHandler::PageId::Page_Home_SubMachine)
+        HomePage = id;
+
     qDebug()<<"main GoPage,id="<<id<<ui->stackedWidget->currentWidget()->objectName();
     if (id == UIHandler::PageId::Page_Home_AllMachine && ui->stackedWidget->currentWidget() != HomeAllMachine::getPtr())
         ui->stackedWidget->setCurrentWidget(HomeAllMachine::getPtr());
-    else if (id == UIHandler::PageId::Page_Home_Main && ui->stackedWidget->currentWidget() != HomeSubMachine::getPtr())
+    else if (id == UIHandler::PageId::Page_Home_SubMachine && ui->stackedWidget->currentWidget() != HomeSubMachine::getPtr())
         ui->stackedWidget->setCurrentWidget(HomeSubMachine::getPtr());
     else if (id == UIHandler::PageId::Page_Data_Menu && ui->stackedWidget->currentWidget() != DataMenu::getPtr())
         ui->stackedWidget->setCurrentWidget(DataMenu::getPtr());

@@ -504,7 +504,7 @@ bool HomeAllMachine::eventFilter(QObject *obj, QEvent *event)
 
 void HomeAllMachine::on_machine_Clicked(int machineNo)
 {
-    UIHandler::GoPage(UIHandler::PageId::Page_Home_Main);
+    UIHandler::GoPage(UIHandler::PageId::Page_Home_SubMachine);
     HomeMain::getPtr()->switchDisplay(machineNo);
 }
 
