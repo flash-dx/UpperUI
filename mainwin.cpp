@@ -84,6 +84,12 @@ MainWin::MainWin(QWidget *parent) :
     ui->stackedWidget->addWidget(PumpParam::getPtr());
     ui->stackedWidget->addWidget(PIDParam::getPtr());
     ui->stackedWidget->addWidget(LogView::getPtr());
+    ui->stackedWidget->addWidget(UpperMachine::getPtr());
+    ui->stackedWidget->addWidget(UpperMachineSetting::getPtr());
+    ui->stackedWidget->addWidget(SystemParam::getPtr());
+    ui->stackedWidget->addWidget(version::getPtr());
+    ui->stackedWidget->addWidget(Version2::getPtr());
+
     ui->stackedWidget->addWidget(HomeAllMachine::getPtr());
 
     connect(UIHandler::getPtr(),&UIHandler::Go,this,&MainWin::GoPage);

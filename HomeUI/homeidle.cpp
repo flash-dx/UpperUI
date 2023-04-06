@@ -6,6 +6,8 @@
 #include "components/onebtnmessagebox.h"
 #include "homemain.h"
 #include "components/cqrcodeinfo.h"
+
+#include <QListView>
 static HomeIdle *winptr = nullptr;
 HomeIdle::HomeIdle(QWidget *parent) :
     QDialog(parent),
@@ -26,7 +28,71 @@ HomeIdle::HomeIdle(QWidget *parent) :
     ui->Home_Idle_lbGif->setMovie(movie);
     ui->Home_Idle_lbGif->setVisible(false);
 
+
+//    ui->Home_Idle_lbTestName->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbTestSerial->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbSampleCode->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbSampleInfo->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbSampleRemark->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbValidTime->setStyleSheet("background-color:#ffffff");
+    ui->Home_Idle_lbBoxTips->setStyleSheet("color:red");
+
+    ui->Home_Idle_cbTestType->setView(new QListView());
+
+    int tempX = ui->Home_Idle_btOpenDoor->x();
+    int tempY = ui->Home_Idle_btOpenDoor->y();
+    int tempWidth = ui->Home_Idle_btOpenDoor->width();
+    int tempHeight = ui->Home_Idle_btOpenDoor->height();
+    int spaceing = 20;
+
+    ui->Home_Idle_lbTestName->setGeometry(tempX-348-300,tempY-30,448,50);
+    ui->Home_Idle_lbTestSerial->setGeometry(ui->Home_Idle_lbTestName->x(),ui->Home_Idle_lbTestName->y()+ui->Home_Idle_lbTestName->height()+spaceing,348,50);
+    ui->Home_Idle_lbValidTime->setGeometry(ui->Home_Idle_lbTestName->x(),ui->Home_Idle_lbTestSerial->y()+ui->Home_Idle_lbTestSerial->height()+spaceing,348,50);
+
+    ui->Home_Idle_cbTestType->setGeometry(ui->Home_Idle_lbValidTime->x(),ui->Home_Idle_lbValidTime->y()+ui->Home_Idle_lbValidTime->height()+spaceing,300,60);
+    ui->Home_Idle_lbBoxTips->setGeometry(ui->Home_Idle_cbTestType->x(),ui->Home_Idle_cbTestType->y()+ui->Home_Idle_cbTestType->height()+spaceing,348,50);
+
+    ui->Home_Idle_lbTestName->setText(tr("四项呼吸道病毒核酸检测"));
+    ui->Home_Idle_lbValidTime->setText("2022-09-10");
+    ui->Home_Idle_lbTestSerial->setText(tr("GMS007C302"));
+    ui->Home_Idle_lbBoxTips->setText(tr("试剂盒已过期"));
+
+    ui->Home_Idle_lbSampleCode->setText("123456");
+    ui->Home_Idle_lbSampleInfo->setText("人医");
+    ui->Home_Idle_lbSampleRemark->setText("五联");
+
+    ui->Home_Idle_lbSampleCode->setGeometry(tempX+tempHeight+300,tempY-30,348,50);
+    ui->Home_Idle_lbSampleInfo->setGeometry(ui->Home_Idle_lbSampleCode->x(),ui->Home_Idle_lbSampleCode->y()+ui->Home_Idle_lbSampleCode->height()+spaceing,348,50);
+    ui->Home_Idle_lbSampleRemark->setGeometry(ui->Home_Idle_lbSampleCode->x(),ui->Home_Idle_lbSampleInfo->y()+ui->Home_Idle_lbSampleInfo->height()+spaceing,348,50);
     ui->Home_Idle_btOpenDoor->setStyleSheet("QPushButton {background-image: url(:/images/doorclose.png)}");
+
+//    ui->Home_Idle_lbOpen->setStyleSheet("background-color:red");
+//    ui->Home_Idle_lbBarCode->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbQrCode->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbBox->setStyleSheet("background-color:#ffffff");
+//    ui->Home_Idle_lbClose->setStyleSheet("background-color:#ffffff");
+
+    ui->Home_Idle_lbBoxState->setVisible(false);
+
+    ui->Home_Idle_lbOpen->setText(tr("开仓"));
+    ui->Home_Idle_lbBarCode->setText(tr("扫条形码"));
+    ui->Home_Idle_lbQrCode->setText(tr("扫二维码"));
+    ui->Home_Idle_lbBox->setText(tr("放试剂盒"));
+    ui->Home_Idle_lbClose->setText(tr("合仓"));
+
+
+    ui->Home_Idle_lbOpen->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_done.png);");
+    ui->Home_Idle_lbBarCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
+    ui->Home_Idle_lbQrCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
+    ui->Home_Idle_lbBox->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
+    ui->Home_Idle_lbClose->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_ notDone.png);");
+
+
+    ui->Home_Idle_lbOpen->setGeometry(tempX-580,tempY+tempHeight+200,250,60);
+    ui->Home_Idle_lbBarCode->setGeometry(ui->Home_Idle_lbOpen->x()+ui->Home_Idle_lbOpen->width()+100,ui->Home_Idle_lbOpen->y()-ui->Home_Idle_lbOpen->height()-20,250,60);
+    ui->Home_Idle_lbQrCode->setGeometry(ui->Home_Idle_lbBarCode->x(),ui->Home_Idle_lbBarCode->y()+ui->Home_Idle_lbBarCode->height()+80,250,60);
+    ui->Home_Idle_lbBox->setGeometry(ui->Home_Idle_lbQrCode->x()+ui->Home_Idle_lbQrCode->width()+100,ui->Home_Idle_lbOpen->y(),250,60);
+    ui->Home_Idle_lbClose->setGeometry(ui->Home_Idle_lbBox->x()+ui->Home_Idle_lbBox->width()+100,ui->Home_Idle_lbBox->y(),250,60);
 }
 
 HomeIdle::~HomeIdle()
@@ -44,6 +110,8 @@ HomeIdle *HomeIdle::getPtr()
 void HomeIdle::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
+    ui->Home_Idle_cbTestType->clear();
+    ui->Home_Idle_cbTestType->addItems(UIHandler::getSampleTypeArr());
 
     connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
     //connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeIdle::TwoBtnMessageBox_Ack);
@@ -112,9 +180,9 @@ void HomeIdle::showEvent(QShowEvent *event){
     }
 
     ui->Home_Idle_btReady->setVisible(mode);
-    ui->Home_Idle_lbSequence->setVisible(mode);
-    ui->Home_Idle_cbSequence->setVisible(mode);
-    ui->Home_Idle_btSequence->setVisible(mode);
+    ui->Home_Idle_lbSequence->setVisible(false);
+    ui->Home_Idle_cbSequence->setVisible(false);
+    ui->Home_Idle_btSequence->setVisible(false);
 }
 
 void HomeIdle::hideEvent(QHideEvent *event){
@@ -241,8 +309,9 @@ void HomeIdle::Sample_Changed(QString res1, QString res2, QString res3)
 
 void HomeIdle::on_Home_Idle_btReady_clicked()
 {
-    UIHandler::setStage(HomeStage::Stage_ready);
+    UIHandler::setStage(HomeStage::Stage_result);
     UIHandler::getPtr()->UpdateUI(UIHandler::getCurrMachineId());
+    //emit UIHandler::getPtr()->TestProgress(50,100,UIHandler::getCurrMachineId());
 }
 
 void HomeIdle::on_Home_Idle_btSequence_clicked()
