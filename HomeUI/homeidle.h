@@ -12,9 +12,8 @@ class HomeIdle;
 class HomeIdle : public QDialog
 {
     Q_OBJECT
-private:
-    explicit HomeIdle(QWidget *parent = nullptr);
 public:
+    explicit HomeIdle(QWidget *parent = nullptr);
     ~HomeIdle();
     static HomeIdle *getPtr();
 

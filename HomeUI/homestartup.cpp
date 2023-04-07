@@ -29,7 +29,8 @@ HomeStartup::HomeStartup(QWidget *parent) :
 
 void HomeStartup::Update()
 {
-    qDebug()<<"HomeStartup::Update";
+    HomeStage stage = UIHandler::getStage();
+    qDebug()<<"HomeStartup::Update stage="<<stage;
 }
 
 HomeStartup::~HomeStartup()

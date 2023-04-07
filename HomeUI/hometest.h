@@ -17,9 +17,8 @@ QT_CHARTS_USE_NAMESPACE
 class HomeTest : public QDialog
 {
     Q_OBJECT
-private:
-    explicit HomeTest(QWidget *parent = nullptr);
 public:
+    explicit HomeTest(QWidget *parent = nullptr);
     ~HomeTest();
     static HomeTest *getPtr();
 
