@@ -15,6 +15,8 @@ class HomeStartup : public QDialog
 
 public:
     explicit HomeStartup(QWidget *parent = nullptr);
+    void Update();
+
 public:
     ~HomeStartup();
     static HomeStartup *getPtr();

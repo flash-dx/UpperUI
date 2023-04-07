@@ -27,6 +27,11 @@ HomeStartup::HomeStartup(QWidget *parent) :
     ui->Home_Startup_lbDoorTips->setWordWrap(true);
 }
 
+void HomeStartup::Update()
+{
+    qDebug()<<"HomeStartup::Update";
+}
+
 HomeStartup::~HomeStartup()
 {
     delete ui;

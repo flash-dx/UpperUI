@@ -4,6 +4,7 @@
 #include "uihandler.h"
 #include <QDebug>
 static HomeSubMachine *winptr = nullptr;
+static QHash<int,HomeStartup *> subUI;
 HomeSubMachine::HomeSubMachine(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HomeSubMachine)
@@ -14,7 +15,9 @@ HomeSubMachine::HomeSubMachine(QWidget *parent) :
 
     foreach(WholeMachine_T *vec, UIHandler::getWholeMacArr()){
         foreach(SubMachine_T *sub, vec->sub){
-            ui->tabWidget->addTab(new HomeStartup, QString::fromStdString(sub->name));
+            HomeStartup *startup = new HomeStartup;
+            ui->tabWidget->addTab(startup, QString::fromStdString(sub->name));
+            subUI[sub->machineNO] = startup;
             qDebug()<<"addTab"<<sub->machineNO;
         }
     }
@@ -37,7 +40,8 @@ HomeSubMachine *HomeSubMachine::getPtr()
 void HomeSubMachine::UpdateUI(int machineNo)
 {
     qDebug()<<"HomeSubMachine::UpdateUI"<<machineNo;
-
+    if (subUI.keys().contains(machineNo))
+        subUI[machineNo]->Update();
 }
 
 void HomeSubMachine::on_HomeSubMachine_btHome_clicked()
