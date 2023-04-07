@@ -38,7 +38,7 @@ E04::~E04()
 void E04::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
-    connect(HomeMain::getPtr(),&HomeMain::sig_UpdateUI,this,&E04::slot_updateUi);
+    //connect(HomeMain::getPtr(),&HomeMain::sig_UpdateUI,this,&E04::slot_updateUi);
 
 }
 

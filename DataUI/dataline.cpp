@@ -130,7 +130,7 @@ void DataLine::showEvent(QShowEvent *event){
     UIHandler::NotifyTitle("dataline",5);
 
     if (winIndex == 1){
-        connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
+        //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
     }
     else {
         updateUI();

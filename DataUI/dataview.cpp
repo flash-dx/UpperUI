@@ -104,7 +104,7 @@ void DataView::showEvent(QShowEvent *event){
             UIHandler::NotifyTitle(tr("测试结束"));
         else
             UIHandler::NotifyTitle("dataview",5);
-        connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
+        //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
     }
     else {
         updateUI();
@@ -116,7 +116,7 @@ void DataView::hideEvent(QHideEvent *event){
     foreach (QPushButton *btn, list)
         delete btn;
     list.clear();
-    HomeMain::getPtr()->disconnect(this);
+    //HomeMain::getPtr()->disconnect(this);
     disconnect(ui->Data_View_btRef,&QPushButton::clicked,this,&DataView::Item_clicked);
     //disconnect(GlobalParam::pPrintmgr,&printmgr::finishPrint,this,&DataView::PrintFinish);
 }

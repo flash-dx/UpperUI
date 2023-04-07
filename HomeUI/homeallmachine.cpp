@@ -439,7 +439,7 @@ void HomeAllMachine::showEvent(QShowEvent *event)
             updateIcon(TYPE_MESSAGEICON,machineNo);
     });
 
-    connect(HomeMain::getPtr(),&HomeMain::sig_DoorKeyDown,this,&HomeAllMachine::slot_DoorKeyDown);
+    //connect(HomeMain::getPtr(),&HomeMain::sig_DoorKeyDown,this,&HomeAllMachine::slot_DoorKeyDown);
 }
 
 void HomeAllMachine::hideEvent(QHideEvent *event)
@@ -505,12 +505,12 @@ bool HomeAllMachine::eventFilter(QObject *obj, QEvent *event)
 void HomeAllMachine::on_machine_Clicked(int machineNo)
 {
     UIHandler::GoPage(UIHandler::PageId::Page_Home_SubMachine);
-    HomeMain::getPtr()->switchDisplay(machineNo);
+    //HomeMain::getPtr()->switchDisplay(machineNo);
 }
 
 void HomeAllMachine::slot_DoorKeyDown(int machineNo)
 {
-    HomeMain::getPtr()->switchDisplay(machineNo);
+    //HomeMain::getPtr()->switchDisplay(machineNo);
 }
 
 void HomeAllMachine::on_pBtn_PowerOff_clicked()

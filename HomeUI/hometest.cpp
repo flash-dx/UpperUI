@@ -76,7 +76,7 @@ void HomeTest::paintEvent(QPaintEvent *event)
 void HomeTest::showEvent(QShowEvent *event){
     Q_UNUSED(event);    
     //qDebug()<<"hometest showEvent"<<UIHandler::PanelCode()<<UIHandler::BoxSerial();
-    connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
+    //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
     connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeTest::TwoBtnMessageBox_Ack);
     connect(OneBtnMessageBox::getPtr(),&OneBtnMessageBox::MessageAck,this,&HomeTest::on_OneBtnMessageBox_Ack);
     ui->Home_HomeTest_btCancelTest->setText(tr("取消测试"));
@@ -89,7 +89,7 @@ void HomeTest::hideEvent(QHideEvent *event){
     Q_UNUSED(event);
     TwoBtnMessageBox::getPtr()->disconnect(this);
     OneBtnMessageBox::getPtr()->disconnect(this);
-    HomeMain::getPtr()->disconnect(this);
+    //HomeMain::getPtr()->disconnect(this);
     TwoBtnMessageBox::hide();
     OneBtnMessageBox::getPtr()->hide();
     if(HomeLoading::getPtr()->isVisible())

@@ -113,12 +113,12 @@ void HomeIdle::showEvent(QShowEvent *event){
     ui->Home_Idle_cbTestType->clear();
     ui->Home_Idle_cbTestType->addItems(UIHandler::getSampleTypeArr());
 
-    connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
+    //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
     //connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeIdle::TwoBtnMessageBox_Ack);
     connect(OneBtnMessageBox::getPtr(),&OneBtnMessageBox::MessageAck,this,&HomeIdle::OneBtnMessageBox_Ack);
     connect(ThreeQuery::getPtr(),&ThreeQuery::queryAck,this,&HomeIdle::Sample_Changed);
     connect(ThreeQuery::getPtr(),&ThreeQuery::queryClose,this,&HomeIdle::InputBox_Close);
-    connect(HomeMain::getPtr(),&HomeMain::sig_DoorKeyDown,this,&HomeIdle::slot_DoorKeyDown);
+    //connect(HomeMain::getPtr(),&HomeMain::sig_DoorKeyDown,this,&HomeIdle::slot_DoorKeyDown);
     connect(UIHandler::getPtr(),&UIHandler::sig_QrCodeChange,this,[=](QString code){
 
         if(!UIHandler::getDoorState() || UIHandler::getIdleData()->bOpenDoor)
@@ -191,7 +191,7 @@ void HomeIdle::hideEvent(QHideEvent *event){
     TwoBtnMessageBox::getPtr()->disconnect(this);
     OneBtnMessageBox::getPtr()->disconnect(this);
     ThreeQuery::getPtr()->disconnect(this);
-    HomeMain::getPtr()->disconnect(this);
+    //HomeMain::getPtr()->disconnect(this);
 }
 
 void HomeIdle::UpdateUI(){
