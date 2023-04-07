@@ -60,7 +60,7 @@ MainWin::MainWin(QWidget *parent) :
     ui->MainWin_btData->setGeometry(UIHandler::screenWidth/3+ui->MainWin_btHome->x(),UIHandler::contentHeight+14,BOTTOM_BUTTON_WIDTH,BOTTOMBUTTON_HEIGHT);
     ui->MainWin_btData->setStyleSheet("QPushButton {font-size:60px;padding-left:30;color:#a7a7a7;background: url(:/images/datarelease.png)}");
 
-    ui->stackedWidget->addWidget(HomeMain::getPtr());
+    //ui->stackedWidget->addWidget(HomeMain::getPtr());
     ui->stackedWidget->addWidget(DataMenu::getPtr());
     ui->stackedWidget->addWidget(DataView::getPtr());
     ui->stackedWidget->addWidget(DataLine::getPtr());
