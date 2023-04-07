@@ -18,8 +18,8 @@ HomeSubMachine::HomeSubMachine(QWidget *parent) :
             qDebug()<<"addTab"<<sub->machineNO;
         }
     }
-    //for (int i = 0; i < 12; i++)
-    //    ui->tabWidget->addTab(new HomeStartup,QString("tab_%1").arg(i));
+
+    connect(UIHandler::getPtr(),&UIHandler::UpdateUI,this,&HomeSubMachine::UpdateUI);
 }
 
 HomeSubMachine::~HomeSubMachine()
@@ -32,6 +32,12 @@ HomeSubMachine *HomeSubMachine::getPtr()
     if (winptr == nullptr)
         winptr = new HomeSubMachine;
     return winptr;
+}
+
+void HomeSubMachine::UpdateUI(int machineNo)
+{
+    qDebug()<<"HomeSubMachine::UpdateUI"<<machineNo;
+
 }
 
 void HomeSubMachine::on_HomeSubMachine_btHome_clicked()

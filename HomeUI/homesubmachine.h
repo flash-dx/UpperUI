@@ -17,6 +17,7 @@ public:
     static HomeSubMachine *getPtr();
 
 private slots:
+    void UpdateUI(int machineNo);
     void on_HomeSubMachine_btHome_clicked();
 
 private:
