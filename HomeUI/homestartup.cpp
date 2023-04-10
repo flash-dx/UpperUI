@@ -47,7 +47,7 @@ HomeStartup *HomeStartup::getPtr()
 
 void HomeStartup::showEvent(QShowEvent *event){
     Q_UNUSED(event);
-    connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
+    //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
 
     UIHandler::NotifyTitle("setup_startup",5);
 }
@@ -59,7 +59,7 @@ void HomeStartup::hideEvent(QHideEvent *event){
         timerid = 0;
     }
 
-    HomeMain::getPtr()->disconnect(this);
+    //HomeMain::getPtr()->disconnect(this);
 }
 
 void HomeStartup::timerEvent(QTimerEvent *e)

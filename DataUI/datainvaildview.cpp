@@ -73,7 +73,7 @@ void DataInvaildView::showEvent(QShowEvent *event){
             UIHandler::NotifyTitle(tr("测试结束"));
         else
             UIHandler::NotifyTitle("dataview",5);
-        connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
+        //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
     }
     else {
         updateUI();
@@ -87,7 +87,7 @@ void DataInvaildView::hideEvent(QHideEvent *event)
     {
         UIHandler::abNormalInfo = "";
     }
-    HomeMain::getPtr()->disconnect(this);
+    //HomeMain::getPtr()->disconnect(this);
 }
 
 void DataInvaildView::on_Data_InvalidView_btBack_clicked()
