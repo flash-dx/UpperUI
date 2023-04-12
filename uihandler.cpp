@@ -218,6 +218,7 @@ void UIHandler::setStage(const HomeStage stage)
 
 HomeStage UIHandler::getStage(int machineNo)
 {
+    qDebug()<<"UIHandler::getStage"<<machineNo;
     return UpperHandler::getStage(machineNo);
 }
 
@@ -566,6 +567,7 @@ void UIHandler::dealSignal(const char *data)
 
 void UIHandler::slot_updateUi(int machineNo)
 {
+    qDebug()<<"UIHandler::slot_updateUI"<<machineNo;
     emit UpdateUI(machineNo);
     HomeStage stage = getPtr()->getStage(machineNo);
     if(stage == Stage_selfcheck || stage == Stage_error)

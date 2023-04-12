@@ -2,7 +2,6 @@
 #include "ui_e04.h"
 
 #include "uihandler.h"
-#include "HomeUI/homemain.h"
 static E04 * E04Ptr;
 
 E04::E04(QWidget *parent) :
@@ -44,7 +43,6 @@ void E04::showEvent(QShowEvent *event){
 
 void E04::hideEvent(QHideEvent *event){
     Q_UNUSED(event);
-    HomeMain::getPtr()->disconnect(this);
 }
 
 void E04::slot_updateUi()

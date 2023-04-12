@@ -2,7 +2,6 @@
 #include "ui_dataview.h"
 #include <QPainter>
 #include "components/onebtnmessagebox.h"
-#include "HomeUI/homemain.h"
 #include "uihandler.h"
 #include <Module/testmodel.h>
 static DataView *winptr = nullptr;

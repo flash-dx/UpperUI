@@ -16,7 +16,7 @@ class UnitMain : public QDialog
 public:
     explicit UnitMain(QWidget *parent = nullptr);
     ~UnitMain();
-    void UpdateUI();
+    void UpdateUI(int machineNo);
 
 private:
     Ui::UnitMain *ui;

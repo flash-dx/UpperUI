@@ -5,7 +5,6 @@
 #include <QVBoxLayout>
 #include <QProgressBar>
 #include <QMultiMap>
-#include "homemain.h"
 #include <uihandler.h>
 
 #define WIDTH 480
@@ -504,8 +503,8 @@ bool HomeAllMachine::eventFilter(QObject *obj, QEvent *event)
 
 void HomeAllMachine::on_machine_Clicked(int machineNo)
 {
+    UIHandler::setCurrMachineId(machineNo);
     UIHandler::GoPage(UIHandler::PageId::Page_Home_SubMachine);
-    //HomeMain::getPtr()->switchDisplay(machineNo);
 }
 
 void HomeAllMachine::slot_DoorKeyDown(int machineNo)

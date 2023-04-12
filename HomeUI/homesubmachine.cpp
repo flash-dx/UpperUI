@@ -18,7 +18,6 @@ HomeSubMachine::HomeSubMachine(QWidget *parent) :
             UnitMain *unit = new UnitMain;
             ui->tabWidget->addTab(unit, QString::fromStdString(sub->name));
             subUI[sub->machineNO] = unit;
-            qDebug()<<"addTab"<<sub->machineNO;
         }
     }
 
@@ -37,11 +36,20 @@ HomeSubMachine *HomeSubMachine::getPtr()
     return winptr;
 }
 
+void HomeSubMachine::showEvent(QShowEvent *event)
+{
+    Q_UNUSED(event);
+    int currMachineNo = UIHandler::getCurrMachineId();
+    qDebug()<<"HomeSubMachine::showEvent"<<currMachineNo;
+    if (currMachineNo >= 0 && subUI[currMachineNo] != ui->tabWidget->currentWidget()){
+        ui->tabWidget->setCurrentWidget(subUI[currMachineNo]);
+    }
+}
+
 void HomeSubMachine::UpdateUI(int machineNo)
 {
-    qDebug()<<"HomeSubMachine::UpdateUI"<<machineNo;
     if (subUI.keys().contains(machineNo))
-        subUI[machineNo]->UpdateUI();
+        subUI[machineNo]->UpdateUI(machineNo);
 }
 
 void HomeSubMachine::on_HomeSubMachine_btHome_clicked()

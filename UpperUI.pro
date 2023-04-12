@@ -33,7 +33,6 @@ SOURCES += \
     mainwin.cpp \
     components/cqrcodeinfo.cpp \
     components/e04.cpp \
-    components/Homeloading.cpp \
     components/loading.cpp \
     components/lock.cpp \
     components/onebtnmessagebox.cpp \
@@ -48,7 +47,6 @@ SOURCES += \
     DataUI/dataview.cpp \
     HomeUI/homeallmachine.cpp \
     HomeUI/homeidle.cpp \
-    HomeUI/homemain.cpp \
     HomeUI/homeready.cpp \
     HomeUI/homestartup.cpp \
     HomeUI/hometest.cpp \
@@ -88,7 +86,6 @@ HEADERS += \
     mainwin.h \
     components/cqrcodeinfo.h \
     components/e04.h \
-    components/Homeloading.h \
     components/loading.h \
     components/lock.h \
     components/onebtnmessagebox.h \
@@ -103,7 +100,6 @@ HEADERS += \
     DataUI/dataview.h \
     HomeUI/homeallmachine.h \
     HomeUI/homeidle.h \
-    HomeUI/homemain.h \
     HomeUI/homeready.h \
     HomeUI/homestartup.h \
     HomeUI/hometest.h \

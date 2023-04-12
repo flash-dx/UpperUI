@@ -1,7 +1,6 @@
 ﻿#include "machinecalibration.h"
 #include "ui_machinecalibration.h"
 #include "../uihandler.h"
-#include "HomeUI/homemain.h"
 #include <QListView>
 
 static MachineCalibration *winptr = nullptr;
@@ -26,7 +25,6 @@ MachineCalibration::MachineCalibration(QWidget *parent) :
     int btnBottom = 30;
     int btnLeft = UIHandler::contentWidth - btnW - btnRight;
     int btnTop = UIHandler::contentHeight - btnBottom - btnH;
-    int btnAdd = 20;
 
     ui->pButton_machine_back->setGeometry(btnLeft, btnTop, btnW,btnH);
 

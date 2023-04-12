@@ -16,6 +16,9 @@ public:
     ~HomeSubMachine();
     static HomeSubMachine *getPtr();
 
+protected:
+    void showEvent(QShowEvent *event);
+
 private slots:
     void UpdateUI(int machineNo);
     void on_HomeSubMachine_btHome_clicked();

@@ -4,7 +4,6 @@
 #include "uihandler.h"
 #include "components/threequery.h"
 #include "components/onebtnmessagebox.h"
-#include "homemain.h"
 #include "components/cqrcodeinfo.h"
 
 #include <QListView>

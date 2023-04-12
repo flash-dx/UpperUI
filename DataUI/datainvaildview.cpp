@@ -1,8 +1,6 @@
 #include "datainvaildview.h"
 #include "ui_datainvaildview.h"
 
-#include "HomeUI/homemain.h"
-
 static DataInvaildView *winptr = nullptr;
 static DataInvaildView *winptr2 = nullptr;
 static int winIndex = 0;

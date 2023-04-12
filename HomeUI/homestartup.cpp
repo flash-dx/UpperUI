@@ -1,12 +1,10 @@
 #include "homestartup.h"
 #include "ui_homestartup.h"
 #include "uihandler.h"
-#include "uihandler.h"
-#include "homemain.h"
 #include "components/onebtnmessagebox.h"
 
-static HomeStartup *winptr = nullptr;
 static int timerid = 0;
+
 HomeStartup::HomeStartup(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HomeStartup)
@@ -27,39 +25,9 @@ HomeStartup::HomeStartup(QWidget *parent) :
     ui->Home_Startup_lbDoorTips->setWordWrap(true);
 }
 
-void HomeStartup::Update()
-{
-    HomeStage stage = UIHandler::getStage();
-    qDebug()<<"HomeStartup::Update stage="<<stage;
-}
-
 HomeStartup::~HomeStartup()
 {
     delete ui;
-}
-
-HomeStartup *HomeStartup::getPtr()
-{
-    if (winptr == nullptr)
-        winptr = new HomeStartup;
-    return winptr;
-}
-
-void HomeStartup::showEvent(QShowEvent *event){
-    Q_UNUSED(event);
-    //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(UpdateUI()));
-
-    UIHandler::NotifyTitle("setup_startup",5);
-}
-
-void HomeStartup::hideEvent(QHideEvent *event){
-    Q_UNUSED(event);
-    if (timerid != 0){
-        killTimer(timerid);
-        timerid = 0;
-    }
-
-    //HomeMain::getPtr()->disconnect(this);
 }
 
 void HomeStartup::timerEvent(QTimerEvent *e)
@@ -71,13 +39,11 @@ void HomeStartup::timerEvent(QTimerEvent *e)
             count = 0;
         for (int i = 0; i < count; i++)
             header += ".";
-        UIHandler::NotifyTitle(header);
     }
 }
 
-void HomeStartup::UpdateUI(){
-    UIHandler::NotifyTitle("startup",5);
-    const StartupData *data = UIHandler::getStartupData();
+void HomeStartup::UpdateUI(int machineNo){
+    const StartupData *data = UIHandler::getStartupData(machineNo);
     if (data == nullptr) return;
     qDebug()<<"startup UpdateUI,bOpenDoor"<<data->bOpenDoor;
     if (!data->tips.empty()){

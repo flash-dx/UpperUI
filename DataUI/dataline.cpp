@@ -4,7 +4,6 @@
 
 #include "uihandler.h"
 #include "Module/testmodel.h"
-#include "HomeUI/homemain.h"
 #include "list"
 using namespace std;
 static DataLine *winptr = nullptr;

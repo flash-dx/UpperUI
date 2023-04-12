@@ -341,22 +341,30 @@ min-width: 145;
 min-height: 50;
 max-width: 145;
 max-height: 50;
-padding-left: 6px;
+padding-left: 3px;
+padding-right: 3px;
+}
+
+QTabBar::tab:selected{
+background: rgba(220,220,220,1);
 }
 /*
 QTabWidget::pane{
 background:rgba(14,73,122,0.4);
 border:none;
 }
-QTabBar::tab:!selected{
-background: rgba(20,45,86,0.5);
-color: rgba(255,255,255,0.5);
-}
+
 QTabBar::tab:hover{
 background: rgba(14,73,122,0.4);
 color: rgba(255,255,255,0.7);
 }
+
+QTabBar::tab:!selected{
+background: rgba(20,45,86,0.5);
+color: rgba(255,255,255,0.5);
+}
 */
+
 QPushButton#HomeSubMachine_btHome {
 border-image: url(:/images/home.png);
 }

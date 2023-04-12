@@ -6,8 +6,6 @@
 #include "components/twobtnmessagebox.h"
 #include "components/onebtnmessagebox.h"
 #include "uihandler.h"
-#include "homemain.h"
-#include "components/Homeloading.h"
 
 #define OFFSET_X -200
 #define OFFSET_Y -150
@@ -80,9 +78,6 @@ void HomeTest::showEvent(QShowEvent *event){
     connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeTest::TwoBtnMessageBox_Ack);
     connect(OneBtnMessageBox::getPtr(),&OneBtnMessageBox::MessageAck,this,&HomeTest::on_OneBtnMessageBox_Ack);
     ui->Home_HomeTest_btCancelTest->setText(tr("取消测试"));
-
-    if(HomeLoading::getPtr()->isVisible())
-        HomeLoading::hide();
 }
 
 void HomeTest::hideEvent(QHideEvent *event){
@@ -92,8 +87,6 @@ void HomeTest::hideEvent(QHideEvent *event){
     //HomeMain::getPtr()->disconnect(this);
     TwoBtnMessageBox::hide();
     OneBtnMessageBox::getPtr()->hide();
-    if(HomeLoading::getPtr()->isVisible())
-        HomeLoading::getPtr()->hide();
 }
 
 void HomeTest::on_Home_HomeTest_btCancelTest_clicked()
@@ -141,7 +134,7 @@ void HomeTest::UpdateUI()
     UIHandler::NotifyTitle("test",5);
     if(data->bLoading)
     {
-        HomeLoading::display(str2q(data->tips));
+        //HomeLoading::display(str2q(data->tips));
     }
     if(data->oneBtnMsgFlag)
     {
