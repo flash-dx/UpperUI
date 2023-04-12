@@ -75,7 +75,8 @@ SOURCES += \
     SetupUI/version2.cpp \
     SetupUI/wifimenu.cpp \
     HomeUI/homesubmachine.cpp \
-    HomeUI/unitmain.cpp
+    HomeUI/unitmain.cpp \
+    globalapplication.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -127,7 +128,8 @@ HEADERS += \
     SetupUI/version2.h \
     SetupUI/wifimenu.h \
     HomeUI/homesubmachine.h \
-    HomeUI/unitmain.h
+    HomeUI/unitmain.h \
+    globalapplication.h
 
 FORMS += \
         mainwindow.ui \

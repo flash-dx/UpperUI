@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "globalapplication.h"
 #include <QApplication>
 #include <QFile>
 #include <QTextCodec>
@@ -6,7 +7,9 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    //QApplication a(argc, argv);
+    qputenv("QT_IM_MODULE", QByteArray("Qt5Input"));
+    GlobalApplication a(argc,argv);
 
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QTextCodec::setCodecForLocale(codec);
