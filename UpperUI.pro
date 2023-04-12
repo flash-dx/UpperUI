@@ -31,7 +31,6 @@ SOURCES += \
     uihandler.cpp \
     Module/testmodel.cpp \
     mainwin.cpp \
-    components/cqrcodeinfo.cpp \
     components/e04.cpp \
     components/loading.cpp \
     components/lock.cpp \
@@ -84,7 +83,6 @@ HEADERS += \
     uihandler.h \
     Module/testmodel.h \
     mainwin.h \
-    components/cqrcodeinfo.h \
     components/e04.h \
     components/loading.h \
     components/lock.h \

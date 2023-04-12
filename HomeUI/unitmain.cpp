@@ -34,6 +34,7 @@ void UnitMain::UpdateUI(int machineNo)
     else if (stage == Stage_idle){
         if (ui->stackedWidget->currentWidget() != idleWin)
             ui->stackedWidget->setCurrentWidget(idleWin);
+        idleWin->UpdateUI(machineNo);
     }
     else if (stage == Stage_test){
         if (ui->stackedWidget->currentWidget() != testWin)

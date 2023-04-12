@@ -15,7 +15,7 @@ class HomeIdle : public QDialog
 public:
     explicit HomeIdle(QWidget *parent = nullptr);
     ~HomeIdle();
-    static HomeIdle *getPtr();
+    void UpdateUI(int machineNo);
 
 protected:
     void showEvent(QShowEvent *event);
@@ -23,8 +23,6 @@ protected:
 
 private slots:
     void on_Home_Idle_btOpenDoor_clicked();
-    void UpdateUI();
-    //void TwoBtnMessageBox_Ack(int ack);
     void OneBtnMessageBox_Ack(int ack);
     void on_Home_Idle_btPen_clicked();
     void Sample_Changed(QString res1, QString res2, QString res3);
@@ -34,8 +32,6 @@ private slots:
     void on_Home_Idle_btSequence_clicked();
     void slot_DoorKeyDown(int machineNo);
 
-signals:
-    void sig_QrCodeChange(int result);
 
 private:
     Ui::HomeIdle *ui;        

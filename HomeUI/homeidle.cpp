@@ -4,7 +4,6 @@
 #include "uihandler.h"
 #include "components/threequery.h"
 #include "components/onebtnmessagebox.h"
-#include "components/cqrcodeinfo.h"
 
 #include <QListView>
 static HomeIdle *winptr = nullptr;
@@ -79,14 +78,6 @@ HomeIdle::HomeIdle(QWidget *parent) :
     ui->Home_Idle_lbBox->setText(tr("放试剂盒"));
     ui->Home_Idle_lbClose->setText(tr("合仓"));
 
-
-    ui->Home_Idle_lbOpen->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_done.png);");
-    ui->Home_Idle_lbBarCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
-    ui->Home_Idle_lbQrCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
-    ui->Home_Idle_lbBox->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
-    ui->Home_Idle_lbClose->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_ notDone.png);");
-
-
     ui->Home_Idle_lbOpen->setGeometry(tempX-580,tempY+tempHeight+200,250,60);
     ui->Home_Idle_lbBarCode->setGeometry(ui->Home_Idle_lbOpen->x()+ui->Home_Idle_lbOpen->width()+100,ui->Home_Idle_lbOpen->y()-ui->Home_Idle_lbOpen->height()-20,250,60);
     ui->Home_Idle_lbQrCode->setGeometry(ui->Home_Idle_lbBarCode->x(),ui->Home_Idle_lbBarCode->y()+ui->Home_Idle_lbBarCode->height()+80,250,60);
@@ -97,13 +88,6 @@ HomeIdle::HomeIdle(QWidget *parent) :
 HomeIdle::~HomeIdle()
 {
     delete ui;
-}
-
-HomeIdle *HomeIdle::getPtr()
-{
-    if (winptr == nullptr)
-        winptr = new HomeIdle;
-    return winptr;
 }
 
 void HomeIdle::showEvent(QShowEvent *event){
@@ -137,15 +121,7 @@ void HomeIdle::showEvent(QShowEvent *event){
         {
             UIHandler::setSampleCode(code);
         }
-        //Log::LogByFile("recodeQr.txt",code);
-        if(CQrCodeInfo::getPtr()->isHidden())
-        {
-            CQrCodeInfo::getPtr()->display(result);
-        }
-        else
-        {
-            emit sig_QrCodeChange(result);
-        }
+
     });
 
     bool mode = false;
@@ -186,16 +162,14 @@ void HomeIdle::showEvent(QShowEvent *event){
 
 void HomeIdle::hideEvent(QHideEvent *event){
     Q_UNUSED(event);
-    UIHandler::getPtr()->disconnect(this);
     TwoBtnMessageBox::getPtr()->disconnect(this);
     OneBtnMessageBox::getPtr()->disconnect(this);
     ThreeQuery::getPtr()->disconnect(this);
     //HomeMain::getPtr()->disconnect(this);
 }
 
-void HomeIdle::UpdateUI(){
-    UIHandler::NotifyTitle("idle",5);
-    const IdleData *data = UIHandler::getIdleData();
+void HomeIdle::UpdateUI(int machineNo){
+    const IdleData *data = UIHandler::getIdleData(machineNo);
     if (data == nullptr) return;
     qDebug()<<"HomeIdle,UpdateUI"<<str2q(data->errMessage)<<UIHandler::getBoxState();
     /*
@@ -204,12 +178,24 @@ void HomeIdle::UpdateUI(){
     }
     else
     */
-    {
+    {       
+        ui->Home_Idle_lbClose->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_ notDone.png);");
         if (UIHandler::getBoxState())
-            ui->Home_Idle_lbBoxState->setText(tr("试剂盒就绪"));
+            ui->Home_Idle_lbBox->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
         else
-            ui->Home_Idle_lbBoxState->setText(tr("未检测到试剂盒"));
-
+            ui->Home_Idle_lbBox->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
+        if (UIHandler::getDoorState())
+            ui->Home_Idle_lbOpen->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_done.png);");
+        else
+            ui->Home_Idle_lbOpen->setStyleSheet("padding-left:70px;border-image: url(:/images/tip_ notDone.png);");
+        if (UIHandler::getSampleCode().isEmpty())
+            ui->Home_Idle_lbBarCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
+        else
+            ui->Home_Idle_lbBarCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
+        if (UIHandler::PanelCode().isEmpty())
+            ui->Home_Idle_lbQrCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_ notDone.png);");
+        else
+            ui->Home_Idle_lbQrCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
 
         if (data->bOpenDoor){
             ui->Home_Idle_btOpenDoor->setVisible(false);
