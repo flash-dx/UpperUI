@@ -101,6 +101,7 @@ public:
 
     static int getCurrMachineId();
     static void setCurrMachineId(const int id);
+    static int getPrevMachineId();
 
     static map<int,string>get_subMac_Name();
     static map<int,string>get_subMac_Mac();

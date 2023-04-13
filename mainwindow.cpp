@@ -70,15 +70,16 @@ void MainWindow::UISetup()
 
     ui->MainWindow_lbBattery->setText("");
     ui->MainWindow_lbBattery->setGeometry(screenWidth - 410, (HEADER_HEIGHT-30)/2, 60, 30);
-    ui->MainWindow_lbBattery->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/battery.png);");
+    ui->MainWindow_lbBattery->setStyleSheet("background-color: transparent;border-image: url(:/images/battery.png);");
 
     ui->MainWindow_lbEht->setText("");
     ui->MainWindow_lbEht->setGeometry(screenWidth - 445, (HEADER_HEIGHT-30)/2, 30, 30);
-    ui->MainWindow_lbEht->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/Eht.png);");
+    ui->MainWindow_lbEht->setStyleSheet("background-color: transparent;border-image: url(:/images/Eht.png);");
 
     ui->MainWindow_lbWifi->setText("");
     ui->MainWindow_lbWifi->setGeometry(screenWidth - 480, (HEADER_HEIGHT-30)/2, 30, 30);
-    ui->MainWindow_lbWifi->setStyleSheet("background-color: rgb(50, 48, 48);border-image: url(:/images/sign0.png);");
+
+    ui->MainWindow_lbWifi->setStyleSheet("background-color: transparent;border-image: url(:/images/sign0.png);");
 
     ui->MainWindow_btQrCode->setGeometry(ui->MainWindow_lbWifi->x()-100,(HEADER_HEIGHT-50)/2,50,50);
     ui->MainWindow_btQrCode->setStyleSheet("background: url(:/images/qrcode.png) transparent;");

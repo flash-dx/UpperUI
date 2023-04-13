@@ -11,10 +11,7 @@ GlobalApplication::GlobalApplication(int &argc, char **argv):QApplication (argc,
 GlobalApplication::~GlobalApplication(){
 
 }
-void GlobalApplication::setWindowInstance(QWidget *wnd){
-    widget = wnd;
-}
-//static bool keyvalid = true;
+
 static QString sampleCode = "";
 static QString simpleKey = "";
 static time_t timel = 0;
