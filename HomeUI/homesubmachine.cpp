@@ -40,10 +40,18 @@ void HomeSubMachine::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event);
     int currMachineNo = UIHandler::getCurrMachineId();
+    if (currMachineNo == -1)
+        currMachineNo = UIHandler::getPrevMachineId();
     qDebug()<<"HomeSubMachine::showEvent"<<currMachineNo;
     if (currMachineNo >= 0 && subUI[currMachineNo] != ui->tabWidget->currentWidget()){
         ui->tabWidget->setCurrentWidget(subUI[currMachineNo]);
     }
+}
+
+void HomeSubMachine::hideEvent(QHideEvent *event)
+{
+    Q_UNUSED(event);
+    UIHandler::setCurrMachineId(-1);
 }
 
 void HomeSubMachine::UpdateUI(int machineNo)

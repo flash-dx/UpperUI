@@ -181,6 +181,11 @@ void UIHandler::setCurrMachineId(const int id)
     UpperHandler::setCurrMachineId(id);
 }
 
+int UIHandler::getPrevMachineId()
+{
+    return UpperHandler::getPrevMachineId();
+}
+
 map<int, string> UIHandler::get_subMac_Name()
 {
     return  UpperHandler::get_subMac_Name();
