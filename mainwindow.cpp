@@ -81,9 +81,9 @@ void MainWindow::UISetup()
 
     ui->MainWindow_lbWifi->setStyleSheet("background-color: transparent;border-image: url(:/images/sign0.png);");
 
-    ui->MainWindow_btQrCode->setGeometry(ui->MainWindow_lbWifi->x()-100,(HEADER_HEIGHT-50)/2,50,50);
+    ui->MainWindow_btQrCode->setGeometry(ui->MainWindow_lbWifi->x()-100,(HEADER_HEIGHT-42)/2,42,42);
     ui->MainWindow_btQrCode->setStyleSheet("background: url(:/images/qrcode.png) transparent;");
-    ui->MainWindow_btBarCode->setGeometry(ui->MainWindow_btQrCode->x()-60,(HEADER_HEIGHT-50)/2,50,50);
+    ui->MainWindow_btBarCode->setGeometry(ui->MainWindow_btQrCode->x()-60,(HEADER_HEIGHT-42)/2,42,42);
     ui->MainWindow_btBarCode->setStyleSheet("background: url(:/images/barcode.png) transparent;");
 }
 

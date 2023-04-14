@@ -121,7 +121,7 @@
         <file>images/tip_ notDone.png</file>
         <file>images/tip_done.png</file>
         <file>images/home.png</file>
-        <file>images/qrcode.png</file>
         <file>images/barcode.png</file>
+        <file>images/qrcode.png</file>
     </qresource>
 </RCC>
