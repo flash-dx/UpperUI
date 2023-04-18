@@ -98,3 +98,13 @@ void MainWindow::EnterLogin(bool bEnter)
         ui->MainWindow_lbUser->setText(UIHandler::getDisplayUser());
     }
 }
+
+void MainWindow::on_MainWindow_btBarCode_clicked()
+{
+    UIHandler::ScanCode(UIHandler::ReadXmlParam("BarCode","P20230414"));
+}
+
+void MainWindow::on_MainWindow_btQrCode_clicked()
+{
+    UIHandler::ScanCode(UIHandler::ReadXmlParam("QrCode","FlashDx11 80020 GMS008D102 230109 181 120 X"));
+}

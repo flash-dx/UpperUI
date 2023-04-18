@@ -75,7 +75,7 @@ public:
     static void FooterSetEnabled(bool enable);
     static void NotifyTitle(QString title, int type = 0);
     static void GlobalMessage(int msg);
-    static void QrCodeUpdate(QString code);
+    static void ScanCode(QString code);
     static void Close();
 
 

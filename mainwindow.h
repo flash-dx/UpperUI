@@ -24,6 +24,8 @@ private:
 
 private slots:
     void EnterLogin(bool bEnter);
+    void on_MainWindow_btBarCode_clicked();
+    void on_MainWindow_btQrCode_clicked();
 };
 
 #endif // MAINWINDOW_H

@@ -27,11 +27,8 @@ private slots:
     void on_Home_Idle_btPen_clicked();
     void Sample_Changed(QString res1, QString res2, QString res3);
     void InputBox_Close();
-    void on_Home_Idle_btReady_clicked();
 
     void on_Home_Idle_btSequence_clicked();
-    void slot_DoorKeyDown(int machineNo);
-
 
 private:
     Ui::HomeIdle *ui;        

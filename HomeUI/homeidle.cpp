@@ -14,28 +14,28 @@ HomeIdle::HomeIdle(QWidget *parent) :
     ui->setupUi(this);
     setStyleSheet("background-color:#f5f5f5");
     ui->Home_Idle_btOpenDoor->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
-    ui->Home_Idle_lbBoxState->setGeometry((UIHandler::screenWidth-600)/2,ui->Home_Idle_btOpenDoor->y()+250,600,400);
-    ui->Home_Idle_lbBoxState->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
-    ui->Home_Idle_lbBoxState->setWordWrap(true);
-    ui->Home_Idle_lbBoxState->setText(tr("未检测到试剂盒"));
-    ui->Home_Idle_btReady->setGeometry(UIHandler::screenWidth-299-171,UIHandler::contentHeight*7/8-106-40-106-30-106-30,299,106);
-    ui->Home_Idle_btReady->setText(tr("试剂盒就绪"));
-    ui->Home_Idle_btPen->setGeometry(ui->Home_Idle_btOpenDoor->x()+350,ui->Home_Idle_btOpenDoor->y()+(224-70)/2,75,76);
+    ui->Home_Idle_lbWarning->setGeometry((UIHandler::screenWidth-450)/2,ui->Home_Idle_btOpenDoor->y()+250,450,100);
+    ui->Home_Idle_lbWarning->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+    ui->Home_Idle_lbWarning->setWordWrap(true);
+    ui->Home_Idle_lbWarning->setStyleSheet("color:red");
+    ui->Home_Idle_lbWarning->setText(tr("请取出残留试剂盒"));
+
+    ui->Home_Idle_lbBK1->setGeometry(ui->Home_Idle_btOpenDoor->x()-368-150,(UIHandler::contentHeight*7/8-457)/2-50,368,457);
+    ui->Home_Idle_lbBK2->setGeometry(ui->Home_Idle_btOpenDoor->x()+219+150,(UIHandler::contentHeight*7/8-457)/2-50,368,457);
+    ui->Home_Idle_btPen->setGeometry(ui->Home_Idle_lbBK2->x()+368+100,(UIHandler::contentHeight*7/8-76)/2-50,75,76);
     movie = new QMovie(":/images/opendoorAmi.gif");
     ui->Home_Idle_lbGif->setGeometry((UIHandler::screenWidth-230)/2,(UIHandler::contentHeight*7/8-230)/2-100,230,230);
     ui->Home_Idle_lbGif->setMovie(movie);
-    ui->Home_Idle_lbGif->setVisible(false);
-
-
-//    ui->Home_Idle_lbTestName->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbTestSerial->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbSampleCode->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbSampleInfo->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbSampleRemark->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbValidTime->setStyleSheet("background-color:#ffffff");
-    ui->Home_Idle_lbBoxTips->setStyleSheet("color:red");
+    ui->Home_Idle_lbGif->setVisible(false);   
 
     ui->Home_Idle_cbTestType->setView(new QListView());
+
+    ui->Home_Idle_lbTestName->setGeometry(ui->Home_Idle_lbBK1->x()+10,ui->Home_Idle_lbBK1->y()+26,348,130);
+    ui->Home_Idle_lbTestName->setAlignment(Qt::AlignCenter);
+    ui->Home_Idle_lbTestName->setWordWrap(true);
+
+    ui->Home_Idle_lbTestSerial->setGeometry(ui->Home_Idle_lbBK1->x()+10,ui->Home_Idle_lbBK1->y()+165,348,130);
+    ui->Home_Idle_lbTestSerial->setAlignment(Qt::AlignCenter);
 
     int tempX = ui->Home_Idle_btOpenDoor->x();
     int tempY = ui->Home_Idle_btOpenDoor->y();
@@ -48,12 +48,10 @@ HomeIdle::HomeIdle(QWidget *parent) :
     ui->Home_Idle_lbValidTime->setGeometry(ui->Home_Idle_lbTestName->x(),ui->Home_Idle_lbTestSerial->y()+ui->Home_Idle_lbTestSerial->height()+spaceing,348,50);
 
     ui->Home_Idle_cbTestType->setGeometry(ui->Home_Idle_lbValidTime->x(),ui->Home_Idle_lbValidTime->y()+ui->Home_Idle_lbValidTime->height()+spaceing,300,60);
-    ui->Home_Idle_lbBoxTips->setGeometry(ui->Home_Idle_cbTestType->x(),ui->Home_Idle_cbTestType->y()+ui->Home_Idle_cbTestType->height()+spaceing,348,50);
 
     ui->Home_Idle_lbTestName->setText(tr("四项呼吸道病毒核酸检测"));
     ui->Home_Idle_lbValidTime->setText("2022-09-10");
     ui->Home_Idle_lbTestSerial->setText(tr("GMS007C302"));
-    ui->Home_Idle_lbBoxTips->setText(tr("试剂盒已过期"));
 
     ui->Home_Idle_lbSampleCode->setText("123456");
     ui->Home_Idle_lbSampleInfo->setText("人医");
@@ -64,13 +62,6 @@ HomeIdle::HomeIdle(QWidget *parent) :
     ui->Home_Idle_lbSampleRemark->setGeometry(ui->Home_Idle_lbSampleCode->x(),ui->Home_Idle_lbSampleInfo->y()+ui->Home_Idle_lbSampleInfo->height()+spaceing,348,50);
     ui->Home_Idle_btOpenDoor->setStyleSheet("QPushButton {background-image: url(:/images/doorclose.png)}");
 
-//    ui->Home_Idle_lbOpen->setStyleSheet("background-color:red");
-//    ui->Home_Idle_lbBarCode->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbQrCode->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbBox->setStyleSheet("background-color:#ffffff");
-//    ui->Home_Idle_lbClose->setStyleSheet("background-color:#ffffff");
-
-    ui->Home_Idle_lbBoxState->setVisible(false);
 
     ui->Home_Idle_lbOpen->setText(tr("开仓"));
     ui->Home_Idle_lbBarCode->setText(tr("扫条形码"));
@@ -101,7 +92,6 @@ void HomeIdle::showEvent(QShowEvent *event){
     connect(OneBtnMessageBox::getPtr(),&OneBtnMessageBox::MessageAck,this,&HomeIdle::OneBtnMessageBox_Ack);
     connect(ThreeQuery::getPtr(),&ThreeQuery::queryAck,this,&HomeIdle::Sample_Changed);
     connect(ThreeQuery::getPtr(),&ThreeQuery::queryClose,this,&HomeIdle::InputBox_Close);
-    //connect(HomeMain::getPtr(),&HomeMain::sig_DoorKeyDown,this,&HomeIdle::slot_DoorKeyDown);
     connect(UIHandler::getPtr(),&UIHandler::sig_QrCodeChange,this,[=](QString code){
 
         if(!UIHandler::getDoorState() || UIHandler::getIdleData()->bOpenDoor)
@@ -154,7 +144,6 @@ void HomeIdle::showEvent(QShowEvent *event){
         UIHandler::setBoxCode("");
     }
 
-    ui->Home_Idle_btReady->setVisible(mode);
     ui->Home_Idle_lbSequence->setVisible(false);
     ui->Home_Idle_cbSequence->setVisible(false);
     ui->Home_Idle_btSequence->setVisible(false);
@@ -209,7 +198,6 @@ void HomeIdle::UpdateUI(int machineNo){
             ui->Home_Idle_lbGif->setVisible(false);
             ui->Home_Idle_btOpenDoor->setStyleSheet("QPushButton {background-image: url(:/images/dooropen.png)}");
         }
-        ui->Home_Idle_btReady->setEnabled(!data->bOpenDoor);
         ui->Home_Idle_btPen->setEnabled(!data->bOpenDoor);
     }
 }
@@ -255,16 +243,6 @@ void HomeIdle::on_Home_Idle_btOpenDoor_clicked()
     UIHandler::IdleSwitchDoor();
 }
 
-//void HomeIdle::TwoBtnMessageBox_Ack(int ack)
-//{
-//    if (ack == 1)
-//        UIHandler::GoPage(UIHandler::PageId::Page_Home_Main);
-//    else{
-//        //UIHandler::setErrorOpenDoor(true,GlobalParam::currentMachineNo);
-//        UIHandler::SequenceDo(SequenceId::Sequence_OpenBox);
-//    }
-//}
-
 void HomeIdle::OneBtnMessageBox_Ack(int ack)
 {
     Q_UNUSED(ack);
@@ -292,13 +270,6 @@ void HomeIdle::Sample_Changed(QString res1, QString res2, QString res3)
     UIHandler::setSampleRemark(res3);
 }
 
-void HomeIdle::on_Home_Idle_btReady_clicked()
-{
-    UIHandler::setStage(HomeStage::Stage_result);
-    UIHandler::getPtr()->UpdateUI(UIHandler::getCurrMachineId());
-    //emit UIHandler::getPtr()->TestProgress(50,100,UIHandler::getCurrMachineId());
-}
-
 void HomeIdle::on_Home_Idle_btSequence_clicked()
 {
     QString panelCode = "";
@@ -315,9 +286,4 @@ void HomeIdle::on_Home_Idle_btSequence_clicked()
         UIHandler::setBoxCode(UIHandler::getBoxCode(panelCode));
 //        qDebug()<<panelName<<panelCode<<GlobalParam::DefaultBoxSerial<<GlobalParam::getBoxCode(panelCode);
     }
-}
-
-void HomeIdle::slot_DoorKeyDown(int machineNo)
-{
-    on_Home_Idle_btOpenDoor_clicked();
 }

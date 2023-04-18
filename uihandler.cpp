@@ -116,9 +116,9 @@ void UIHandler::GlobalMessage(int msg)
     emit UIHandler::getPtr()->GlobalParamMessage(msg);
 }
 
-void UIHandler::QrCodeUpdate(QString code)
+void UIHandler::ScanCode(QString code)
 {
-    emit UIHandler::getPtr()->sig_QrCodeChange(code);
+    UpperHandler::ScanCode(q2str(code.remove('\r')));
 }
 
 void UIHandler::Close(){

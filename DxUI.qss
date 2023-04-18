@@ -169,6 +169,12 @@ background: url(:/images/back.png);
     QPushButton#Home_Idle_btOpenDoor {
     background-image: url(:/images/doorclose.png);
     }
+    QLabel#Home_Idle_lbBK1 {
+    background-image: url(:/images/ThreeMessageBG.png);
+    }
+    QLabel#Home_Idle_lbBK2 {
+    background-image: url(:/images/ThreeMessageBG.png);
+    }
     QPushButton#Home_Idle_btQuit {
     font-size: 40px;
     padding-left: 30px;

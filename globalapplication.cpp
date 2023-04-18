@@ -68,7 +68,7 @@ void GlobalApplication::timerEvent(QTimerEvent *event){
         qDebug()<<sampleCode<<"sampleCode";
         if(sampleCode.length() > 5)
         {
-            UIHandler::QrCodeUpdate(sampleCode);
+            UIHandler::ScanCode(sampleCode);
         }
         sampleCode = "";
     }

@@ -26,19 +26,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Home_Idle_lbBoxState">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>320</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="Home_Idle_btPen">
    <property name="geometry">
     <rect>
@@ -50,22 +37,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Home_Idle_btReady">
-   <property name="geometry">
-    <rect>
-     <x>920</x>
-     <y>240</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
    </property>
   </widget>
   <widget class="QLabel" name="Home_Idle_lbGif">
@@ -304,7 +275,7 @@ background-color:rgb(222, 221, 218)</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Home_Idle_lbBoxTips">
+  <widget class="QLabel" name="Home_Idle_lbWarning">
    <property name="geometry">
     <rect>
      <x>810</x>
@@ -317,6 +288,53 @@ background-color:rgb(222, 221, 218)</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="Home_Idle_lbBK1">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>280</y>
+     <width>54</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Home_Idle_lbBK2">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>420</y>
+     <width>54</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>Home_Idle_lbBK2</zorder>
+  <zorder>Home_Idle_lbBK1</zorder>
+  <zorder>Home_Idle_btOpenDoor</zorder>
+  <zorder>Home_Idle_btPen</zorder>
+  <zorder>Home_Idle_lbGif</zorder>
+  <zorder>Home_Idle_btSequence</zorder>
+  <zorder>Home_Idle_lbSequence</zorder>
+  <zorder>Home_Idle_cbSequence</zorder>
+  <zorder>Home_Idle_lbSampleInfo</zorder>
+  <zorder>Home_Idle_lbTestName</zorder>
+  <zorder>Home_Idle_lbTestSerial</zorder>
+  <zorder>Home_Idle_cbTestType</zorder>
+  <zorder>Home_Idle_lbSampleCode</zorder>
+  <zorder>Home_Idle_lbSampleRemark</zorder>
+  <zorder>Home_Idle_lbOpen</zorder>
+  <zorder>Home_Idle_lbBarCode</zorder>
+  <zorder>Home_Idle_lbQrCode</zorder>
+  <zorder>Home_Idle_lbBox</zorder>
+  <zorder>Home_Idle_lbClose</zorder>
+  <zorder>Home_Idle_lbValidTime</zorder>
+  <zorder>Home_Idle_lbWarning</zorder>
  </widget>
  <resources/>
  <connections/>
