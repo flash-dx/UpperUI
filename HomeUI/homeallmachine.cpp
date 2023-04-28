@@ -325,11 +325,7 @@ void HomeAllMachine::updateIcon(ICONTYPE type, int machineNo)
              else if (type == ICONTYPE::TYPE_MESSAGEICON) {
                  HomeStage stage = UIHandler::getStage(machineNo);
                  strPath = ":/images/tempNoMsg.png";
-                 if(stage == Stage_selfcheck && !UIHandler::getStartupData(machineNo)->tips.empty())
-                 {
-                    strPath = ":/images/tempHaveMsg.png";
-                 }
-                 else if (stage == Stage_error ) {
+                 if (stage == Stage_error ) {
                      strPath = ":/images/tempHaveMsg.png";
                  }
              }

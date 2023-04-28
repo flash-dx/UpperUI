@@ -52,76 +52,6 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="Home_Idle_btSequence">
-   <property name="geometry">
-    <rect>
-     <x>800</x>
-     <y>10</y>
-     <width>140</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>30</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(186, 189, 182);</string>
-   </property>
-   <property name="text">
-    <string>设置</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Home_Idle_lbSequence">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>20</y>
-     <width>201</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>30</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>时序：</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="Home_Idle_cbSequence">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>20</y>
-     <width>591</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>35</pointsize>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">selection-color: rgb(46, 52, 54);
-background-color:rgb(222, 221, 218)</string>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>30</width>
-     <height>30</height>
-    </size>
-   </property>
-  </widget>
   <widget class="QLabel" name="Home_Idle_lbSampleInfo">
    <property name="geometry">
     <rect>
@@ -249,33 +179,7 @@ background-color:rgb(222, 221, 218)</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="Home_Idle_lbClose">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>700</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Home_Idle_lbValidTime">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>490</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Home_Idle_lbWarning">
+  <widget class="QLabel" name="Home_Idle_lbTips">
    <property name="geometry">
     <rect>
      <x>810</x>
@@ -319,9 +223,6 @@ background-color:rgb(222, 221, 218)</string>
   <zorder>Home_Idle_btOpenDoor</zorder>
   <zorder>Home_Idle_btPen</zorder>
   <zorder>Home_Idle_lbGif</zorder>
-  <zorder>Home_Idle_btSequence</zorder>
-  <zorder>Home_Idle_lbSequence</zorder>
-  <zorder>Home_Idle_cbSequence</zorder>
   <zorder>Home_Idle_lbSampleInfo</zorder>
   <zorder>Home_Idle_lbTestName</zorder>
   <zorder>Home_Idle_lbTestSerial</zorder>
@@ -332,9 +233,7 @@ background-color:rgb(222, 221, 218)</string>
   <zorder>Home_Idle_lbBarCode</zorder>
   <zorder>Home_Idle_lbQrCode</zorder>
   <zorder>Home_Idle_lbBox</zorder>
-  <zorder>Home_Idle_lbClose</zorder>
-  <zorder>Home_Idle_lbValidTime</zorder>
-  <zorder>Home_Idle_lbWarning</zorder>
+  <zorder>Home_Idle_lbTips</zorder>
  </widget>
  <resources/>
  <connections/>

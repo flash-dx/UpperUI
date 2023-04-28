@@ -15,17 +15,14 @@ class HomeStartup : public QDialog
 public:
     explicit HomeStartup(QWidget *parent = nullptr);
     ~HomeStartup();
-    void UpdateUI(int machineNo);
 
 protected:
+    void showEvent(QShowEvent *event);
+    void hideEvent(QHideEvent *event);
     void timerEvent(QTimerEvent *e);
-
-private slots:
-    void on_Home_Startup_btOpenDoor_clicked();
 
 private:
     Ui::HomeStartup *ui;
-    QMovie *movie;
 };
 
 #endif // HOME_STARTUP_H

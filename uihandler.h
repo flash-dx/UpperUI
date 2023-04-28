@@ -162,14 +162,11 @@ public:
 
     static QString getTwoBtnMsg();
     static bool clearMsg();
-    static bool resetQrInfo();
-    static const StartupData *getStartupData(int machineNo = getCurrMachineId());
+
     static const IdleData *getIdleData(int machineNo = getCurrMachineId());
     static const TestProcessData *getTestProcessData(int machineNo = getCurrMachineId());
 
     static const ErrorInfo *getErrInfo(int machineNo = getCurrMachineId());
-
-    static void StartupOpenDoor();
 
     static void IdleSwitchDoor();
 

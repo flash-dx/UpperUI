@@ -317,11 +317,6 @@ void UIHandler::setBoxCode(const QString code)
     UpperHandler::setBoxCode(code.toStdString());
 }
 
-const StartupData *UIHandler::getStartupData(int machineNo)
-{
-    return UpperHandler::getStartupData(machineNo);
-}
-
 const IdleData *UIHandler::getIdleData(int machineNo)
 {
     return UpperHandler::getIdleData(machineNo);
@@ -335,11 +330,6 @@ const TestProcessData *UIHandler::getTestProcessData(int machineNo)
 const ErrorInfo *UIHandler::getErrInfo(int machineNo)
 {
     return UpperHandler::getErrInfo(machineNo);
-}
-
-void UIHandler::StartupOpenDoor()
-{
-    UpperHandler::StartupOpenDoor();
 }
 
 void UIHandler::IdleSwitchDoor()
@@ -810,11 +800,6 @@ QString UIHandler::getTwoBtnMsg()
 bool UIHandler::clearMsg()
 {
     return UpperHandler::clearMsg();
-}
-
-bool UIHandler::resetQrInfo()
-{
-    return UpperHandler::resetQrInfo();
 }
 
 bool UIHandler::delSubMachine(QString mac)

@@ -85,7 +85,7 @@ void HomeReady::showEvent(QShowEvent *event){
     ui->Home_HomeReady_btCancelTest->setText(tr("取消测试"));
 
     ChangedTips();
-    connect(ThreeQuery::getPtr(),&ThreeQuery::queryAck,this,&HomeReady::Sample_Changed);
+    //connect(ThreeQuery::getPtr(),&ThreeQuery::queryAck,this,&HomeReady::Sample_Changed);
     connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeReady::TwoBtnMessageBox_Ack,Qt::UniqueConnection);
     connect(UIHandler::getPtr(),&UIHandler::sig_errorSql,this,[=](int machiNo){
         OneBtnMessageBox::display(tr("测试创建失败，请检查是否含有非法字符！"),tr("返回"));
@@ -95,7 +95,7 @@ void HomeReady::showEvent(QShowEvent *event){
 
 void HomeReady::hideEvent(QHideEvent *event){
     Q_UNUSED(event);
-    ThreeQuery::getPtr()->disconnect(this);
+    //ThreeQuery::getPtr()->disconnect(this);
     TwoBtnMessageBox::getPtr()->disconnect(this);
     OneBtnMessageBox::getPtr()->disconnect(this);
     UIHandler::getPtr()->disconnect(this);
@@ -149,9 +149,9 @@ void HomeReady::TwoBtnMessageBox_Ack(int ack, QString winName)
 
 void HomeReady::on_Home_HomeReady_btPen_clicked()
 {
-    int id = UIHandler::getCurrMachineId();
-    ThreeQuery::display(tr("样本信息录入"),tr("样本号"),tr("样本信息"),tr("样本备注"),
-                        UIHandler::getSampleCode(),UIHandler::getSampleInfo(),UIHandler::getSampleRemark());
+    //int id = UIHandler::getCurrMachineId();
+    //ThreeQuery::display(tr("样本信息录入"),tr("样本号"),tr("样本信息"),tr("样本备注"),
+    //                    UIHandler::getSampleCode(),UIHandler::getSampleInfo(),UIHandler::getSampleRemark());
 }
 
 void HomeReady::on_Home_HomeReady_btCancelTest_clicked()

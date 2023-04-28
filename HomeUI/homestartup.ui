@@ -26,32 +26,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="Home_Startup_btOpenDoor">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>160</y>
-     <width>89</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Home_Startup_lbGif">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>220</y>
-     <width>67</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLabel" name="Home_Startup_lbDoorTips">
    <property name="geometry">
     <rect>

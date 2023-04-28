@@ -2,19 +2,22 @@
 #include "ui_threequery.h"
 #include <QStyleOption>
 #include <QPainter>
-#include "uihandler.h"
-#include "mainwin.h"
-static ThreeQuery *threeQuery = nullptr;
+#include <QScreen>
+#include <QDebug>
 
 ThreeQuery::ThreeQuery(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::ThreeQuery)
 {
     ui->setupUi(this);
-    int init_x = (UIHandler::contentWidth-810)/2;
-    int init_y = (UIHandler::contentHeight-565)/2+150 - 60;
-    setGeometry(0,0,UIHandler::contentWidth,UIHandler::screenHeight);
-    ui->Com_ThreeQuery_wgContainer->setGeometry(0+init_x,20+init_y,810,565);
+    setWindowFlags(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_TranslucentBackground,true);
+    int screenWidth = QGuiApplication::screens().at(0)->geometry().width();
+    int screenHeight = QGuiApplication::screens().at(0)->geometry().height();
+    int init_x = (screenWidth-810)/2;
+    int init_y = (screenHeight-565)/2 - 60;
+    setGeometry(0,0,screenWidth,screenHeight);
+    ui->Com_ThreeQuery_wgContainer->setGeometry(init_x,init_y,810,565);
     ui->Com_ThreeQuery_lbTitle->setGeometry(0,20,810,60);
     ui->Com_ThreeQuery_lbTitle->setAlignment(Qt::AlignTop|Qt::AlignHCenter);
 
@@ -45,6 +48,13 @@ ThreeQuery::ThreeQuery(QWidget *parent) :
     ui->Com_ThreeQuery_leR2->setStyleSheet(lineStyle);
     ui->Com_ThreeQuery_leR3->setStyleSheet(lineStyle);
     ui->Com_ThreeQuery_btCancel->setStyleSheet("text-align:left;padding-left:90px;padding-bottom:10px;");
+
+    ui->Com_ThreeQuery_lbTitle->setText(tr("样本信息录入"));
+    ui->Com_ThreeQuery_lbL1->setText(tr("样本号："));
+    ui->Com_ThreeQuery_lbL2->setText(tr("样本信息："));
+    ui->Com_ThreeQuery_lbL3->setText(tr("样本备注："));
+    ui->Com_ThreeQuery_btCancel->setText(tr("取消"));
+    ui->Com_ThreeQuery_btConfirm->setText(tr("确认"));
 }
 
 ThreeQuery::~ThreeQuery()
@@ -52,12 +62,19 @@ ThreeQuery::~ThreeQuery()
     delete ui;
 }
 
-ThreeQuery *ThreeQuery::getPtr(){
-    if (threeQuery == nullptr)
-    {
-        threeQuery = new ThreeQuery(MainWin::getPtr());
-    }
-    return threeQuery;
+void ThreeQuery::setLabel(QString title, QString l1, QString l2, QString l3)
+{
+    ui->Com_ThreeQuery_lbTitle->setText(title);
+    ui->Com_ThreeQuery_lbL1->setText(l1);
+    ui->Com_ThreeQuery_lbL2->setText(l2);
+    ui->Com_ThreeQuery_lbL3->setText(l3);
+}
+
+void ThreeQuery::setValue(QString v1, QString v2, QString v3)
+{
+    ui->Com_ThreeQuery_leR1->setText(v1);
+    ui->Com_ThreeQuery_leR2->setText(v2);
+    ui->Com_ThreeQuery_leR3->setText(v3);
 }
 
 void ThreeQuery::paintEvent(QPaintEvent *event)
@@ -67,31 +84,15 @@ void ThreeQuery::paintEvent(QPaintEvent *event)
     p.fillRect(rect(),QColor(125,125,125,100));
 }
 
-void ThreeQuery::display(QString title, QString l1, QString l2, QString l3, QString v1, QString v2, QString v3)
-{
-    getPtr()->ui->Com_ThreeQuery_lbTitle->setText(title);
-    getPtr()->ui->Com_ThreeQuery_lbL1->setText("<em style=\"color:red;font-size:40px;\">* &nbsp;</em>"+l1);
-    getPtr()->ui->Com_ThreeQuery_lbL2->setText(l2);
-    getPtr()->ui->Com_ThreeQuery_lbL3->setText(l3);
-    getPtr()->ui->Com_ThreeQuery_leR1->setText(v1);
-    getPtr()->ui->Com_ThreeQuery_leR2->setText(v2);
-    getPtr()->ui->Com_ThreeQuery_leR3->setText(v3);
-    getPtr()->ui->Com_ThreeQuery_btCancel->setText(tr("取消"));
-    getPtr()->ui->Com_ThreeQuery_btConfirm->setText(tr("确认"));
-    UIHandler::setBtTextCenter(getPtr()->ui->Com_ThreeQuery_btConfirm, 79,"background-image: url(:/images/confirm.png);text-align:left;");
-    UIHandler::setBtTextCenter(getPtr()->ui->Com_ThreeQuery_btCancel, 48,"background-image: url(:/images/cancel.png);text-align:left;");
-    getPtr()->show();
-}
-
 void ThreeQuery::on_Com_ThreeQuery_btConfirm_clicked()
-{    
-    emit queryAck(ui->Com_ThreeQuery_leR1->text(),ui->Com_ThreeQuery_leR2->text(),ui->Com_ThreeQuery_leR3->text());
-    getPtr()->close();
-    emit queryClose();
+{
+    value1 = ui->Com_ThreeQuery_leR1->text();
+    value2 = ui->Com_ThreeQuery_leR2->text();
+    value3 = ui->Com_ThreeQuery_leR3->text();
+    accept();
 }
 
 void ThreeQuery::on_Com_ThreeQuery_btCancel_clicked()
 {
-    getPtr()->close();
-    emit queryClose();
+    close();
 }

@@ -1,6 +1,8 @@
 #include "dataview.h"
 #include "ui_dataview.h"
 #include <QPainter>
+#include <QPrinter>
+#include <QPrintDialog>
 #include "components/onebtnmessagebox.h"
 #include "uihandler.h"
 #include <Module/testmodel.h>
@@ -180,6 +182,12 @@ void DataView::on_Data_View_btPrint_clicked()
 //        //UIHandler::UpdateState(UIHandler::StateId::State_Loading_Open);
 //        qDebug()<<"GlobalParam::pSequence->printTest()";
 //    }
+    QPrinter printer;
+    QPrintDialog dlg(&printer);
+    if (dlg.exec() == QPrintDialog::Accepted){
+        qDebug()<<printer.pageLayout();
+        qDebug()<<printer.printerName();
+    }
 }
 
 void DataView::PrintFinish(QByteArray data)

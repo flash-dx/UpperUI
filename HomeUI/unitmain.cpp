@@ -29,7 +29,6 @@ void UnitMain::UpdateUI(int machineNo)
     if (stage == Stage_selfcheck){
         if (ui->stackedWidget->currentWidget() != startupWin)
             ui->stackedWidget->setCurrentWidget(startupWin);
-        startupWin->UpdateUI(machineNo);
     }
     else if (stage == Stage_idle){
         if (ui->stackedWidget->currentWidget() != idleWin)

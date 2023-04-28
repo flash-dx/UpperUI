@@ -213,6 +213,7 @@ background: url(:/images/back.png);
     QPushButton#Home_Idle_btPen {
     background-image: url(:/images/Pen.png);
     }
+
     /* BoxReady */    
     QPushButton#Home_BoxReady_btStart {
     background-image: url(:/images/StartTest.png);    
