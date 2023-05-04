@@ -77,7 +77,7 @@ public:
     static void GlobalMessage(int msg);
     static void ScanCode(QString code);
     static void Close();
-
+    static QString getString(const int id);
 
     static size_t getSubCount();
 
@@ -283,8 +283,9 @@ public:
     static subDoorInfo judgeDoorStatus();
 
     static bool getDoorState(int machineNo = getCurrMachineId());
-
     static bool getBoxState(int machineNo = getCurrMachineId());
+    static bool isDoorOpening(int machineNo = getCurrMachineId());
+
     static int getTestProgress(int machineNo = getCurrMachineId());
 
     static QString getValidTime();

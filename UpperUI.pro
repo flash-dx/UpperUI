@@ -46,7 +46,6 @@ SOURCES += \
     DataUI/dataview.cpp \
     HomeUI/homeallmachine.cpp \
     HomeUI/homeidle.cpp \
-    HomeUI/homeready.cpp \
     HomeUI/homestartup.cpp \
     HomeUI/hometest.cpp \
     SetupUI/adduser.cpp \
@@ -99,7 +98,6 @@ HEADERS += \
     DataUI/dataview.h \
     HomeUI/homeallmachine.h \
     HomeUI/homeidle.h \
-    HomeUI/homeready.h \
     HomeUI/homestartup.h \
     HomeUI/hometest.h \
     SetupUI/adduser.h \

@@ -32,6 +32,7 @@ private slots:
     void TwoBtnMessageBox_Ack(int ack, QString winname);
     void on_OneBtnMessageBox_Ack(int ack,QString name);
     void UpdateUI();
+
 private:
     Ui::HomeTest *ui;
     void initUi();

@@ -125,6 +125,31 @@ void UIHandler::Close(){
 
 }
 
+QString UIHandler::getString(const int id)
+{
+    if (id == Idle_Tips_OpenDoor)
+        return tr("请打开舱门");
+    else if (id == Idle_Tips_ScanBar)
+        return tr("请扫条形码");
+    else if (id == Idle_Tips_ScanQr)
+        return tr("请扫二维码");
+    else if (id == Idle_Tips_InBox)
+        return tr("请放入试剂盒");
+    else if (id == Idle_Tips_CloseDoor)
+        return tr("请关闭舱门");
+    else if (id == Idle_errMessage_OpenDoor)
+        return tr("请先打开舱门！");
+    else if (id == Idle_errMessage_OutBox)
+        return tr("请先取出试剂盒！");
+    else if (id == Idle_errMessage_ScanBar)
+        return tr("请先输入样本号！");
+    else if (id == Idle_errMessage_ScanQr)
+        return tr("请先扫描二维码！");
+    else if (id == Idle_Tips_ScanBar)
+        return tr("");
+    return "";
+}
+
 QStringList UIHandler::getLogUser(){
 
     QStringList list;
@@ -223,7 +248,6 @@ void UIHandler::setStage(const HomeStage stage)
 
 HomeStage UIHandler::getStage(int machineNo)
 {
-    qDebug()<<"UIHandler::getStage"<<machineNo;
     return UpperHandler::getStage(machineNo);
 }
 
@@ -508,6 +532,11 @@ bool UIHandler::getDoorState(int machineNo)
 bool UIHandler::getBoxState(int machineNo)
 {
     return UpperHandler::getBoxState(machineNo);
+}
+
+bool UIHandler::isDoorOpening(int machineNo)
+{
+    return UpperHandler::isDoorOpening(machineNo);
 }
 
 int UIHandler::getTestProgress(int machineNo)

@@ -25,6 +25,7 @@ private:
     QString winName;
 signals:
     void MessageAck(int ack, QString win);
+
 private slots:
     void on_Com_OneBtnMessageBox_bt1_clicked();
 };

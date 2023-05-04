@@ -74,10 +74,10 @@ HomeIdle::~HomeIdle()
 void HomeIdle::UpdateUI(int machineNo){
     const IdleData *data = UIHandler::getIdleData(machineNo);
     if (data == nullptr) return;    
-    qDebug()<<"HomeIdle,UpdateUI"<<"err="<<data->errMessage<<"tips="<<data->tips<<UIHandler::getBoxState();
+    qDebug()<<"HomeIdle,UpdateUI"<<"err="<<data->errMessage<<"tips="<<data->tips<<"boxState:"<<UIHandler::getBoxState()<<"doorState:"<<UIHandler::getDoorState();
 
     if (UIHandler::getBoxState() && UIHandler::PanelCode().isEmpty()){
-        OneBtnMessageBox::display(tr("请先取出残留试剂盒！"),tr("返回"));
+        ui->Home_Idle_lbTips->setText(UIHandler::getString(Idle_errMessage_OutBox));
         return;
     }
 
@@ -90,28 +90,11 @@ void HomeIdle::UpdateUI(int machineNo){
     ui->Home_Idle_lbSampleInfo->setText(UIHandler::getSampleInfo());
     ui->Home_Idle_lbSampleRemark->setText(UIHandler::getSampleRemark());
 
-    if (data->tips > 0){
-        if(data->tips == 1)
-            ui->Home_Idle_lbTips->setText(tr("请打开舱门"));
-        else if(data->tips == 2)
-            ui->Home_Idle_lbTips->setText(tr("请扫条形码"));
-        else if(data->tips == 3)
-            ui->Home_Idle_lbTips->setText(tr("请扫二维码"));
-        else if(data->tips == 4)
-            ui->Home_Idle_lbTips->setText(tr("请放入试剂盒"));
-    }
+    if (data->tips > 0)
+        ui->Home_Idle_lbTips->setText(UIHandler::getString(data->tips));
 
     if (data->errMessage > 0){
-        QString strErr;
-        if (data->errMessage == 1)
-            strErr = tr("请先打开舱门！");
-        else if (data->errMessage == 2)
-            strErr = tr("请先取出试剂盒！");
-        else if (data->errMessage == 3)
-            strErr = tr("请先输入样本号！");
-        else if (data->errMessage == 4)
-            strErr = tr("请先扫描二维码！");
-        OneBtnMessageBox::display(strErr,tr("返回"));
+        OneBtnMessageBox::display(UIHandler::getString(data->errMessage),tr("返回"));
     }
     else
     {
@@ -136,7 +119,7 @@ void HomeIdle::UpdateUI(int machineNo){
         else
             ui->Home_Idle_lbQrCode->setStyleSheet("padding-left:30px;border-image: url(:/images/tip_done.png);");
 
-        if (data->bOpenDoor){
+        if (UIHandler::isDoorOpening()){
             ui->Home_Idle_btOpenDoor->setVisible(false);
             ui->Home_Idle_lbGif->setVisible(true);
             ui->Home_Idle_btOpenDoor->setStyleSheet("QPushButton {background-image: url(:/images/doorclose.png)}");
@@ -148,7 +131,7 @@ void HomeIdle::UpdateUI(int machineNo){
             ui->Home_Idle_lbGif->setVisible(false);
             ui->Home_Idle_btOpenDoor->setStyleSheet("QPushButton {background-image: url(:/images/dooropen.png)}");
         }
-        ui->Home_Idle_btPen->setEnabled(!data->bOpenDoor);
+        ui->Home_Idle_btPen->setEnabled(!UIHandler::isDoorOpening());
     }
 }
 
@@ -157,6 +140,7 @@ void HomeIdle::showEvent(QShowEvent *event)
     Q_UNUSED(event);
     if (UIHandler::getBoxState() && UIHandler::PanelCode().isEmpty()){
         OneBtnMessageBox::display(tr("请先取出残留试剂盒！"),tr("返回"));
+        ui->Home_Idle_lbTips->setText(UIHandler::getString(Idle_errMessage_OutBox));
         DisplayStep(false);
     }
 }
