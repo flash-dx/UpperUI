@@ -175,18 +175,6 @@ int TestModel::AddLastTest(int machineNo, int testId){
     return currTestid;
 }
 
-int TestModel::getLastTestType(int machineNo){
-    /*
-    QSqlQuery query = DataBaseMgr::select(QString("select ResultType from PanelTest where MachineNo = %1 order by Testid DESC LIMIT 1").arg(machineNo));
-    qDebug()<<QString("select ResultType from PanelTest where MachineNo = %1 order by Testid DESC LIMIT 1").arg(machineNo);
-    if (query.next())
-    {
-        return query.value(0).toInt();
-    }
-    */
-    return 0;
-}
-
 bool TestModel::ExistTest(int Testid){
     foreach(Test test, m_display_list){
         if (test.testId == Testid)

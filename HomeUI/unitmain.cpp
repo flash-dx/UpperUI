@@ -38,5 +38,6 @@ void UnitMain::UpdateUI(int machineNo)
     else if (stage == Stage_test){
         if (ui->stackedWidget->currentWidget() != testWin)
             ui->stackedWidget->setCurrentWidget(testWin);
+        testWin->UpdateUI(machineNo);
     }
 }

@@ -3,11 +3,11 @@
 
 #include <QDialog>
 #include "uihandler.h"
-//#include <QtCharts>
 #include <QtCharts/QChart>
 #include <QValueAxis>
 #include <QCategoryAxis>
 #include <QChartView>
+
 namespace Ui {
 class HomeTest;
 }
@@ -20,10 +20,9 @@ class HomeTest : public QDialog
 public:
     explicit HomeTest(QWidget *parent = nullptr);
     ~HomeTest();
-    static HomeTest *getPtr();
+    void UpdateUI(int machineNo);
 
 protected:
-    void paintEvent(QPaintEvent *event);
     void showEvent(QShowEvent *event);
     void hideEvent(QHideEvent *event);
 
@@ -31,7 +30,6 @@ private slots:
     void on_Home_HomeTest_btCancelTest_clicked();
     void TwoBtnMessageBox_Ack(int ack, QString winname);
     void on_OneBtnMessageBox_Ack(int ack,QString name);
-    void UpdateUI();
 
 private:
     Ui::HomeTest *ui;

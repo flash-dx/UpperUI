@@ -15,7 +15,7 @@ HomeStartup::HomeStartup(QWidget *parent) :
     ui->Home_Startup_lbDoorTips->setGeometry(UIHandler::screenWidth/2-100,ui->Home_Startup_lbLogo->y()+250,400,400);
     ui->Home_Startup_lbDoorTips->setAlignment(Qt::AlignLeft|Qt::AlignTop);
     ui->Home_Startup_lbDoorTips->setWordWrap(true);
-    ui->Home_Startup_lbDoorTips->setText(tr("系统启动中 "));
+    ui->Home_Startup_lbDoorTips->setText(tr("机器启动中 "));
 }
 
 HomeStartup::~HomeStartup()
@@ -39,7 +39,7 @@ void HomeStartup::timerEvent(QTimerEvent *e)
 {
     static int count;
     if (e->timerId() == timerid){
-        QString header = tr("系统启动中 ");
+        QString header = tr("机器启动中 ");
         if (++count > 5)
             count = 0;
         for (int i = 0; i < count; i++)

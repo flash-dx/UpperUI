@@ -7,48 +7,30 @@
 #include "components/onebtnmessagebox.h"
 #include "uihandler.h"
 
-#define OFFSET_X -200
-#define OFFSET_Y -150
-static HomeTest *winptr = nullptr;
 HomeTest::HomeTest(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::HomeTest)
 {
     ui->setupUi(this);
-    int tempWidth = 60;
-    int spacing = 20;
-    ui->Home_HomeTest_btCancelTest->setGeometry(UIHandler::screenWidth-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
-    ui->Home_HomeTest_lbTestName->setGeometry(368+OFFSET_X,250+OFFSET_Y,348,tempWidth);
-    ui->Home_HomeTest_lbTestSerial->setGeometry(368+OFFSET_X,ui->Home_HomeTest_lbTestName->y()+ui->Home_HomeTest_lbTestName->height()+spacing,348,tempWidth);
-    ui->Home_HomeTest_lbTestType->setGeometry(368+OFFSET_X,ui->Home_HomeTest_lbTestSerial->y()+ui->Home_HomeTest_lbTestSerial->height()+spacing,348,tempWidth);
-    ui->Home_HomeTest_lbSampleCode->setGeometry(368+OFFSET_X,ui->Home_HomeTest_lbTestType->y()+ui->Home_HomeTest_lbTestType->height()+spacing,348,tempWidth);
-    ui->Home_HomeTest_lbSampleInfo->setGeometry(368+OFFSET_X,ui->Home_HomeTest_lbSampleCode->y()+ui->Home_HomeTest_lbSampleCode->height()+spacing,348,tempWidth);
-    ui->Home_HomeTest_lbSampleRemark->setGeometry(368+OFFSET_X,ui->Home_HomeTest_lbSampleInfo->y()+ui->Home_HomeTest_lbSampleInfo->height()+spacing,348,tempWidth);
-    ui->Home_HomeTest_lbTestName->setAlignment(Qt::AlignLeft);
-    ui->Home_HomeTest_lbTestSerial->setAlignment(Qt::AlignLeft);
-    ui->Home_HomeTest_lbTestType->setAlignment(Qt::AlignLeft);
-    ui->Home_HomeTest_lbSampleCode->setAlignment(Qt::AlignLeft);
-    ui->Home_HomeTest_lbSampleInfo->setAlignment(Qt::AlignLeft);
-    ui->Home_HomeTest_lbSampleRemark->setAlignment(Qt::AlignLeft);
-
-    ui->Home_HomeTest_lbSampleCode->setText("123456");
-    ui->Home_HomeTest_lbSampleInfo->setText("人医");
-    ui->Home_HomeTest_lbSampleRemark->setText("五联");
-    ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试预计剩余20分钟50秒"));
-
-
-    ui->Home_HomeTest_lbTestProgress->setGeometry(150,0,600,80);
-    //ui->Home_HomeTest_lbTestProgress->setStyleSheet("background-color:#ffffff;");
     setStyleSheet("background-color:#f5f5f5");
-//    ui->Home_HomeTest_lbTestName->setStyleSheet("background-color:#ffffff;");
-//    ui->Home_HomeTest_lbTestSerial->setStyleSheet("background-color:#ffffff;");
-//    ui->Home_HomeTest_lbTestType->setStyleSheet("background-color:#ffffff;");
-//    ui->Home_HomeTest_lbSampleCode->setStyleSheet("background-color:#ffffff;");
-//    ui->Home_HomeTest_lbSampleInfo->setStyleSheet("background-color:#ffffff");
-//    ui->Home_HomeTest_lbSampleRemark->setStyleSheet("background-color:#ffffff");
 
+    ui->Home_HomeTest_lbTestProgress->setGeometry(60,0,700,80);
 
-    ui->Home_HomeTest_lbTestName->setWordWrap(true);
+    ui->Home_HomeTest_lbTestName->setGeometry(60,120,700,60);
+    ui->Home_HomeTest_lbTestSerial->setGeometry(60,ui->Home_HomeTest_lbTestName->y()+80,700,60);
+    ui->Home_HomeTest_lbTestType->setGeometry(60,ui->Home_HomeTest_lbTestSerial->y()+80,700,60);
+    ui->Home_HomeTest_lbSampleCode->setGeometry(60,ui->Home_HomeTest_lbTestType->y()+80,700,60);
+    ui->Home_HomeTest_lbSampleInfo->setGeometry(60,ui->Home_HomeTest_lbSampleCode->y()+80,700,60);
+    ui->Home_HomeTest_lbSampleRemark->setGeometry(60,ui->Home_HomeTest_lbSampleInfo->y()+80,700,60);
+    ui->Home_HomeTest_lbTestName->setAlignment(Qt::AlignHCenter);
+    ui->Home_HomeTest_lbTestSerial->setAlignment(Qt::AlignHCenter);
+    ui->Home_HomeTest_lbTestType->setAlignment(Qt::AlignHCenter);
+    ui->Home_HomeTest_lbSampleCode->setAlignment(Qt::AlignHCenter);
+    ui->Home_HomeTest_lbSampleInfo->setAlignment(Qt::AlignHCenter);
+    ui->Home_HomeTest_lbSampleRemark->setAlignment(Qt::AlignHCenter);
+
+    ui->Home_HomeTest_btCancelTest->setGeometry(UIHandler::screenWidth-299-20,UIHandler::contentHeight*7/8-106-20,299,106);
+
     initUi();
 }
 
@@ -57,24 +39,15 @@ HomeTest::~HomeTest()
     delete ui;
 }
 
-HomeTest *HomeTest::getPtr()
-{
-    if (winptr == nullptr)
-        winptr = new HomeTest;
-    return winptr;
-}
-
-void HomeTest::paintEvent(QPaintEvent *event)
-{
-    Q_UNUSED(event);
-//    QPainter paint(this);
-//    paint.fillRect(1920/2-1+OFFSET_X,240+OFFSET_Y,2,400,QColor(0xd9,0xd9,0xd9));
-}
-
 void HomeTest::showEvent(QShowEvent *event){
-    Q_UNUSED(event);    
-    //connect(TwoBtnMessageBox::getPtr(),&TwoBtnMessageBox::MessageAck,this,&HomeTest::TwoBtnMessageBox_Ack);
-    //connect(OneBtnMessageBox::getPtr(),&OneBtnMessageBox::MessageAck,this,&HomeTest::on_OneBtnMessageBox_Ack);
+    Q_UNUSED(event);
+    ui->Home_HomeTest_lbTestName->setText(UIHandler::PanelName());
+    ui->Home_HomeTest_lbTestSerial->setText(UIHandler::BoxSerial());
+    ui->Home_HomeTest_lbTestType->setText(UIHandler::getSampleTypeName(UIHandler::getSampleType()));
+    ui->Home_HomeTest_lbSampleCode->setText(UIHandler::getSampleCode());
+    ui->Home_HomeTest_lbSampleInfo->setText(UIHandler::getSampleInfo());
+    ui->Home_HomeTest_lbSampleRemark->setText(UIHandler::getSampleRemark());
+
     ui->Home_HomeTest_btCancelTest->setText(tr("取消测试"));
 }
 
@@ -123,12 +96,12 @@ void HomeTest::on_OneBtnMessageBox_Ack(int ack ,QString name)
     }
 }
 
-void HomeTest::UpdateUI()
+void HomeTest::UpdateUI(int machineNo)
 {
-    const TestProcessData *data = UIHandler::getTestProcessData();
+    const TestProcessData *data = UIHandler::getTestProcessData(machineNo);
     if (data == nullptr) return;
+    ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(data->nTotal-data->nComplete)+tr("秒"));
 
-    UIHandler::NotifyTitle("test",5);
     if(data->bLoading)
     {
         //HomeLoading::display(str2q(data->tips));
@@ -137,12 +110,6 @@ void HomeTest::UpdateUI()
     {
         OneBtnMessageBox::display(str2q(data->oneMsginfo.tips),str2q(data->oneMsginfo.btnText),":/images/backTestbt2.png","hometest");
     }
-    ui->Home_HomeTest_lbTestName->setText(UIHandler::PanelName()/*+UIHandler::PanelCode()*/);
-    ui->Home_HomeTest_lbTestSerial->setText(UIHandler::BoxSerial());
-    ui->Home_HomeTest_lbTestType->setText(UIHandler::getSampleTypeName(UIHandler::getSampleType()));
-//    ui->Home_HomeTest_lbSampleCode->setText(UIHandler::getSampleCode());
-//    ui->Home_HomeTest_lbSampleInfo->setText(UIHandler::getSampleInfo());
-//    ui->Home_HomeTest_lbSampleRemark->setText(UIHandler::getSampleRemark());
 
     QString strMsg = UIHandler::getTwoBtnMsg();
     if(!strMsg.isEmpty())

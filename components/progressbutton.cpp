@@ -24,6 +24,7 @@ private:
     Q_DISABLE_COPY(QtPushButtonStyleProxy)
 };
 void ProgressButton::paintEvent(QPaintEvent* event) {
+    Q_UNUSED(event);
 //    if(m_value < 1 || m_value > 99) {
 //        QPushButton::paintEvent(event);
 //        return;

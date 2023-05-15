@@ -31,7 +31,6 @@ public:
     int columnCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
     int AddLastTest(int machineNo,int testId);
-    static int getLastTestType(int machineNo);
     bool ExistTest(int Testid);
     void InitTest();
     static bool TestValidCheck(int testid);

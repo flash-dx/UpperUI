@@ -121,7 +121,6 @@ public:
     static QString getSampleRemark();
     static void setSampleType(const int type);
     static int getSampleType();
-    static void clearSample(const int machiNo = 0);
     static void setMachineCode(const int code);
     static QString PanelName(int machineNo = getCurrMachineId());
     static QString PanelCode();
@@ -186,8 +185,6 @@ public:
     static QStringList getPanelList();
 
     static int decodeQr(QString code);
-    /*    ready    */
-    static void ReadyStartTest();
 
     static QStringList getSampleTypeArr();
     /*    testprocess    */

@@ -291,11 +291,6 @@ int UIHandler::getSampleType()
     return UpperHandler::getSampleType();
 }
 
-void UIHandler::clearSample(const int machiNo)
-{
-
-}
-
 void UIHandler::setMachineCode(const int code)
 {
     UpperHandler::setMachineCode(code);
@@ -375,12 +370,6 @@ QStringList UIHandler::getPanelList()
 int UIHandler::decodeQr(QString code)
 {
     return UpperHandler::decodeQr(q2str(code));
-}
-
-void UIHandler::ReadyStartTest()
-{
-    //emit UIHandler::getPtr()->UpdateUI(UpperHandler::getCurrMachineId());;
-    UpperHandler::ReadyStartTest();
 }
 
 QStringList UIHandler::getSampleTypeArr()
@@ -603,12 +592,6 @@ void UIHandler::slot_updateUi(int machineNo)
 void UIHandler::slot_testProgress(int complete, int total, int machineNo)
 {
     emit TestProgress(complete,total,machineNo);
-    if(machineNo == getCurrMachineId() && (getStage() == Stage_test || getStage() == Stage_looptest))
-    {
-        int remain = total - complete;
-        QString title = QString(tr("正在测试，预计剩余")+QString("%1").arg(remain/60)+tr("分")+QString("%1").arg(remain%60)+tr("秒"));
-        NotifyTitle(title,(complete*1000)/total+100);
-    }
 }
 
 void UIHandler::slot_updateTestList(int machineNo, int testId)
