@@ -209,7 +209,7 @@ public:
 
     static const Test getLastTest(int machineNo);
     //dataloader
-    static bool LoadFileData(string filename, map<int, std::vector<CPointF> > &posArr, map<int, int> &PosId, list<string> &Name, map<int, int> &CurrItemCT, map<int, int> &CT);
+    static bool LoadFileData(string filename, TestData &testData);
     static void LoadResultData(int Testid, map<int, std::vector<CPointF> > &posArr, map<int, int> &PosId, list<string> &Name, map<int, int> &CurrItemCT, map<int, int> &CT);
 
 
