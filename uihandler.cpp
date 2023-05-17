@@ -398,9 +398,9 @@ bool UIHandler::hasTesting()
     return  UpperHandler::hasTesting();
 }
 
-const list<Test> UIHandler::getTestList()
+const list<Test> UIHandler::getTestList(QString filter)
 {
-    return  UpperHandler::getTestList();
+    return  UpperHandler::getTestList(q2str(filter));
 }
 
 bool UIHandler::delCurrTest(int testId)

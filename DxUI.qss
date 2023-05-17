@@ -1,4 +1,4 @@
-QDialog {background-color: #f5f5f5;}
+﻿QDialog {background-color: #f5f5f5;}
 QWidget {background-color: #f5f5f5;}
 QLabel {font-size:40px;}
 QCheckBox {font-size:40px;spacing:20px;outline-style:none;}
@@ -306,8 +306,12 @@ background: url(:/images/back.png);
     }
 /* Data */
     /* DataMenu */
-    QLabel#Data_Menu_lbHeader1,#Data_Menu_lbHeader2,#Data_Menu_lbHeader3,#Data_Menu_lbHeader4,#Data_Menu_lbHeader5,#Data_Menu_lbHeader6,#Data_Menu_lbHeader7
+    QLabel#Data_Menu_lbHeader1,#Data_Menu_lbHeader2,#Data_Menu_lbHeader3,#Data_Menu_lbHeader4,#Data_Menu_lbHeader5,#Data_Menu_lbHeader6,#Data_Menu_lbHeader7,#Data_Menu_lbHeader8
     {font-size: 36px; color:#888888}
+    QLabel#Data_Menu_EditPage
+    {font-size: 20px; color:#888888}
+    QLabel#Data_Menu_lbPage,#Data_Menu_btnNext,#Data_Menu_btnJump,#Data_Menu_btnPre,#Data_Menu_btnFilter,#Data_Menu_btnAll
+    {font-size: 20px;}
     /* DataView */
     QPushButton#Data_View_btBack {
     font-size: 40px;

@@ -1,6 +1,7 @@
-#ifndef TESTMODEL_H
+﻿#ifndef TESTMODEL_H
 #define TESTMODEL_H
 #include<QAbstractListModel>
+#include<QSortFilterProxyModel>
 #include "testinfo.h"
 
 class TestModel : public QAbstractListModel
@@ -63,12 +64,17 @@ public:
     //Test getTestItem(int index){return m_display_list[index];}
 
     static int getTestErrCode(int testid);
+    void setFilter(QString filter){ strfilter = filter;}
+    void setOrder(QString column, bool asc){ strOrder = QString("order by %1 %2").arg(column).arg(asc?"DESC":"asc");}
 protected:
     QHash<int, QByteArray> roleNames() const;
 
 private:
     QHash<int, QByteArray> roles;
     void resetDisplayId();
+
+    QString strfilter;
+    QString strOrder;
 };
 
 #endif // TESTMODEL_H
