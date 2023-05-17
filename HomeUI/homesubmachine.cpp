@@ -64,3 +64,12 @@ void HomeSubMachine::on_HomeSubMachine_btHome_clicked()
 {
     UIHandler::GoPage(UIHandler::PageId::Page_Home_AllMachine);
 }
+
+void HomeSubMachine::on_tabWidget_currentChanged(int index)
+{
+    Q_UNUSED(index);
+    foreach(int id, subUI.keys()){
+        if (subUI[id] == ui->tabWidget->currentWidget())
+            UIHandler::setCurrMachineId(id);
+    }
+}
