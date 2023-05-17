@@ -30,7 +30,7 @@ private slots:
     void on_Home_HomeTest_btCancelTest_clicked();
     void TwoBtnMessageBox_Ack(int ack, QString winname);
     void on_OneBtnMessageBox_Ack(int ack,QString name);
-
+    void on_Item_clicked();
 private:
     Ui::HomeTest *ui;
     void initUi();
@@ -38,6 +38,9 @@ private:
     QChartView *chartView;
     QValueAxis *axisX;
     QCategoryAxis *axisY;
+    QList<QPushButton*> list;
+    void updateChart();
+    void updateItem();
 
 };
 
