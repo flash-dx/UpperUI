@@ -398,9 +398,9 @@ bool UIHandler::hasTesting()
     return  UpperHandler::hasTesting();
 }
 
-const list<Test> UIHandler::getTestList()
+const list<Test> UIHandler::getTestList(QString filter)
 {
-    return  UpperHandler::getTestList();
+    return  UpperHandler::getTestList(q2str(filter));
 }
 
 bool UIHandler::delCurrTest(int testId)
@@ -601,7 +601,7 @@ void UIHandler::slot_updateTestList(int machineNo, int testId)
 
 bool UIHandler::LoadFileData(string filename, map<int, std::vector<CPointF> > &posArr, map<int, int> &PosId, list<string> &Name, map<int, int> &CurrItemCT, map<int, int> &CT)
 {
-    return  UpperHandler::LoadFileData(filename,posArr,PosId,Name,CurrItemCT,CT);
+    return  1;//UpperHandler::LoadFileData(filename,posArr,PosId,Name,CurrItemCT,CT);
 }
 
 void UIHandler::LoadResultData(int Testid, map<int, std::vector<CPointF> > &posArr, map<int, int> &PosId, list<string> &Name, map<int, int> &CurrItemCT, map<int, int> &CT)

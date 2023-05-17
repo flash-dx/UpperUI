@@ -193,7 +193,7 @@ public:
 
     static bool hasTesting();
     //testmodel
-    static const list<Test> getTestList();
+    static const list<Test> getTestList(QString filter);
     static list<string> onePointTestList(bool language);
 
     static bool delCurrTest(int testId);

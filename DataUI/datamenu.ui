@@ -117,6 +117,131 @@
     <string>TextLabel</string>
    </property>
   </widget>
+  <widget class="QLabel" name="Data_Menu_lbHeader8">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>80</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Data_Menu_lbPage">
+   <property name="geometry">
+    <rect>
+     <x>980</x>
+     <y>380</y>
+     <width>141</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>第 1 页/共 10 页</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Data_Menu_btnPre">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>380</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+   </property>
+   <property name="text">
+    <string>上一页</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Data_Menu_btnNext">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>380</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+   </property>
+   <property name="text">
+    <string>下一页</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Data_Menu_btnJump">
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>380</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+   </property>
+   <property name="text">
+    <string>跳转</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Data_Menu_EditPage">
+   <property name="geometry">
+    <rect>
+     <x>720</x>
+     <y>380</y>
+     <width>71</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Data_Menu_btnFilter">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>380</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+   </property>
+   <property name="text">
+    <string>筛选</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Data_Menu_btnAll">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>380</y>
+     <width>75</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+   </property>
+   <property name="text">
+    <string>全部显示</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
