@@ -1,7 +1,8 @@
-#ifndef DATAMENU_H
+﻿#ifndef DATAMENU_H
 #define DATAMENU_H
 
 #include <QDialog>
+#include "Module/testmodel.h"
 
 namespace Ui {
 class DataMenu;
@@ -18,12 +19,16 @@ public:
 
 protected:
     void showEvent(QShowEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event);
 
 private slots:
     void on_tableView_clicked(const QModelIndex &index);
 
 private:
     Ui::DataMenu *ui;
+
+    bool bAsc;
+    TestModel testModel;
 };
 
 #endif // DATAMENU_H

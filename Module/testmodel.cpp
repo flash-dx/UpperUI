@@ -1,4 +1,4 @@
-#include "testmodel.h"
+﻿#include "testmodel.h"
 
 #include<QDebug>
 #include<QFont>
@@ -34,7 +34,7 @@ static bool isExistTestData(int testid){
 
 
     if (m_display_list[listIndex].panelCode.at(0) == '2')
-        UIHandler::LoadFileData(q2str(QCoreApplication::applicationDirPath()+"/RawData.csv"),testData[testid].posArr,testData[testid].PosId,testData[testid].Name,testData[testid].ItemThreshold,testData[testid].CT);
+        UIHandler::LoadFileData(q2str(QCoreApplication::applicationDirPath()+"/RawData.csv"),testData[testid]);
     else if(m_display_list[listIndex].resultType > 2)
         UIHandler::LoadResultData(testid,testData[testid].posArr,testData[testid].PosId,testData[testid].Name,testData[testid].ItemThreshold,testData[testid].CT);
 
@@ -67,6 +67,8 @@ TestModel::TestModel(QObject *parent):QAbstractListModel (parent)
     roles[RoleSampleId] = "SampleId";
     roles[RolesPanelCode] = "PanelCode";
     roles[RolesPanelName] = "PanelName";
+    roles[RolesMachineNo] = "MachineNo";
+    strOrder = "order by Testid DESC";
 }
 
 int TestModel::rowCount(const QModelIndex &parent) const
@@ -77,7 +79,7 @@ int TestModel::rowCount(const QModelIndex &parent) const
 int TestModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return 7;
+    return 8;
 }
 QVariant TestModel::data(const QModelIndex &index, int role) const
 {    
@@ -92,17 +94,19 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
         else if (index.column() == 2)
             return str2q(test.panelName);
         else if (index.column() == 3)
-            return str2q(test.sampleId);
+            return str2q(to_string(test.machineNo));
         else if (index.column() == 4)
-            return str2q(test.user);
+            return str2q(test.sampleId);
         else if (index.column() == 5)
-            return str2q(test.checker);
+            return str2q(test.user);
         else if (index.column() == 6)
+            return str2q(test.checker);
+        else if (index.column() == 7)
             return str2q(test.testTime);
     }
     else if(role == Qt::DecorationRole){
         if (index.column() == 1 && test.resultType<2)
-            return QIcon(":/images/thrAlarmSmall.png");        
+            return QIcon(":/images/thrAlarmSmall.png");
     }
     else if(role == Qt::TextAlignmentRole)
         return Qt::AlignCenter;    
@@ -138,6 +142,8 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
         return str2q(test.panelCode);
     else if(role == RolesPanelName)        
         return str2q(test.panelName);
+    else if(role == RolesMachineNo)
+        return str2q(to_string(test.machineNo));
 
     return QVariant();
 }
@@ -152,7 +158,13 @@ void TestModel::InitTest(){
 
     m_display_list.clear();
 
-    const list<Test>  list= UIHandler::getTestList();
+    QString filter;
+    if(strfilter.isEmpty())
+        filter = strOrder;
+    else
+        filter = QString("where %1 %2").arg(strfilter).arg(strOrder);
+
+    const list<Test>  list= UIHandler::getTestList(filter);
 
     foreach (Test test, list) {
        m_display_list<<test;
