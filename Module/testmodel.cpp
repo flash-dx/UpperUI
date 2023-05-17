@@ -34,7 +34,7 @@ static bool isExistTestData(int testid){
 
 
     if (m_display_list[listIndex].panelCode.at(0) == '2')
-        UIHandler::LoadFileData(q2str(QCoreApplication::applicationDirPath()+"/RawData.csv"),testData[testid].posArr,testData[testid].PosId,testData[testid].Name,testData[testid].ItemThreshold,testData[testid].CT);
+        UIHandler::LoadFileData(q2str(QCoreApplication::applicationDirPath()+"/RawData.csv"),testData[testid]);
     else if(m_display_list[listIndex].resultType > 2)
         UIHandler::LoadResultData(testid,testData[testid].posArr,testData[testid].PosId,testData[testid].Name,testData[testid].ItemThreshold,testData[testid].CT);
 
