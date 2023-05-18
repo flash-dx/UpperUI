@@ -24,11 +24,24 @@ protected:
 private slots:
     void on_tableView_clicked(const QModelIndex &index);
 
+    void on_Data_Menu_btnPre_clicked();
+
+    void on_Data_Menu_btnNext_clicked();
+
+    void on_Data_Menu_btnJump_clicked();
+
 private:
     Ui::DataMenu *ui;
 
     bool bAsc;
     TestModel testModel;
+    int pageNum;
+    int currPage;
+    int totalPage;
+    int totalRecord;
+
+    void initPage();
+    void updatePage();
 };
 
 #endif // DATAMENU_H

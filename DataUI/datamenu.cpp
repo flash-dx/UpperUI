@@ -14,7 +14,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui(new Ui::DataMenu)
 {
     ui->setupUi(this);
-    int w = (UIHandler::contentWidth-100)/8;
+    int w = (UIHandler::contentWidth)/8;
     int h = 80;
     ui->Data_Menu_lbHeader1->setGeometry(0,0,w-40,h);
     ui->Data_Menu_lbHeader1->setAlignment(Qt::AlignCenter);
@@ -43,8 +43,8 @@ DataMenu::DataMenu(QWidget *parent) :
 
     //ui->tableView->setFocusPolicy(Qt::WheelFocus);
     ui->tableView->setGeometry(0,h,UIHandler::contentWidth,UIHandler::contentHeight-h*2);
-    ui->tableView->setVerticalScrollMode(QTableView::ScrollMode::ScrollPerPixel);
-    QScroller::grabGesture(ui->tableView->viewport(),QScroller::LeftMouseButtonGesture);
+    //ui->tableView->setVerticalScrollMode(QTableView::ScrollMode::ScrollPerPixel);
+    //QScroller::grabGesture(ui->tableView->viewport(),QScroller::LeftMouseButtonGesture);
     ui->tableView->verticalHeader()->hide();
     ui->tableView->horizontalHeader()->hide();
     ui->tableView->verticalHeader()->setDefaultSectionSize(h);
@@ -63,23 +63,28 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->setColumnWidth(7,w);
     ui->tableView->setIconSize(QSize(50,50));
 
-    ui->tableView->verticalScrollBar()->setStyleSheet("QScrollBar:vertical {background:rgb(255,255,255);min-width:50px;}"
-        "QScrollBar::handle:vertical {background:rgb(193,193,193);border: 3px solid gray;border-radius:25px;min-height: 100px;min-width:20px;}"
-        "QScrollBar::handle:vertical:hover {background:rgb(111,111,111);border: 3px solid gray;border-radius:25px;min-height: 100px;min-width:20px;}");
+    ui->tableView->verticalScrollBar()->hide();
+    ui->tableView->verticalScrollBar()->setVisible(false);
+    ui->tableView->verticalScrollBar()->setDisabled(true);
+    ui->tableView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
+//    ui->tableView->verticalScrollBar()->setStyleSheet("QScrollBar:vertical {background:rgb(255,255,255);min-width:50px;}"
+//        "QScrollBar::handle:vertical {background:rgb(193,193,193);border: 3px solid gray;border-radius:25px;min-height: 100px;min-width:20px;}"
+//        "QScrollBar::handle:vertical:hover {background:rgb(111,111,111);border: 3px solid gray;border-radius:25px;min-height: 100px;min-width:20px;}");
 
     ui->tableView->setStyleSheet("alternate-background-color: #f8f8f8;background-color:#ffffff;");
 
     ui->tableView->horizontalScrollBar()->setVisible(false);
 
     w = 95;
-    ui->Data_Menu_lbPage->setGeometry(UIHandler::contentWidth - 300,ui->tableView->geometry().bottom(),200,h);
-    ui->Data_Menu_btnNext->setGeometry(UIHandler::contentWidth - 400,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnJump->setGeometry(UIHandler::contentWidth - 500,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_EditPage->setGeometry(UIHandler::contentWidth - 600,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnPre->setGeometry(UIHandler::contentWidth - 700,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnFilter->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 900,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    bAsc = true;
+    ui->Data_Menu_lbPage->setGeometry(UIHandler::contentWidth - 200,ui->tableView->geometry().bottom(),200,h);
+    ui->Data_Menu_btnNext->setGeometry(UIHandler::contentWidth - 300,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnJump->setGeometry(UIHandler::contentWidth - 400,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_EditPage->setGeometry(UIHandler::contentWidth - 500,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnPre->setGeometry(UIHandler::contentWidth - 600,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnFilter->setGeometry(UIHandler::contentWidth - 700,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);
 }
 
 DataMenu::~DataMenu()
@@ -107,6 +112,7 @@ void DataMenu::showEvent(QShowEvent *event){
      ui->Data_Menu_lbHeader7->setText(tr("审核员"));
      ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
 
+     initPage();
      testModel.InitTest();
      UIHandler::NotifyTitle("datamenu",5);
 }
@@ -168,4 +174,53 @@ bool DataMenu::eventFilter(QObject *obj, QEvent *event)
         }
     }
     return false;
+}
+
+void DataMenu::initPage()
+{
+    bAsc = true;
+    currPage = 1;
+    pageNum = ui->tableView->geometry().height()/80;
+    totalRecord = UIHandler::pTestModel->rowCount();
+    totalPage = (totalRecord+pageNum-1)/pageNum;
+    ui->Data_Menu_EditPage->setText("1");
+    ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
+    testModel.setLimit(0, pageNum);
+}
+
+void DataMenu::updatePage()
+{
+    testModel.setLimit(pageNum*(currPage-1), pageNum);
+    testModel.InitTest();
+    ui->tableView->update();
+    ui->Data_Menu_EditPage->setText(QString::number(currPage));
+    ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
+}
+
+void DataMenu::on_Data_Menu_btnPre_clicked()
+{
+    if(currPage > 1)
+    {
+        currPage--;
+        updatePage();
+    }
+}
+
+void DataMenu::on_Data_Menu_btnNext_clicked()
+{
+    if(currPage < totalPage)
+    {
+        currPage++;
+        updatePage();
+    }
+}
+
+void DataMenu::on_Data_Menu_btnJump_clicked()
+{
+    int page = ui->Data_Menu_EditPage->text().toInt();
+    if(page > 1 && page < totalPage)
+    {
+        currPage = page;
+        updatePage();
+    }
 }
