@@ -159,10 +159,13 @@ void TestModel::InitTest(){
     m_display_list.clear();
 
     QString filter;
-    if(strfilter.isEmpty())
+    if(strFilter.isEmpty())
         filter = strOrder;
     else
-        filter = QString("where %1 %2").arg(strfilter).arg(strOrder);
+        filter = QString("where %1 %2").arg(strFilter).arg(strOrder);
+
+    if(!strLimit.isEmpty())
+        filter += " " + strLimit;
 
     const list<Test>  list= UIHandler::getTestList(filter);
 

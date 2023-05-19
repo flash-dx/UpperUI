@@ -64,8 +64,9 @@ public:
     //Test getTestItem(int index){return m_display_list[index];}
 
     static int getTestErrCode(int testid);
-    void setFilter(QString filter){ strfilter = filter;}
+    void setFilter(QString filter){ strFilter = filter;}
     void setOrder(QString column, bool asc){ strOrder = QString("order by %1 %2").arg(column).arg(asc?"DESC":"asc");}
+    void setLimit(int start, int count){ strLimit = QString("Limit %1,%2").arg(start).arg(count);}
 protected:
     QHash<int, QByteArray> roleNames() const;
 
@@ -73,8 +74,9 @@ private:
     QHash<int, QByteArray> roles;
     void resetDisplayId();
 
-    QString strfilter;
+    QString strFilter;
     QString strOrder;
+    QString strLimit;
 };
 
 #endif // TESTMODEL_H
