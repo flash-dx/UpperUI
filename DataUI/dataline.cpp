@@ -211,7 +211,6 @@ void DataLine::updateUI(int machineNo)
 
 
     QStringList itemName = UIHandler::pTestModel->getTestName(UIHandler::pTestModel->getCurrTestId());
-    QStringList itemName;
 
     itemName.prepend(UIHandler::getItemName(2));
 
