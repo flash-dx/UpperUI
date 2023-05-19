@@ -15,23 +15,23 @@ DataMenu::DataMenu(QWidget *parent) :
     ui(new Ui::DataMenu)
 {
     ui->setupUi(this);
-    int w = (UIHandler::contentWidth)/10;
+    int w = (UIHandler::contentWidth)/11;
     int h = 80;
     ui->Data_Menu_lbHeader1->setGeometry(0,0,w,h);
     ui->Data_Menu_lbHeader1->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader2->setGeometry(w*1-30,0,w,h);
+    ui->Data_Menu_lbHeader2->setGeometry(w*1,0,w,h);
     ui->Data_Menu_lbHeader2->setAlignment(Qt::AlignVCenter|Qt::AlignLeft);
-    ui->Data_Menu_lbHeader3->setGeometry(w*2-30,0,w*2+30,h);
+    ui->Data_Menu_lbHeader3->setGeometry(w*2,0,w*3,h);
     ui->Data_Menu_lbHeader3->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader4->setGeometry(w*4,0,w,h);
+    ui->Data_Menu_lbHeader4->setGeometry(w*5,0,w,h);
     ui->Data_Menu_lbHeader4->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader5->setGeometry(w*5,0,w,h);
+    ui->Data_Menu_lbHeader5->setGeometry(w*6,0,w,h);
     ui->Data_Menu_lbHeader5->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader6->setGeometry(w*6,0,w,h);
+    ui->Data_Menu_lbHeader6->setGeometry(w*7,0,w,h);
     ui->Data_Menu_lbHeader6->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader7->setGeometry(w*7,0,w,h);
+    ui->Data_Menu_lbHeader7->setGeometry(w*8,0,w,h);
     ui->Data_Menu_lbHeader7->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader8->setGeometry(w*8,0,w*2,h);
+    ui->Data_Menu_lbHeader8->setGeometry(w*9,0,w*2,h);
     ui->Data_Menu_lbHeader8->setAlignment(Qt::AlignCenter);
     ui->Data_Menu_lbHeader1->installEventFilter(this);
     ui->Data_Menu_lbHeader2->installEventFilter(this);
@@ -57,7 +57,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->setShowGrid(false);
     ui->tableView->setColumnWidth(0,w);
     ui->tableView->setColumnWidth(1,w);
-    ui->tableView->setColumnWidth(2,w*2);
+    ui->tableView->setColumnWidth(2,w*3);
     ui->tableView->setColumnWidth(3,w);
     ui->tableView->setColumnWidth(4,w);
     ui->tableView->setColumnWidth(5,w);
