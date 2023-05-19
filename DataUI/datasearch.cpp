@@ -27,6 +27,7 @@ DataSearch::DataSearch(QWidget *parent) :
 
     QString type = "QWidget{font: 18px '宋体';background-color: transparent;}"\
                    "QPushButton {border-image: url(:/images/btnbk.png);}"\
+                   "QPushButton:pressed {border-image: url(:/images/btnbkD.png);}"\
                    "QLineEdit {font-size:20px;background-color:#E6E6E6;}"\
                    "QComboBox {font-size:20px;background-color:#E6E6E6;}";
     setStyleSheet(type);
@@ -35,6 +36,11 @@ DataSearch::DataSearch(QWidget *parent) :
     ui->btn_Cancel->setStyleSheet(type);
     type = "color:white;font: 38px '华文中宋';";
     ui->lb_logo->setStyleSheet(type);
+
+    ui->combox_SampleType->setVisible(false);
+    ui->lb_SampleType->setVisible(false);
+
+    Init();
 }
 
 DataSearch::~DataSearch()
@@ -50,7 +56,7 @@ void DataSearch::paintEvent(QPaintEvent *event)
 
 void DataSearch::showEvent(QShowEvent *event)
 {
-    Init();
+
 }
 
 void DataSearch::on_btn_Cancel_clicked()

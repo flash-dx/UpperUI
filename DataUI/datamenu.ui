@@ -156,7 +156,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>上一页</string>
@@ -172,7 +173,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>下一页</string>
@@ -188,7 +190,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>跳转</string>
@@ -220,7 +223,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>查找</string>
@@ -236,7 +240,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>显示全部</string>

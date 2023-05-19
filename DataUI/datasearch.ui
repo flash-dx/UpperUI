@@ -23,7 +23,7 @@ background-image: url(:/images/datasearchbg.png);
     <rect>
      <x>170</x>
      <y>150</y>
-     <width>181</width>
+     <width>461</width>
      <height>31</height>
     </rect>
    </property>
@@ -257,7 +257,8 @@ background-color: transparent;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>确定</string>
@@ -279,7 +280,8 @@ background-color: transparent;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>取消</string>
@@ -306,9 +308,9 @@ background-color: transparent;</string>
    <widget class="QComboBox" name="combox_sampleid">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>30</y>
-      <width>171</width>
+      <x>130</x>
+      <y>80</y>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -325,8 +327,8 @@ background-color: transparent;</string>
    <widget class="QLabel" name="lb_sampleID">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>30</y>
+      <x>30</x>
+      <y>80</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -348,7 +350,7 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>317</x>
-      <y>80</y>
+      <y>130</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -370,7 +372,7 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>80</y>
+      <y>130</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -392,27 +394,8 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>130</y>
+      <y>80</y>
       <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="editable">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="combox_SampleType">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -430,7 +413,7 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>130</y>
+      <y>80</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -448,33 +431,11 @@ background-color: transparent;</string>
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_SampleType">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>130</y>
-      <width>121</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>样本类型:</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-    </property>
-   </widget>
    <widget class="QComboBox" name="combox_user">
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>80</y>
+      <y>130</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -493,7 +454,7 @@ background-color: transparent;</string>
     <property name="geometry">
      <rect>
       <x>420</x>
-      <y>80</y>
+      <y>130</y>
       <width>171</width>
       <height>31</height>
      </rect>
@@ -558,8 +519,8 @@ background-color: transparent;</string>
     <rect>
      <x>40</x>
      <y>500</y>
-     <width>70</width>
-     <height>30</height>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
@@ -569,10 +530,52 @@ background-color: transparent;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>清除</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="combox_SampleType">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>80</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lb_SampleType">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>80</y>
+     <width>121</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>宋体</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>样本类型:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
   <zorder>groupBox</zorder>
@@ -590,6 +593,8 @@ background-color: transparent;</string>
   <zorder>btn_ok</zorder>
   <zorder>btn_Cancel</zorder>
   <zorder>btn_all</zorder>
+  <zorder>combox_SampleType</zorder>
+  <zorder>lb_SampleType</zorder>
  </widget>
  <resources/>
  <connections/>

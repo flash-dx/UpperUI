@@ -6,6 +6,7 @@
 #include <QScrollBar>
 
 #include <Module/testmodel.h>
+#include <components/onebtnmessagebox.h>
 
 static DataMenu *winptr = nullptr;
 
@@ -14,23 +15,23 @@ DataMenu::DataMenu(QWidget *parent) :
     ui(new Ui::DataMenu)
 {
     ui->setupUi(this);
-    int w = (UIHandler::contentWidth)/8;
+    int w = (UIHandler::contentWidth)/10;
     int h = 80;
-    ui->Data_Menu_lbHeader1->setGeometry(0,0,w-40,h);
+    ui->Data_Menu_lbHeader1->setGeometry(0,0,w,h);
     ui->Data_Menu_lbHeader1->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader2->setGeometry(w*1-40,0,w,h);
+    ui->Data_Menu_lbHeader2->setGeometry(w*1-30,0,w,h);
     ui->Data_Menu_lbHeader2->setAlignment(Qt::AlignVCenter|Qt::AlignLeft);
-    ui->Data_Menu_lbHeader3->setGeometry(w*2-40,0,w+40,h);
+    ui->Data_Menu_lbHeader3->setGeometry(w*2-30,0,w*2+30,h);
     ui->Data_Menu_lbHeader3->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader4->setGeometry(w*3,0,w,h);
+    ui->Data_Menu_lbHeader4->setGeometry(w*4,0,w,h);
     ui->Data_Menu_lbHeader4->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader5->setGeometry(w*4,0,w,h);
+    ui->Data_Menu_lbHeader5->setGeometry(w*5,0,w,h);
     ui->Data_Menu_lbHeader5->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader6->setGeometry(w*5,0,w,h);
+    ui->Data_Menu_lbHeader6->setGeometry(w*6,0,w,h);
     ui->Data_Menu_lbHeader6->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader7->setGeometry(w*6,0,w,h);
+    ui->Data_Menu_lbHeader7->setGeometry(w*7,0,w,h);
     ui->Data_Menu_lbHeader7->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader8->setGeometry(w*7,0,w,h);
+    ui->Data_Menu_lbHeader8->setGeometry(w*8,0,w*2,h);
     ui->Data_Menu_lbHeader8->setAlignment(Qt::AlignCenter);
     ui->Data_Menu_lbHeader1->installEventFilter(this);
     ui->Data_Menu_lbHeader2->installEventFilter(this);
@@ -56,12 +57,12 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->setShowGrid(false);
     ui->tableView->setColumnWidth(0,w);
     ui->tableView->setColumnWidth(1,w);
-    ui->tableView->setColumnWidth(2,w);
+    ui->tableView->setColumnWidth(2,w*2);
     ui->tableView->setColumnWidth(3,w);
     ui->tableView->setColumnWidth(4,w);
     ui->tableView->setColumnWidth(5,w);
     ui->tableView->setColumnWidth(6,w);
-    ui->tableView->setColumnWidth(7,w);
+    ui->tableView->setColumnWidth(7,w*2);
     ui->tableView->setIconSize(QSize(50,50));
 
     ui->tableView->verticalScrollBar()->hide();
@@ -85,7 +86,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->Data_Menu_EditPage->setGeometry(UIHandler::contentWidth - 500,ui->tableView->geometry().bottom()+h/4,w,h/2);
     ui->Data_Menu_btnPre->setGeometry(UIHandler::contentWidth - 600,ui->tableView->geometry().bottom()+h/4,w,h/2);
     ui->Data_Menu_btnFilter->setGeometry(UIHandler::contentWidth - 700,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);    
 }
 
 DataMenu::~DataMenu()
@@ -106,13 +107,13 @@ void DataMenu::showEvent(QShowEvent *event){
      ui->retranslateUi(this);
 
      initPage();
-     updatePage();
      UIHandler::NotifyTitle("datamenu",5);
 }
 
 void DataMenu::on_tableView_clicked(const QModelIndex &index)
 {
-    UIHandler::pTestModel->setCurrTestByIndex(index.row());
+    int testid = testModel.data(index, TestModel::RolesTestid).toInt();
+    UIHandler::pTestModel->setCurrTestById(testid);
     UIHandler::setDataEntry(0);
     if (UIHandler::pTestModel->getTestResultType(UIHandler::pTestModel->getCurrTestId()) >= 2)
       UIHandler::GoPage(UIHandler::PageId::Page_Data_View);
@@ -173,6 +174,7 @@ void DataMenu::initPage()
     testModel.setOrder("Testid", bAsc);
     testModel.setFilter(searchFilter);
     testModel.InitTest();
+    ui->tableView->update();
 
     totalRecord = testModel.getFilterRowCount();
     totalPage = (totalRecord+pageNum-1)/pageNum;
@@ -217,11 +219,16 @@ void DataMenu::on_Data_Menu_btnNext_clicked()
 void DataMenu::on_Data_Menu_btnJump_clicked()
 {
     int page = ui->Data_Menu_EditPage->text().toInt();
-    if(page > 1 && page < totalPage)
+    if(page == currPage)
+        return;
+
+    if(page >= 1 && page <= totalPage)
     {
         currPage = page;
         updatePage();
     }
+    else
+        OneBtnMessageBox::display(tr("输入的跳转页错误"),tr("返回"));
 }
 
 void DataMenu::resetTableHead()
@@ -253,5 +260,4 @@ void DataMenu::on_Data_Menu_btnFilter_clicked()
 void DataMenu::on_Data_Menu_btnAll_clicked()
 {
     initPage();
-    updatePage();
 }
