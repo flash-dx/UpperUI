@@ -57,7 +57,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->setShowGrid(false);
     ui->tableView->setColumnWidth(0,w);
     ui->tableView->setColumnWidth(1,w-20);
-    ui->tableView->setColumnWidth(2,w*3);
+    ui->tableView->setColumnWidth(2,w*3+20);
     ui->tableView->setColumnWidth(3,w);
     ui->tableView->setColumnWidth(4,w);
     ui->tableView->setColumnWidth(5,w);
