@@ -78,6 +78,7 @@ void UIHandler::Init(){
     Fconnect(upperHandler,sig_DoorKeyDown,getPtr(),&UIHandler::slot_DoorKeyDown);
     Fconnect(upperHandler,sig_senorUpdate,getPtr(),&UIHandler::slot_senorUpdate);
     Fconnect(upperHandler,sig_tcpStatus,getPtr(),&UIHandler::slot_tcpStatus);
+    Fconnect(upperHandler,sig_updateChart,getPtr(),&UIHandler::slot_updateChart);
     //upperHandler->setCallBack(Respond);
     upperHandler->Init(q2str(QCoreApplication::applicationDirPath()));
 
@@ -316,7 +317,44 @@ QString UIHandler::getSampleTypeName(int type)
     return str2q(UpperHandler::getSampleTypeName(type));
 }
 
-void UIHandler::setPanelName(const QString name)
+QStringList UIHandler::getSubTestName(const int machiNo)
+{
+    QStringList strList;
+
+    list<string> list = UpperHandler::getSubTestName(machiNo);
+
+    for (auto iter:list) {
+        strList<<str2q(iter) ;
+    }
+    return  strList;
+}
+
+void UIHandler::setSubCurrItemName(const QString &name)
+{
+    UpperHandler::setSubCurrItemName(q2str(name));
+}
+
+QString UIHandler::getSubCurrItemName(const int machiNo)
+{
+    return str2q(UpperHandler::getSubCurrItemName(machiNo));
+}
+
+map<int, int> UIHandler::getSubOneCycleData(const int machiNo)
+{
+    return UpperHandler::getSubOneCycleData(machiNo);
+}
+
+list<int> UIHandler::getSubTestlistId(const int machiNo)
+{
+    return UpperHandler::getSubTestlistId(machiNo);
+}
+
+int UIHandler::getSubIndexToId(int index, const int machiNo)
+{
+    return UpperHandler::getSubIndexToId(index,machiNo);
+}
+
+void UIHandler::setPanelName(const QString &name)
 {
     UpperHandler::setPanelName(name.toStdString());
 }
@@ -541,6 +579,16 @@ QString UIHandler::getValidTime()
 int UIHandler::getSubCurTestId()
 {
     return  UpperHandler::getSubCurTestId();
+}
+
+int UIHandler::getSubCurItemCt(const QString &itemName)
+{
+    return UpperHandler::getSubCurItemCt(q2str(itemName));
+}
+
+int UIHandler::getSubCurrItemId(const int machiNo)
+{
+    return UpperHandler::getSubCurrItemId(machiNo);
 }
 
 void UIHandler::TestResultGoWin(int WinID){
@@ -1021,4 +1069,9 @@ void UIHandler::slot_tcpStatus(int status, int machineNo)
 {
     emit UpdateUI(machineNo);
     emit sig_tcpStatus(status,machineNo);
+}
+
+void UIHandler::slot_updateChart(int machineNo, int cycle)
+{
+    emit sig_updateChart(machineNo,cycle);
 }

@@ -43,8 +43,6 @@ HomeTest::~HomeTest()
 void HomeTest::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
-    TestModel::setCurrTestById(UIHandler::getSubCurTestId());
-
     ui->Home_HomeTest_lbTestName->setText(UIHandler::PanelName());
     ui->Home_HomeTest_lbTestSerial->setText(UIHandler::BoxSerial());
     ui->Home_HomeTest_lbTestType->setText(UIHandler::getSampleTypeName(UIHandler::getSampleType()));
@@ -54,16 +52,32 @@ void HomeTest::showEvent(QShowEvent *event){
 
     ui->Home_HomeTest_btCancelTest->setText(tr("取消测试"));
 
-    updateItem();
+    const TestProcessData *data = UIHandler::getTestProcessData(UIHandler::getCurrMachineId());
+    if (data == nullptr) return;
 
-    connect(UIHandler::getPtr(),&UIHandler::TestProgress,this,[=](int complete, int total, int machineNo){
+    if(data->bLoading)
+    {
+        //HomeLoading::display(str2q(data->tips));
+    }
+    if(data->oneBtnMsgFlag)
+    {
+        OneBtnMessageBox::display(str2q(data->oneMsginfo.tips),str2q(data->oneMsginfo.btnText),":/images/backTestbt2.png","hometest");
+    }
 
-         if (machineNo != UIHandler::getCurrMachineId())
-             return;
+    QString strMsg = UIHandler::getTwoBtnMsg();
+    if(!strMsg.isEmpty())
+    {
+         TwoBtnMessageBox::display(QString("%1").arg(strMsg)+ tr("，是否继续测试？"),tr("继续测试"),tr("确定取消"), "HomeTest2");
+    }
 
+//    connect(UIHandler::getPtr(),&UIHandler::TestProgress,this,[=](int complete, int total, int machineNo){
 
-         ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(total-complete)+tr("秒"));
-     });
+//         if (machineNo != UIHandler::getCurrMachineId())
+//             return;
+
+//         int remain = total-complete;
+//         ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(remain/60)+tr("分")+QString::number(remain%60)+tr("秒"));
+//     });
 }
 
 void HomeTest::hideEvent(QHideEvent *event){
@@ -114,10 +128,10 @@ void HomeTest::on_OneBtnMessageBox_Ack(int ack ,QString name)
 void HomeTest::on_Item_clicked()
 {
     qDebug()<<"on_Item_clicked"<<focusWidget()->objectName();
-    TestModel::setCurrItemName(focusWidget()->objectName());
-    foreach (QPushButton *pBtn, list)
+    UIHandler::setSubCurrItemName(focusWidget()->objectName());
+    foreach (QPushButton *pBtn, listBtn)
     {
-        if(pBtn->objectName() == TestModel::getCurrItemName())
+        if(pBtn->objectName() == UIHandler::getSubCurrItemName())
         {
             pBtn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF");
         }
@@ -130,13 +144,34 @@ void HomeTest::on_Item_clicked()
     foreach (QString label, axisY->categoriesLabels())
         axisY->remove(label);
 
+    QString curItemName = UIHandler::getSubCurrItemName();
+    chart->setTitle(curItemName);
 
-    updateChart();
+    Q_FOREACH(QLineSeries *series,listLine)
+    {
+        QStringList strList = series->name().split('P');
+        if(strList.size() == 2)
+        {
+            if(UIHandler::getSubCurrItemId() == UIHandler::getSubIndexToId(strList[1].toInt()))
+            {
+                series->setVisible();
+            }
+            else {
+                series->setVisible(false);
+            }
+        }
+    }
+
+
+    int ct = UIHandler::getSubCurItemCt(curItemName);
+    axisY->append(QString::number(ct),ct);
 }
 
 void HomeTest::UpdateUI(int machineNo)
 {
-    updateChart();
+    const TestProcessData * testData = UIHandler::getTestProcessData(machineNo);
+    int remain = testData->nTotal - testData->nComplete;
+    ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(remain/60)+tr("分")+QString::number(remain%60)+tr("秒"));
 }
 
 void HomeTest::initUi()
@@ -164,45 +199,76 @@ void HomeTest::initUi()
     chart->setTitleFont(QFont("黑体",40));
 }
 
-void HomeTest::updateChart()
+void HomeTest::updateChart(int machineNo ,int cycle)
 {
-    chart->setTitle(TestModel::getCurrItemName());
-    chart->removeAllSeries();
-    axisY->setRange(-10,50);
-    QString itemName = TestModel::getCurrItemName();
-    int testid = TestModel::getCurrTestId();
-    int ct = TestModel::getItemCT(testid,itemName);
-    qDebug()<<"HomeTest showEvent testid="<<testid<<"ct="<<ct<<"itemName"<<itemName;
-    axisY->append(QString::number(ct),ct);
-    TestData *data = TestModel::getTestData(testid);
-    if (data == nullptr)
-        return;
-    for(auto it : data->PosId){
-        int itemid = it.second/*data->PosId[it.first]*/;
-        if (UIHandler::getItemName(itemid) == itemName){
-            QLineSeries *line = new QLineSeries;
-            line->setName(QString("P%1").arg(it.first));
+    map<int,int> __map = UIHandler::getSubOneCycleData(machineNo);
+
+    QString itemName = UIHandler::getSubCurrItemName(machineNo);
+
+    static bool flag = false;
+
+    for (auto iter1:__map) {
+
+        if(cycle == 1 && !flag)
+        {
+            updateItem();
+            flag = true;
+        }
+
+        QLineSeries *line = nullptr;
+
+        Q_FOREACH(QLineSeries *series,listLine)
+        {
+            if(series->name() == QString("P%1").arg(iter1.first))
+            {
+                line = static_cast<QLineSeries *>(series);
+                break;
+            }
+        }
+
+        if(line == nullptr)
+        {
+            line = new QLineSeries;
+            line->setName(QString("P%1").arg(iter1.first));
             chart->addSeries(line);
             line->attachAxis(axisX);
             line->attachAxis(axisY);
+            listLine.push_back(line);
 
-            for (size_t i = 0; i < data->posArr[it.first].size(); i++){
-                if (data->posArr[it.first][i].y() > axisX->max() - 10)
-                    axisY->setMax(data->posArr[it.first][i].y()+10);
-                line->append(data->posArr[it.first][i].x(),data->posArr[it.first][i].y());
+            qDebug()<<iter1.first<<"linename";
+
+            if(UIHandler::getSubCurrItemId(machineNo) == UIHandler::getSubIndexToId(iter1.first,machineNo))
+            {
+                line->setVisible();
+            }
+            else {
+                line->setVisible(false);
             }
         }
+        if (iter1.second > axisX->max() - 10)
+            axisY->setMax(iter1.second/100+10);
+        line->append(cycle,iter1.second/100);
     }
+
+    flag = false;
+}
+
+void HomeTest::resetUi()
+{
+    foreach (QPushButton *btn, listBtn)
+        delete btn;
+    listBtn.clear();
+
+    foreach (QLineSeries *line, listLine)
+        delete line;
+    listLine.clear();
+
+    chart->removeAllSeries();
 }
 
 void HomeTest::updateItem()
 {
-    foreach (QPushButton *btn, list)
-        delete btn;
-    list.clear();
-
-    QStringList itemName = TestModel::getTestName(UIHandler::getSubCurTestId());
-    //itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
+    QStringList itemName = UIHandler::getSubTestName();
 
     int tempWidth = 250;
     int tempHeight = 60 ;
@@ -217,35 +283,22 @@ void HomeTest::updateItem()
         btn->setGeometry(tempx+(tempWidth+xSpacing)*int(i%4),tempy + (tempHeight+ySpacing)*int(i/4),tempWidth,tempHeight);
         btn->setObjectName(itemName[i]);
         btn->setText(itemName[i]);
-        if(itemName[i] == TestModel::getCurrItemName())
-        {
-            btn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF;font:bold 10px");
-        }
-        else
-        {
-            btn->setStyleSheet("border-radius:10px;background-color:#cccccc;color:#000000");
-        }
-
         btn->show();
-        list.append(btn);
+        listBtn.append(btn);
+
+        if(i == 0)
+        {
+            btn->setFocus();
+            btn->clicked(true);
+        }
     }
 
-    const TestProcessData *data = UIHandler::getTestProcessData(UIHandler::getCurrMachineId());
-    if (data == nullptr) return;
-    ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(data->nTotal-data->nComplete)+tr("秒"));
+    QString curItemName = UIHandler::getSubCurrItemName();
+    chart->setTitle(curItemName);
+    //chart->removeAllSeries();
 
-    if(data->bLoading)
-    {
-        //HomeLoading::display(str2q(data->tips));
-    }
-    if(data->oneBtnMsgFlag)
-    {
-        OneBtnMessageBox::display(str2q(data->oneMsginfo.tips),str2q(data->oneMsginfo.btnText),":/images/backTestbt2.png","hometest");
-    }
-
-    QString strMsg = UIHandler::getTwoBtnMsg();
-    if(!strMsg.isEmpty())
-    {
-         TwoBtnMessageBox::display(QString("%1").arg(strMsg)+ tr("，是否继续测试？"),tr("继续测试"),tr("确定取消"), "HomeTest2");
-    }
+    int testid = UIHandler::getSubCurTestId();
+    int ct = UIHandler::getSubCurItemCt(curItemName);
+    qDebug()<<"HomeTest showEvent testid="<<testid<<"ct="<<ct<<"itemName"<<itemName;
+    axisY->append(QString::number(ct),ct);
 }

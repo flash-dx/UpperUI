@@ -41,3 +41,11 @@ void UnitMain::UpdateUI(int machineNo)
         testWin->UpdateUI(machineNo);
     }
 }
+
+void UnitMain::updateChart(int machineNo, int cycle)
+{
+    HomeStage stage = UIHandler::getStage(machineNo);
+    if (stage == Stage_test){
+        testWin->updateChart(machineNo,cycle);
+    }
+}

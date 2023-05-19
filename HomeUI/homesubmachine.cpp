@@ -22,6 +22,11 @@ HomeSubMachine::HomeSubMachine(QWidget *parent) :
     }
 
     connect(UIHandler::getPtr(),&UIHandler::UpdateUI,this,&HomeSubMachine::UpdateUI);
+    connect(UIHandler::getPtr(),&UIHandler::sig_updateChart,this,[=](int machineNo,int cycle){
+
+        if (subUI.keys().contains(machineNo))
+            subUI[machineNo]->updateChart(machineNo,cycle);
+    });
 }
 
 HomeSubMachine::~HomeSubMachine()
@@ -65,11 +70,10 @@ void HomeSubMachine::on_HomeSubMachine_btHome_clicked()
     UIHandler::GoPage(UIHandler::PageId::Page_Home_AllMachine);
 }
 
-void HomeSubMachine::on_tabWidget_currentChanged(int index)
+void HomeSubMachine::on_tabWidget_tabBarClicked(int index)
 {
-    Q_UNUSED(index);
     foreach(int id, subUI.keys()){
-        if (subUI[id] == ui->tabWidget->currentWidget())
+        if (subUI[id] == ui->tabWidget->widget(index))
             UIHandler::setCurrMachineId(id);
     }
 }
