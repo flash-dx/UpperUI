@@ -124,5 +124,7 @@
         <file>images/barcode.png</file>
         <file>images/qrcode.png</file>
         <file>images/btnbk.png</file>
+        <file>images/datasearchbg.png</file>
+        <file>images/btnbkD.png</file>
     </qresource>
 </RCC>

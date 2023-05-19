@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "Module/testmodel.h"
+#include "datasearch.h"
 
 namespace Ui {
 class DataMenu;
@@ -30,18 +31,25 @@ private slots:
 
     void on_Data_Menu_btnJump_clicked();
 
+    void on_Data_Menu_btnFilter_clicked();
+
+    void on_Data_Menu_btnAll_clicked();
+
 private:
     Ui::DataMenu *ui;
 
     bool bAsc;
     TestModel testModel;
+    DataSearch dataSearch;
     int pageNum;
     int currPage;
     int totalPage;
     int totalRecord;
+    QString searchFilter;
 
     void initPage();
     void updatePage();
+    void resetTableHead();
 };
 
 #endif // DATAMENU_H

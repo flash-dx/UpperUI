@@ -34,27 +34,30 @@ public:
     int AddLastTest(int machineNo,int testId);
     bool ExistTest(int Testid);
     void InitTest();
-    static bool TestValidCheck(int testid);
-    static int getItemResultByName(int testid, QString name);
-    static QString getItemImgByName(int testid, QString name);
+    bool TestValidCheck(int testid);
+    int getItemResultByName(int testid, QString name);
+    QString getItemImgByName(int testid, QString name);
 
-    static QString getTestPanelCode(int testid);
-    static QString getTestPanelName(int testid);
-    static QString getTestBoxSerial(int testid);
-    static QString getTestSamapleCode(int testid);
-    static QString getTestSamapleInfo(int testid);
-    static const Test getTest(int testid);
+    QString getTestPanelCode(int testid);
+    QString getTestPanelName(int testid);
+    QString getTestBoxSerial(int testid);
+    QString getTestSamapleCode(int testid);
+    QString getTestSamapleInfo(int testid);
+    const Test getTest(int testid);
+    QString getTestPanelCode(QString panelName);
 
-    static int getTestResultType(int testid);
-    static QStringList getTestName(int testid);    
+    int getTestResultType(int testid);
+    QStringList getTestName(int testid);
 
-    static void setCurrTestByIndex(int TestIndex);
-    static void setCurrTestById(int testId);
-    static int getCurrTestId();
-    static void setCurrItemName(QString name);
-    static QString getCurrItemName();
-    static int getItemCT(int testid, QString name);
-    static TestData *getTestData(int testid);
+    void setCurrTestByIndex(int TestIndex);
+    void setCurrTestById(int testId);
+    int getCurrTestId();
+    void setCurrItemName(QString name);
+    QString getCurrItemName();
+    int getItemCT(int testid, QString name);
+    TestData *getTestData(int testid);
+    int getTestIndex(int testid);
+    bool isExistTestData(int testid);
 
     bool mayCheck();
     bool haveCheck();
@@ -63,10 +66,19 @@ public:
     bool delCurrTest();
     //Test getTestItem(int index){return m_display_list[index];}
 
-    static int getTestErrCode(int testid);
+    int getTestErrCode(int testid);
     void setFilter(QString filter){ strFilter = filter;}
     void setOrder(QString column, bool asc){ strOrder = QString("order by %1 %2").arg(column).arg(asc?"DESC":"asc");}
-    void setLimit(int start, int count){ strLimit = QString("Limit %1,%2").arg(start).arg(count);}
+    void setLimit(int start, int count);
+    int  getFilterRowCount();
+    QList<QString> getTestPanelNameList();
+    QList<QString> getTestSampleIdList();
+    QList<QString> getTestSampleTypeNameList();
+    QList<QString> getTestMachineNoList();
+    QList<QString> getTestUserList();
+    QList<QString> getTestCheckerList();
+    int getTestSampleType(QString sampleTypeName);
+
 protected:
     QHash<int, QByteArray> roleNames() const;
 
@@ -77,6 +89,12 @@ private:
     QString strFilter;
     QString strOrder;
     QString strLimit;
+
+    map<int,TestData> testData;
+    QList<Test> m_display_list;
+    int currTestid;
+    int currTestIndex;
+    QString currItemName;
 };
 
 #endif // TESTMODEL_H

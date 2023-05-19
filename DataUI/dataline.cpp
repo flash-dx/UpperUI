@@ -1,4 +1,4 @@
-#include "dataline.h"
+﻿#include "dataline.h"
 #include "ui_dataline.h"
 #include <QtCharts/QLineSeries>
 
@@ -67,9 +67,9 @@ void DataLine::paintEvent(QPaintEvent *event)
     paint.setFont(QFont("黑体",20));
     paint.drawText(130,yPos,tr("靶标"));
     paint.drawText(360,yPos,tr("Ct"));
-    QString itemName = TestModel::getCurrItemName();
-    int testid = TestModel::getCurrTestId();
-    TestData *data = TestModel::getTestData(testid);
+    QString itemName = UIHandler::pTestModel->getCurrItemName();
+    int testid = UIHandler::pTestModel->getCurrTestId();
+    TestData *data = UIHandler::pTestModel->getTestData(testid);
     if (data == nullptr)
         return;
 
@@ -132,16 +132,16 @@ void DataLine::hideEvent(QHideEvent *event){
 
 void DataLine::updateChart()
 {
-    chart->setTitle(TestModel::getCurrItemName());
+    chart->setTitle(UIHandler::pTestModel->getCurrItemName());
     chart->removeAllSeries();
     axisY->setRange(-10,50);
-    QString itemName = TestModel::getCurrItemName();
-    int testid = TestModel::getCurrTestId();
-    int ct = TestModel::getItemCT(testid,itemName);
+    QString itemName = UIHandler::pTestModel->getCurrItemName();
+    int testid = UIHandler::pTestModel->getCurrTestId();
+    int ct = UIHandler::pTestModel->getItemCT(testid,itemName);
     qDebug()<<"DataLine showEvent testid="<<testid<<"ct="<<ct<<"itemName"<<itemName;
     axisY->append(QString::number(ct),ct);
     ui->btBack->setText(tr("返回"));
-    TestData *data = TestModel::getTestData(testid);
+    TestData *data = UIHandler::pTestModel->getTestData(testid);
     if (data == nullptr)
         return;
     for(auto it : data->PosId){
@@ -174,10 +174,10 @@ void DataLine::on_btBack_clicked()
 void DataLine::on_Item_clicked()
 {
     qDebug()<<"on_Item_clicked"<<focusWidget()->objectName();
-    TestModel::setCurrItemName(focusWidget()->objectName());
+    UIHandler::pTestModel->setCurrItemName(focusWidget()->objectName());
     foreach (QPushButton *pBtn, btnlist)
     {
-        if(pBtn->objectName() == TestModel::getCurrItemName())
+        if(pBtn->objectName() == UIHandler::pTestModel->getCurrItemName())
         {
             pBtn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF");
         }
@@ -209,7 +209,10 @@ void DataLine::updateUI(int machineNo)
 
     updateChart();
 
-    QStringList itemName = TestModel::getTestName(TestModel::getCurrTestId());
+
+    QStringList itemName = UIHandler::pTestModel->getTestName(UIHandler::pTestModel->getCurrTestId());
+    QStringList itemName;
+
     itemName.prepend(UIHandler::getItemName(2));
 
     int dispCount = 7;
@@ -232,7 +235,7 @@ void DataLine::updateUI(int machineNo)
         btn->setGeometry(20+(tempWidth+xSpacing)*int(i%dispCount),10 + (tempHeight+ySpacing)*int(i/dispCount),tempWidth,tempHeight);
         btn->setObjectName(itemName[i]);
         btn->setText(itemName[i]);
-        if(itemName[i] == TestModel::getCurrItemName())
+        if(itemName[i] == UIHandler::pTestModel->getCurrItemName())
         {
             btn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF;font:bold 15px");
         }

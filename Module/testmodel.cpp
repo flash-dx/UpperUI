@@ -8,15 +8,7 @@
 #include "uihandler.h"
 #define UDCT 43
 
-
-static map<int,TestData> testData;
-
-static QList<Test> m_display_list;
-static int currTestid;
-static int currTestIndex;
-static QString currItemName;
-
-static int getTestIndex(int testid){
+int TestModel::getTestIndex(int testid){
     for (int i = 0; i < m_display_list.count(); i++){
         if (m_display_list[i].testId == testid)
             return i;
@@ -24,7 +16,7 @@ static int getTestIndex(int testid){
     return -1;
 }
 
-static bool isExistTestData(int testid){
+bool TestModel::isExistTestData(int testid){
     if (testData.count(testid) == 1)
         return true;
     int listIndex = getTestIndex(testid);
@@ -69,6 +61,8 @@ TestModel::TestModel(QObject *parent):QAbstractListModel (parent)
     roles[RolesPanelName] = "PanelName";
     roles[RolesMachineNo] = "MachineNo";
     strOrder = "order by Testid DESC";
+    currTestid = 0;
+    currTestIndex = 0;
 }
 
 int TestModel::rowCount(const QModelIndex &parent) const
@@ -82,7 +76,7 @@ int TestModel::columnCount(const QModelIndex &parent) const
     return 8;
 }
 QVariant TestModel::data(const QModelIndex &index, int role) const
-{    
+{
     if (index.row()<0 || index.row()>=m_display_list.count())
         return QVariant();
 
@@ -109,7 +103,7 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
             return QIcon(":/images/thrAlarmSmall.png");
     }
     else if(role == Qt::TextAlignmentRole)
-        return Qt::AlignCenter;    
+        return Qt::AlignCenter;
     else if(role == Qt::FontRole)
         return QFont("Times",20);
     else if (role == RolesTestid)
@@ -140,7 +134,7 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
         return test.sampleType;
     else if(role == RolesPanelCode)
         return str2q(test.panelCode);
-    else if(role == RolesPanelName)        
+    else if(role == RolesPanelName)
         return str2q(test.panelName);
     else if(role == RolesMachineNo)
         return str2q(to_string(test.machineNo));
@@ -149,7 +143,7 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
 }
 
 QHash<int, QByteArray> TestModel::roleNames() const
-{    
+{
     return roles;
 }
 
@@ -157,7 +151,6 @@ void TestModel::InitTest(){
     qDebug()<<"TestModel,InitTest";
 
     m_display_list.clear();
-
     QString filter;
     if(strFilter.isEmpty())
         filter = strOrder;
@@ -172,7 +165,6 @@ void TestModel::InitTest(){
     foreach (Test test, list) {
        m_display_list<<test;
     }
-
     resetDisplayId();
 }
 
@@ -209,7 +201,7 @@ bool TestModel::haveCheck(){
     return (m_display_list[currTestIndex].checker.length() != 0);
 }
 
-void TestModel::checkTest(){    
+void TestModel::checkTest(){
     if(UIHandler::checkTest(UIHandler::getUser(),currTestid))
     {
        m_display_list[currTestIndex].checker = q2str(UIHandler::getUser());
@@ -373,4 +365,120 @@ int TestModel::getItemCT(int testid, QString name){
         ItemCT = UIHandler::getItemCT(testData,testid,name);
     }
     return ItemCT;
+}
+
+void TestModel::setLimit(int start, int count)
+{
+    if(start < 0 || count <= 0)
+        strLimit = "";
+    else
+        strLimit = QString("Limit %1,%2").arg(start).arg(count);
+}
+
+int TestModel::getFilterRowCount()
+{
+    QString filter;
+    if(!strFilter.isEmpty())
+        filter = QString("where %1").arg(strFilter);
+    const list<Test>  list= UIHandler::getTestList(filter);
+    return list.size();
+}
+
+QList<QString> TestModel::getTestPanelNameList()
+{
+    QList<QString> strlist;
+    QString panelname;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        panelname = str2q(data.panelName);
+        if(!strlist.contains(panelname))
+          strlist<< panelname;
+    }
+    return strlist;
+}
+
+QString TestModel::getTestPanelCode(QString panelName){
+
+    for (int i = 0; i < m_display_list.count(); i++){
+        if (m_display_list[i].panelName == q2str(panelName))
+            return str2q(m_display_list[i].panelCode);
+    }
+
+    return "";
+}
+
+int TestModel::getTestSampleType(QString sampleTypeName){
+
+    for (int i = 0; i < m_display_list.count(); i++){
+        qDebug()<<str2q(m_display_list[i].sampleTypeName) << sampleTypeName;
+        if (m_display_list[i].sampleTypeName == q2str(sampleTypeName))
+            return m_display_list[i].sampleType;
+    }
+
+    return -1;
+}
+
+QList<QString> TestModel::getTestSampleIdList()
+{
+    QList<QString> strlist;
+    QString sampleId;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        sampleId = str2q(data.sampleId);
+        if(!strlist.contains(sampleId))
+          strlist<< sampleId;
+    }
+    return strlist;
+}
+
+QList<QString> TestModel::getTestSampleTypeNameList()
+{
+    QList<QString> strlist;
+    QString sampleType;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        sampleType = str2q(data.sampleTypeName);
+        if(!strlist.contains(sampleType))
+          strlist<< sampleType;
+    }
+    return strlist;
+}
+
+QList<QString> TestModel::getTestMachineNoList()
+{
+    QList<QString> strlist;
+    QString machineNo;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        machineNo = QString::number(data.machineNo);
+        if(!strlist.contains(machineNo))
+          strlist<< machineNo;
+    }
+    return strlist;
+}
+
+QList<QString> TestModel::getTestUserList()
+{
+    QList<QString> strlist;
+    QString user;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        user = str2q(data.user);
+        if(!strlist.contains(user))
+          strlist<< user;
+    }
+    return strlist;
+}
+
+QList<QString> TestModel::getTestCheckerList()
+{
+    QList<QString> strlist;
+    QString checker;
+    const list<Test>  testlist= UIHandler::getTestList("");
+    foreach (Test data, testlist) {
+        checker = str2q(data.checker);
+        if(!strlist.contains(checker))
+          strlist<< checker;
+    }
+    return strlist;
 }

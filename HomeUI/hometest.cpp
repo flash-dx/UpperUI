@@ -1,4 +1,4 @@
-#include "hometest.h"
+﻿#include "hometest.h"
 #include "ui_hometest.h"
 
 #include <QLineSeries>

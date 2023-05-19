@@ -6,6 +6,7 @@
 #include <QScrollBar>
 
 #include <Module/testmodel.h>
+#include <components/onebtnmessagebox.h>
 
 static DataMenu *winptr = nullptr;
 
@@ -14,23 +15,23 @@ DataMenu::DataMenu(QWidget *parent) :
     ui(new Ui::DataMenu)
 {
     ui->setupUi(this);
-    int w = (UIHandler::contentWidth)/8;
+    int w = (UIHandler::contentWidth)/11;
     int h = 80;
-    ui->Data_Menu_lbHeader1->setGeometry(0,0,w-40,h);
+    ui->Data_Menu_lbHeader1->setGeometry(0,0,w,h);
     ui->Data_Menu_lbHeader1->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader2->setGeometry(w*1-40,0,w,h);
+    ui->Data_Menu_lbHeader2->setGeometry(w*1-20,0,w,h);
     ui->Data_Menu_lbHeader2->setAlignment(Qt::AlignVCenter|Qt::AlignLeft);
-    ui->Data_Menu_lbHeader3->setGeometry(w*2-40,0,w+40,h);
+    ui->Data_Menu_lbHeader3->setGeometry(w*2-20,0,w*3,h);
     ui->Data_Menu_lbHeader3->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader4->setGeometry(w*3,0,w,h);
+    ui->Data_Menu_lbHeader4->setGeometry(w*5,0,w,h);
     ui->Data_Menu_lbHeader4->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader5->setGeometry(w*4,0,w,h);
+    ui->Data_Menu_lbHeader5->setGeometry(w*6,0,w,h);
     ui->Data_Menu_lbHeader5->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader6->setGeometry(w*5,0,w,h);
+    ui->Data_Menu_lbHeader6->setGeometry(w*7,0,w,h);
     ui->Data_Menu_lbHeader6->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader7->setGeometry(w*6,0,w,h);
+    ui->Data_Menu_lbHeader7->setGeometry(w*8,0,w,h);
     ui->Data_Menu_lbHeader7->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader8->setGeometry(w*7,0,w,h);
+    ui->Data_Menu_lbHeader8->setGeometry(w*9,0,w*2,h);
     ui->Data_Menu_lbHeader8->setAlignment(Qt::AlignCenter);
     ui->Data_Menu_lbHeader1->installEventFilter(this);
     ui->Data_Menu_lbHeader2->installEventFilter(this);
@@ -49,18 +50,19 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->horizontalHeader()->hide();
     ui->tableView->verticalHeader()->setDefaultSectionSize(h);
     ui->tableView->horizontalHeader()->setVisible(false);
+    testModel.InitTest();
     ui->tableView->setModel(&testModel);
     ui->tableView->setAlternatingRowColors(true);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setShowGrid(false);
     ui->tableView->setColumnWidth(0,w);
-    ui->tableView->setColumnWidth(1,w);
-    ui->tableView->setColumnWidth(2,w);
+    ui->tableView->setColumnWidth(1,w-20);
+    ui->tableView->setColumnWidth(2,w*3+20);
     ui->tableView->setColumnWidth(3,w);
     ui->tableView->setColumnWidth(4,w);
     ui->tableView->setColumnWidth(5,w);
     ui->tableView->setColumnWidth(6,w);
-    ui->tableView->setColumnWidth(7,w);
+    ui->tableView->setColumnWidth(7,w*2);
     ui->tableView->setIconSize(QSize(50,50));
 
     ui->tableView->verticalScrollBar()->hide();
@@ -84,7 +86,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->Data_Menu_EditPage->setGeometry(UIHandler::contentWidth - 500,ui->tableView->geometry().bottom()+h/4,w,h/2);
     ui->Data_Menu_btnPre->setGeometry(UIHandler::contentWidth - 600,ui->tableView->geometry().bottom()+h/4,w,h/2);
     ui->Data_Menu_btnFilter->setGeometry(UIHandler::contentWidth - 700,ui->tableView->geometry().bottom()+h/4,w,h/2);
-    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);
+    ui->Data_Menu_btnAll->setGeometry(UIHandler::contentWidth - 800,ui->tableView->geometry().bottom()+h/4,w,h/2);    
 }
 
 DataMenu::~DataMenu()
@@ -103,25 +105,17 @@ void DataMenu::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
      ui->retranslateUi(this);
-     ui->Data_Menu_lbHeader1->setText(tr("序号") + "↓");
-     ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
-     ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
-     ui->Data_Menu_lbHeader4->setText(tr("通道名"));
-     ui->Data_Menu_lbHeader5->setText(tr("样本号"));
-     ui->Data_Menu_lbHeader6->setText(tr("操作员"));
-     ui->Data_Menu_lbHeader7->setText(tr("审核员"));
-     ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
 
      initPage();
-     testModel.InitTest();
      UIHandler::NotifyTitle("datamenu",5);
 }
 
 void DataMenu::on_tableView_clicked(const QModelIndex &index)
 {
-    TestModel::setCurrTestByIndex(index.row());
+    int testid = testModel.data(index, TestModel::RolesTestid).toInt();
+    UIHandler::pTestModel->setCurrTestById(testid);
     UIHandler::setDataEntry(0);
-    if (TestModel::getTestResultType(TestModel::getCurrTestId()) >= 2)
+    if (UIHandler::pTestModel->getTestResultType(UIHandler::pTestModel->getCurrTestId()) >= 2)
       UIHandler::GoPage(UIHandler::PageId::Page_Data_View);
     else
       UIHandler::GoPage(UIHandler::PageId::Page_Data_InvalidView);
@@ -154,14 +148,7 @@ bool DataMenu::eventFilter(QObject *obj, QEvent *event)
             testModel.InitTest();
             ui->tableView->update();
 
-            ui->Data_Menu_lbHeader1->setText(tr("序号"));
-            ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
-            ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
-            ui->Data_Menu_lbHeader4->setText(tr("通道名"));
-            ui->Data_Menu_lbHeader5->setText(tr("样本号"));
-            ui->Data_Menu_lbHeader6->setText(tr("操作员"));
-            ui->Data_Menu_lbHeader7->setText(tr("审核员"));
-            ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
+            resetTableHead();
 
             QLabel *label = qobject_cast<QLabel *>(obj);
             QString text = label->text();
@@ -178,21 +165,35 @@ bool DataMenu::eventFilter(QObject *obj, QEvent *event)
 
 void DataMenu::initPage()
 {
+    searchFilter = "";
     bAsc = true;
     currPage = 1;
     pageNum = ui->tableView->geometry().height()/80;
-    totalRecord = UIHandler::pTestModel->rowCount();
+
+    testModel.setLimit(0, pageNum);
+    testModel.setOrder("Testid", bAsc);
+    testModel.setFilter(searchFilter);
+    testModel.InitTest();
+    ui->tableView->update();
+
+    totalRecord = testModel.getFilterRowCount();
     totalPage = (totalRecord+pageNum-1)/pageNum;
     ui->Data_Menu_EditPage->setText("1");
     ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
-    testModel.setLimit(0, pageNum);
+
+    resetTableHead();
+    ui->Data_Menu_lbHeader1->setText(tr("序号") + "↓");
 }
 
 void DataMenu::updatePage()
 {
+    testModel.setFilter(searchFilter);
     testModel.setLimit(pageNum*(currPage-1), pageNum);
     testModel.InitTest();
     ui->tableView->update();
+
+    totalRecord = testModel.getFilterRowCount();
+    totalPage = (totalRecord+pageNum-1)/pageNum;
     ui->Data_Menu_EditPage->setText(QString::number(currPage));
     ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
 }
@@ -218,9 +219,45 @@ void DataMenu::on_Data_Menu_btnNext_clicked()
 void DataMenu::on_Data_Menu_btnJump_clicked()
 {
     int page = ui->Data_Menu_EditPage->text().toInt();
-    if(page > 1 && page < totalPage)
+    if(page == currPage)
+        return;
+
+    if(page >= 1 && page <= totalPage)
     {
         currPage = page;
         updatePage();
     }
+    else
+        OneBtnMessageBox::display(tr("输入的跳转页错误"),tr("返回"));
+}
+
+void DataMenu::resetTableHead()
+{
+    ui->Data_Menu_lbHeader1->setText(tr("序号"));
+    ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
+    ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
+    ui->Data_Menu_lbHeader4->setText(tr("通道名"));
+    ui->Data_Menu_lbHeader5->setText(tr("样本号"));
+    ui->Data_Menu_lbHeader6->setText(tr("操作员"));
+    ui->Data_Menu_lbHeader7->setText(tr("审核员"));
+    ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
+}
+void DataMenu::on_Data_Menu_btnFilter_clicked()
+{
+    if(dataSearch.exec() == QDialog::Accepted)
+    {
+        currPage = 1;
+        searchFilter = dataSearch.searchFilter;
+
+        qDebug()<<"DataMenu::on_Data_Menu_btnFilter_clicked"<<searchFilter;
+        pageNum = ui->tableView->geometry().height()/80;
+        totalPage = (totalRecord+pageNum-1)/pageNum;
+
+        updatePage();
+    }
+}
+
+void DataMenu::on_Data_Menu_btnAll_clicked()
+{
+    initPage();
 }

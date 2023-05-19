@@ -1,4 +1,4 @@
-#include "datainvaildview.h"
+﻿#include "datainvaildview.h"
 #include "ui_datainvaildview.h"
 
 DataInvaildView::DataInvaildView(QWidget *parent, int type) :
@@ -100,13 +100,13 @@ void DataInvaildView::updateUI(int machineNo)
      }
      else
      {
-         testId = TestModel::getCurrTestId();
+         testId = UIHandler::pTestModel->getCurrTestId();
      }
     qDebug()<<"DataInvaildView showEvent"<<testId;
-    ui->Data_InvalidView_lbTestName->setText(TestModel::getTestPanelName(testId)+"   "+TestModel::getTestPanelCode(testId));
-    ui->Data_InvalidView_lbSerial->setText(TestModel::getTestBoxSerial(testId));
+    ui->Data_InvalidView_lbTestName->setText(UIHandler::pTestModel->getTestPanelName(testId)+"   "+UIHandler::pTestModel->getTestPanelCode(testId));
+    ui->Data_InvalidView_lbSerial->setText(UIHandler::pTestModel->getTestBoxSerial(testId));
     //Sequence::getPtr()->changeTitle(GlobalParam::pTestModel->getCurrTestCode()+" | "+GlobalParam::pTestModel->getCurrTestInfo());
-    int ErrorCode = TestModel::getTestErrCode(testId);
+    int ErrorCode = UIHandler::pTestModel->getTestErrCode(testId);
     QString  strErrInfo;
     if(ErrorCode == 1)
     {
@@ -117,7 +117,7 @@ void DataInvaildView::updateUI(int machineNo)
         strErrInfo = tr("点阵异常");
     }
 
-    if (TestModel::getTestResultType(testId) == 1)
+    if (UIHandler::pTestModel->getTestResultType(testId) == 1)
         ui->Data_InvalidView_lbMessage->setText(tr("测试无效\n内部参考品结果异常\n")+ strErrInfo);
     else
         ui->Data_InvalidView_lbMessage->setText(tr("测试无效\n测试过程被终止\n") + strErrInfo);

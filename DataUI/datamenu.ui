@@ -156,7 +156,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>上一页</string>
@@ -172,7 +173,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>下一页</string>
@@ -188,7 +190,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
     <string>跳转</string>
@@ -220,10 +223,11 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
-    <string>筛选</string>
+    <string>查找</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Data_Menu_btnAll">
@@ -236,10 +240,11 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border-image: url(:/images/btnbk.png);</string>
+    <string notr="true">QPushButton {border-image: url(:/images/btnbk.png);}
+QPushButton:pressed {border-image: url(:/images/btnbkD.png);}</string>
    </property>
    <property name="text">
-    <string>全部显示</string>
+    <string>显示全部</string>
    </property>
   </widget>
  </widget>

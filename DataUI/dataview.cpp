@@ -1,4 +1,4 @@
-#include "dataview.h"
+﻿#include "dataview.h"
 #include "ui_dataview.h"
 #include <QPainter>
 #include <QPrinter>
@@ -119,7 +119,7 @@ void DataView::on_Data_View_btCheck_clicked()
 
 void DataView::Item_clicked(){
     if (UIHandler::get_int_Param("MachineMode")==1){
-        TestModel::setCurrItemName(focusWidget()->objectName());
+        UIHandler::pTestModel->setCurrItemName(focusWidget()->objectName());
         if (winIndex == 1)
             UIHandler::TestResultGoWin(2);
         else
@@ -156,7 +156,7 @@ void DataView::on_Data_View_btPrint_clicked()
 //    }
 //    else
 //    {
-//        testid = TestModel::getCurrTestId();
+//        testid = UIHandler::pTestModel->getCurrTestId();
 //    }
 
 //    if (GlobalParam::printTest(testid))
@@ -234,11 +234,11 @@ void DataView::updateUI(int machineNo)
     }
     else
     {
-        testid = TestModel::getCurrTestId();
+        testid = UIHandler::pTestModel->getCurrTestId();
     }
-    ui->Data_View_lbPanelName->setText(TestModel::getTestPanelName(testid)+"   "+TestModel::getTestPanelCode(testid));
-    ui->Data_View_lbBoxSerial->setText(TestModel::getTestBoxSerial(testid));
-    bool bValidcheck = TestModel::TestValidCheck(testid);
+    ui->Data_View_lbPanelName->setText("呼吸道病原体8联检测");
+    ui->Data_View_lbBoxSerial->setText("Lot# 000001"+ QString(" 80021"));
+    bool bValidcheck = UIHandler::pTestModel->TestValidCheck(testid);
     if(bValidcheck)
     {
          ui->Data_View_lbReference->setText(tr("测试有效"));
@@ -255,7 +255,7 @@ void DataView::updateUI(int machineNo)
     ui->Data_View_btRef->setObjectName(UIHandler::getItemName(2));
     connect(ui->Data_View_btRef,&QPushButton::clicked,this,&DataView::Item_clicked);
 
-    QStringList itemName = TestModel::getTestName(testid);
+    QStringList itemName = UIHandler::pTestModel->getTestName(testid);
 
     for (int i = 0; i < itemName.size(); i++){
         QPushButton *bt = new QPushButton(this);
@@ -274,7 +274,7 @@ void DataView::updateUI(int machineNo)
 
         QString strImg = ":/images/ud.png";
         if(bValidcheck)
-            strImg = TestModel::getItemImgByName(testid,itemName[i]);
+            strImg = UIHandler::pTestModel->getItemImgByName(testid,itemName[i]);
 
         bt->setIcon(QIcon(strImg));
 

@@ -69,7 +69,7 @@ void MainWindow::UISetup()
     ui->MainWindow_lbTime->setText(QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss"));
 
     ui->MainWindow_lbBattery->setText("");
-    ui->MainWindow_lbBattery->setGeometry(screenWidth - 410, (HEADER_HEIGHT-30)/2, 60, 30);
+    ui->MainWindow_lbBattery->setGeometry(screenWidth - 410, (HEADER_HEIGHT-20)/2, 40, 20);
     ui->MainWindow_lbBattery->setStyleSheet("background-color: transparent;border-image: url(:/images/battery.png);");
 
     ui->MainWindow_lbEht->setText("");
