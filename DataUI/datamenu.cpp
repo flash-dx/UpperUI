@@ -19,9 +19,9 @@ DataMenu::DataMenu(QWidget *parent) :
     int h = 80;
     ui->Data_Menu_lbHeader1->setGeometry(0,0,w,h);
     ui->Data_Menu_lbHeader1->setAlignment(Qt::AlignCenter);
-    ui->Data_Menu_lbHeader2->setGeometry(w*1,0,w,h);
+    ui->Data_Menu_lbHeader2->setGeometry(w*1-20,0,w,h);
     ui->Data_Menu_lbHeader2->setAlignment(Qt::AlignVCenter|Qt::AlignLeft);
-    ui->Data_Menu_lbHeader3->setGeometry(w*2,0,w*3,h);
+    ui->Data_Menu_lbHeader3->setGeometry(w*2-20,0,w*3,h);
     ui->Data_Menu_lbHeader3->setAlignment(Qt::AlignCenter);
     ui->Data_Menu_lbHeader4->setGeometry(w*5,0,w,h);
     ui->Data_Menu_lbHeader4->setAlignment(Qt::AlignCenter);
@@ -56,7 +56,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setShowGrid(false);
     ui->tableView->setColumnWidth(0,w);
-    ui->tableView->setColumnWidth(1,w);
+    ui->tableView->setColumnWidth(1,w-20);
     ui->tableView->setColumnWidth(2,w*3);
     ui->tableView->setColumnWidth(3,w);
     ui->tableView->setColumnWidth(4,w);
