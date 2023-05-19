@@ -6,12 +6,10 @@
 #include "components/onebtnmessagebox.h"
 #include "uihandler.h"
 #include <Module/testmodel.h>
-static DataView *winptr = nullptr;
-static DataView *winptr2 = nullptr;
-static int winIndex = 0;
 
-DataView::DataView(QWidget *parent) :
-    QDialog(parent),
+
+DataView::DataView(QWidget *parent, int type) :
+    QDialog(parent),winIndex(type),
     ui(new Ui::DataView)
 {
     ui->setupUi(this);
@@ -21,7 +19,6 @@ DataView::DataView(QWidget *parent) :
         contentWidth = UIHandler::screenWidth;
         contentHeight = UIHandler::contentHeight*7/8;
     }
-
 
     ui->Data_View_lbPanelName->setGeometry(0,0,contentWidth/2,114);
     ui->Data_View_lbPanelName->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
@@ -45,23 +42,10 @@ DataView::DataView(QWidget *parent) :
     this->setStyleSheet("QWidget{background-color:rgb(255,255,255)}");
 }
 
+
 DataView::~DataView()
 {
     delete ui;
-}
-
-DataView *DataView::getPtr(int ptrIndex)
-{
-    winIndex = ptrIndex;
-    if (ptrIndex == 1){
-        if (winptr2 == nullptr)
-            winptr2 = new DataView;
-        return winptr2;
-    }
-
-    if (winptr == nullptr)
-        winptr = new DataView;
-    return winptr;
 }
 
 void DataView::paintEvent(QPaintEvent *event)
@@ -74,7 +58,6 @@ void DataView::paintEvent(QPaintEvent *event)
 
 void DataView::showEvent(QShowEvent *event){
     Q_UNUSED(event);
-
 
     ui->Data_View_btBack->setText(tr("返回"));
 
@@ -105,7 +88,6 @@ void DataView::showEvent(QShowEvent *event){
             UIHandler::NotifyTitle(tr("测试结束"));
         else
             UIHandler::NotifyTitle("dataview",5);
-        //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
     }
     else {
         updateUI();
@@ -235,26 +217,27 @@ void DataView::on_Data_View_btDelete_clicked()
 //    }
 }
 
-void DataView::updateUI()
+void DataView::updateUI(int machineNo)
 {
 
-    foreach (QPushButton *btn, list)
-        delete btn;
-    list.clear();
+    if(winIndex != 1)
+    {
+        foreach (QPushButton *btn, list)
+            delete btn;
+        list.clear();
+    }
 
     int testid ;
     if (winIndex == 1)
     {
-       testid = UIHandler::getSubCurTestId();
+       testid = UIHandler::getSubCurTestId(machineNo);
     }
     else
     {
         testid = TestModel::getCurrTestId();
     }
-//    ui->Data_View_lbPanelName->setText(TestModel::getTestPanelName(testid)+"   "+TestModel::getTestPanelCode(testid));
-//    ui->Data_View_lbBoxSerial->setText(TestModel::getTestBoxSerial(testid));
-    ui->Data_View_lbPanelName->setText("呼吸道病原体8联检测");
-    ui->Data_View_lbBoxSerial->setText("Lot# 000001"+ QString(" 80021"));
+    ui->Data_View_lbPanelName->setText(TestModel::getTestPanelName(testid)+"   "+TestModel::getTestPanelCode(testid));
+    ui->Data_View_lbBoxSerial->setText(TestModel::getTestBoxSerial(testid));
     bool bValidcheck = TestModel::TestValidCheck(testid);
     if(bValidcheck)
     {
@@ -272,10 +255,7 @@ void DataView::updateUI()
     ui->Data_View_btRef->setObjectName(UIHandler::getItemName(2));
     connect(ui->Data_View_btRef,&QPushButton::clicked,this,&DataView::Item_clicked);
 
-    //QStringList itemName = TestModel::getTestName(testid);
-
-    QStringList itemName;
-    itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
+    QStringList itemName = TestModel::getTestName(testid);
 
     for (int i = 0; i < itemName.size(); i++){
         QPushButton *bt = new QPushButton(this);
@@ -317,6 +297,5 @@ void DataView::updateUI()
     }
     else
         ui->Data_View_btCheck->setVisible(false);
-
 }
 

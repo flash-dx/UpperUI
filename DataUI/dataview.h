@@ -15,9 +15,10 @@ class DataView : public QDialog
     Q_OBJECT
 
 public:
-    explicit DataView(QWidget *parent = nullptr);
+    explicit DataView(QWidget *parent = nullptr ,int type = 0);
     ~DataView();
-    static DataView *getPtr(int ptrIndex = 0);
+public:
+    void updateUI(int machineNo = -1);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -37,10 +38,11 @@ private slots:
 
     void on_Data_View_btDelete_clicked();
 
-    void updateUI();  
+
 private:
     Ui::DataView *ui;
     QList<QPushButton*> list;
+    int winIndex;
 };
 
 #endif // DATAVIEW_H

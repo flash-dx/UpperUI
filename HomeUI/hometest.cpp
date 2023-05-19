@@ -69,15 +69,6 @@ void HomeTest::showEvent(QShowEvent *event){
     {
          TwoBtnMessageBox::display(QString("%1").arg(strMsg)+ tr("，是否继续测试？"),tr("继续测试"),tr("确定取消"), "HomeTest2");
     }
-
-//    connect(UIHandler::getPtr(),&UIHandler::TestProgress,this,[=](int complete, int total, int machineNo){
-
-//         if (machineNo != UIHandler::getCurrMachineId())
-//             return;
-
-//         int remain = total-complete;
-//         ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(remain/60)+tr("分")+QString::number(remain%60)+tr("秒"));
-//     });
 }
 
 void HomeTest::hideEvent(QHideEvent *event){
@@ -162,7 +153,6 @@ void HomeTest::on_Item_clicked()
         }
     }
 
-
     int ct = UIHandler::getSubCurItemCt(curItemName);
     axisY->append(QString::number(ct),ct);
 }
@@ -170,8 +160,13 @@ void HomeTest::on_Item_clicked()
 void HomeTest::UpdateUI(int machineNo)
 {
     const TestProcessData * testData = UIHandler::getTestProcessData(machineNo);
-    int remain = testData->nTotal - testData->nComplete;
-    ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(remain/60)+tr("分")+QString::number(remain%60)+tr("秒"));
+    if(testData == nullptr)
+        return;
+    if(testData->nComplete >0)
+    {
+        int remain = testData->nTotal - testData->nComplete;
+        ui->Home_HomeTest_lbTestProgress->setText(tr("正在测试，预计剩余")+QString::number(remain/60)+tr("分")+QString::number(remain%60)+tr("秒"));
+    }
 }
 
 void HomeTest::initUi()
@@ -201,17 +196,15 @@ void HomeTest::initUi()
 
 void HomeTest::updateChart(int machineNo ,int cycle)
 {
-    map<int,int> __map = UIHandler::getSubOneCycleData(machineNo);
-
     QString itemName = UIHandler::getSubCurrItemName(machineNo);
 
     static bool flag = false;
 
-    for (auto iter1:__map) {
+    for (auto iter1:UIHandler::getSubOneCycleData(machineNo)) {
 
         if(cycle == 1 && !flag)
         {
-            updateItem();
+            updateItem(machineNo);
             flag = true;
         }
 
@@ -246,8 +239,8 @@ void HomeTest::updateChart(int machineNo ,int cycle)
             }
         }
         if (iter1.second > axisX->max() - 10)
-            axisY->setMax(iter1.second/100+10);
-        line->append(cycle,iter1.second/100);
+            axisY->setMax(iter1.second+10);
+        line->append(cycle,iter1.second);
     }
 
     flag = false;
@@ -266,7 +259,7 @@ void HomeTest::resetUi()
     chart->removeAllSeries();
 }
 
-void HomeTest::updateItem()
+void HomeTest::updateItem(int machineNo)
 {
     QStringList itemName = UIHandler::getSubTestName();
 
@@ -293,11 +286,10 @@ void HomeTest::updateItem()
         }
     }
 
-    QString curItemName = UIHandler::getSubCurrItemName();
+    QString curItemName = UIHandler::getSubCurrItemName(machineNo);
     chart->setTitle(curItemName);
-    //chart->removeAllSeries();
 
-    int testid = UIHandler::getSubCurTestId();
+    int testid = UIHandler::getSubCurTestId(machineNo);
     int ct = UIHandler::getSubCurItemCt(curItemName);
     qDebug()<<"HomeTest showEvent testid="<<testid<<"ct="<<ct<<"itemName"<<itemName;
     axisY->append(QString::number(ct),ct);

@@ -6,26 +6,10 @@
 #include "Module/testmodel.h"
 #include "list"
 using namespace std;
-static DataLine *winptr = nullptr;
-static DataLine *winptr2 = nullptr;
-static int winIndex = 0;
 
-DataLine *DataLine::getPtr(int ptrIndex)
-{
-    winIndex = ptrIndex;
-    if (ptrIndex == 1){
-        if (winptr2 == nullptr)
-            winptr2 = new DataLine;
-        return winptr2;
-    }
 
-    if (winptr == nullptr)
-        winptr = new DataLine;
-    return winptr;
-}
-
-DataLine::DataLine(QWidget *parent) :
-    QDialog(parent),
+DataLine::DataLine(QWidget *parent,int type ) :
+    QDialog(parent),winIndex(type),
     ui(new Ui::DataLine)
 {
     ui->setupUi(this);
@@ -79,7 +63,6 @@ void DataLine::paintEvent(QPaintEvent *event)
         ySpacing = 35;
     }
 
-
     QPainter paint(this);
     paint.setFont(QFont("黑体",20));
     paint.drawText(130,yPos,tr("靶标"));
@@ -87,39 +70,38 @@ void DataLine::paintEvent(QPaintEvent *event)
     QString itemName = TestModel::getCurrItemName();
     int testid = TestModel::getCurrTestId();
     TestData *data = TestModel::getTestData(testid);
-//    if (data == nullptr)
-//        return;
+    if (data == nullptr)
+        return;
 
 
     QBrush oldBrush = paint.brush();
 
     int lineNo = 0;
 
+    for(auto it1:data->ItemidOfName[q2str(itemName)]){
 
-//    for(auto it1:data->ItemidOfName[q2str(itemName)]){
+        //GlobalParam::ItemCode[itemid]);
+        for(auto it2: data->PosId){
+            if (/*data->PosId[it2.first*/it2.second == (it1)){
+                paint.drawText(130,yPos+50+lineNo*ySpacing,UIHandler::getItemCode(it1));
+                if (data->CT[it2.first] > 0)
+                    paint.drawText(360,yPos+50+lineNo*ySpacing,QString::number(static_cast<double>(data->CT[it2.first])/10));
+                else
+                    paint.drawText(360,yPos+50+lineNo*ySpacing,"ND");
 
-//        //GlobalParam::ItemCode[itemid]);
-//        for(auto it2: data->PosId){
-//            if (/*data->PosId[it2.first*/it2.second == (it1)){
-//                paint.drawText(130,yPos+50+lineNo*ySpacing,UIHandler::getItemCode(it1));
-//                if (data->CT[it2.first] > 0)
-//                    paint.drawText(360,yPos+50+lineNo*ySpacing,QString::number(static_cast<double>(data->CT[it2.first])/10));
-//                else
-//                    paint.drawText(360,yPos+50+lineNo*ySpacing,"ND");
-
-//                QString seriesName = QString("P%1").arg(it2.first);
-//                foreach (QAbstractSeries *series, chart->series()){
-//                    if (series->name() == seriesName){
-//                        QLineSeries *line = static_cast<QLineSeries *>(series);
-//                        QBrush *brush = new QBrush(line->color());
-//                        paint.fillRect(440,yPos+50+lineNo*ySpacing-20,20,20,*brush);
-//                        break;
-//                    }
-//                }
-//                lineNo++;
-//            }
-//        }
-//    }
+                QString seriesName = QString("P%1").arg(it2.first);
+                foreach (QAbstractSeries *series, chart->series()){
+                    if (series->name() == seriesName){
+                        QLineSeries *line = static_cast<QLineSeries *>(series);
+                        QBrush *brush = new QBrush(line->color());
+                        paint.fillRect(440,yPos+50+lineNo*ySpacing-20,20,20,*brush);
+                        break;
+                    }
+                }
+                lineNo++;
+            }
+        }
+    }
     paint.setBrush(oldBrush);
 }
 
@@ -216,18 +198,18 @@ void DataLine::on_Item_clicked()
     update();
 }
 
-void DataLine::updateUI()
+void DataLine::updateUI(int machineNo)
 {
-
-    foreach (QPushButton *btn, btnlist)
-        delete btn;
-    btnlist.clear();
+    if(winIndex != 1)
+    {
+        foreach (QPushButton *btn, btnlist)
+            delete btn;
+        btnlist.clear();
+    }
 
     updateChart();
 
-    //QStringList itemName = TestModel::getTestName(TestModel::getCurrTestId());
-    QStringList itemName;
-    itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
+    QStringList itemName = TestModel::getTestName(TestModel::getCurrTestId());
     itemName.prepend(UIHandler::getItemName(2));
 
     int dispCount = 7;

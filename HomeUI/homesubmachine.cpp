@@ -56,7 +56,7 @@ void HomeSubMachine::showEvent(QShowEvent *event)
 void HomeSubMachine::hideEvent(QHideEvent *event)
 {
     Q_UNUSED(event);
-    UIHandler::setCurrMachineId(-1);
+    //UIHandler::setCurrMachineId(-1);
 }
 
 void HomeSubMachine::UpdateUI(int machineNo)

@@ -15,10 +15,10 @@ class DataInvaildView : public QDialog
     Q_OBJECT
 
 public:
-    explicit DataInvaildView(QWidget *parent = nullptr);
+    explicit DataInvaildView(QWidget *parent = nullptr,int type =0);
     ~DataInvaildView();
-    static DataInvaildView *getPtr(int ptrIndex = 0);
-
+public:
+    void updateUI(int machineNo = -1);
 protected:
     void showEvent(QShowEvent *event);
     void hideEvent(QHideEvent *event);
@@ -28,10 +28,9 @@ private slots:
 
     void on_Data_InvalidView_btDelete_clicked();
 
-    void updateUI();
-
 private:
     Ui::DataInvaildView *ui;
+    int winIndex;
 };
 
 #endif // DATAINVAILDVIEW_H

@@ -8,6 +8,10 @@ namespace Ui {
 class MainWin;
 }
 
+class DataView;
+class DataInvaildView;
+class DataLine;
+
 class MainWin : public QDialog
 {
     Q_OBJECT
@@ -30,6 +34,10 @@ private slots:
 
 private:
     Ui::MainWin *ui;
+
+    DataView *dataViewWin;
+    DataInvaildView *invalidWin;
+    DataLine *lineWin;
 };
 
 #endif // MAINWIN_H

@@ -5,9 +5,14 @@
 #include "homeidle.h"
 #include "hometest.h"
 #include "homestartup.h"
+
 namespace Ui {
 class UnitMain;
 }
+
+class DataView;
+class DataInvaildView;
+class DataLine;
 
 class UnitMain : public QDialog
 {
@@ -24,6 +29,9 @@ private:
     HomeStartup *startupWin;
     HomeIdle *idleWin;
     HomeTest *testWin;
+    DataView *dataViewWin;
+    DataInvaildView *invalidWin;
+    DataLine *lineWin;
 };
 
 #endif // UNITMAIN_H

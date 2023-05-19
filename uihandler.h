@@ -294,7 +294,7 @@ public:
     static QString getValidTime();
     //
 
-    static int getSubCurTestId();
+    static int getSubCurTestId(const int machiNo);
 
     static int getSubCurItemCt(const QString& itemName);
 

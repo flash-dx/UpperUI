@@ -59,10 +59,14 @@ MainWin::MainWin(QWidget *parent) :
     ui->MainWin_btData->setGeometry(UIHandler::screenWidth/3+ui->MainWin_btHome->x(),UIHandler::contentHeight+14,BOTTOM_BUTTON_WIDTH,BOTTOMBUTTON_HEIGHT);
     ui->MainWin_btData->setStyleSheet("QPushButton {font-size:60px;padding-left:30;color:#a7a7a7;background: url(:/images/datarelease.png)}");
 
+    dataViewWin = new DataView(this,0);
+    invalidWin = new DataInvaildView(this,0);
+    lineWin = new DataLine(this,0),
+
     ui->stackedWidget->addWidget(DataMenu::getPtr());
-    ui->stackedWidget->addWidget(DataView::getPtr());
-    ui->stackedWidget->addWidget(DataLine::getPtr());
-    ui->stackedWidget->addWidget(DataInvaildView::getPtr());
+    ui->stackedWidget->addWidget(dataViewWin);
+    ui->stackedWidget->addWidget(lineWin);
+    ui->stackedWidget->addWidget(invalidWin);
     ui->stackedWidget->addWidget(SetupMenu::getPtr());
     ui->stackedWidget->addWidget(SystemName::getPtr());
     ui->stackedWidget->addWidget(LockScreenSet::getPtr());
@@ -155,19 +159,19 @@ void MainWin::GoPage(UIHandler::PageId id)
         ui->stackedWidget->setCurrentWidget(HomeSubMachine::getPtr());
     else if (id == UIHandler::PageId::Page_Data_Menu && ui->stackedWidget->currentWidget() != DataMenu::getPtr())
         ui->stackedWidget->setCurrentWidget(DataMenu::getPtr());
-    else if (id == UIHandler::PageId::Page_Data_View && ui->stackedWidget->currentWidget() != DataView::getPtr())
+    else if (id == UIHandler::PageId::Page_Data_View && ui->stackedWidget->currentWidget() != dataViewWin)
     {
-        ui->stackedWidget->setCurrentWidget(DataView::getPtr());
+        ui->stackedWidget->setCurrentWidget(dataViewWin);
         //set_LbTitle_SampleInfo();
     }
-    else if (id == UIHandler::PageId::Page_Data_Line && ui->stackedWidget->currentWidget() != DataLine::getPtr())
+    else if (id == UIHandler::PageId::Page_Data_Line && ui->stackedWidget->currentWidget() != lineWin)
     {
-        ui->stackedWidget->setCurrentWidget(DataLine::getPtr());
+        ui->stackedWidget->setCurrentWidget(lineWin);
         //set_LbTitle_SampleInfo();
     }
-    else if (id == UIHandler::PageId::Page_Data_InvalidView && ui->stackedWidget->currentWidget() != DataInvaildView::getPtr())
+    else if (id == UIHandler::PageId::Page_Data_InvalidView && ui->stackedWidget->currentWidget() != invalidWin)
     {
-        ui->stackedWidget->setCurrentWidget(DataInvaildView::getPtr());
+        ui->stackedWidget->setCurrentWidget(invalidWin);
         //set_LbTitle_SampleInfo();
     }
     else if (id == UIHandler::PageId::Page_Setup_Menu && ui->stackedWidget->currentWidget() != SetupMenu::getPtr())

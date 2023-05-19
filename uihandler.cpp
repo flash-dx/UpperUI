@@ -576,9 +576,9 @@ QString UIHandler::getValidTime()
     return  str2q(UpperHandler::getValidTime());
 }
 
-int UIHandler::getSubCurTestId()
+int UIHandler::getSubCurTestId(const int machiNo)
 {
-    return  UpperHandler::getSubCurTestId();
+    return  UpperHandler::getSubCurTestId(machiNo);
 }
 
 int UIHandler::getSubCurItemCt(const QString &itemName)

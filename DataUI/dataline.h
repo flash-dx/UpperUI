@@ -19,10 +19,10 @@ class DataLine : public QDialog
     Q_OBJECT
 
 public:
-    explicit DataLine(QWidget *parent = nullptr);
+    explicit DataLine(QWidget *parent = nullptr,int type =0);
     ~DataLine();
-    static DataLine *getPtr(int ptrIndex = 0);
-
+public:
+    void updateUI(int machineNo = -1);
 protected:
     void paintEvent(QPaintEvent *event);
     void showEvent(QShowEvent *event);
@@ -31,7 +31,7 @@ protected:
 private slots:
     void on_btBack_clicked();
     void on_Item_clicked();
-    void updateUI();
+
 
 
 private:
@@ -43,6 +43,7 @@ private:
 
     QList<QLabel*> list;
     QList<QPushButton*> btnlist;
+    int winIndex;
 };
 
 #endif // DATALINE_H

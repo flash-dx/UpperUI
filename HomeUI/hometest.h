@@ -45,7 +45,7 @@ private:
     QList<QPushButton*> listBtn;
     QList<QLineSeries*> listLine;
 
-    void updateItem();
+    void updateItem(int machineNo);
 
 };
 

@@ -1,25 +1,8 @@
 #include "datainvaildview.h"
 #include "ui_datainvaildview.h"
 
-static DataInvaildView *winptr = nullptr;
-static DataInvaildView *winptr2 = nullptr;
-static int winIndex = 0;
-
-DataInvaildView *DataInvaildView::getPtr(int ptrIndex)
-{
-    winIndex = ptrIndex;
-    if (ptrIndex == 1){
-        if (winptr2 == nullptr)
-            winptr2 = new DataInvaildView;
-        return winptr2;
-    }
-    if (winptr == nullptr)
-        winptr = new DataInvaildView;
-    return winptr;
-}
-
-DataInvaildView::DataInvaildView(QWidget *parent) :
-    QDialog(parent),
+DataInvaildView::DataInvaildView(QWidget *parent, int type) :
+    QDialog(parent),winIndex(type),
     ui(new Ui::DataInvaildView)
 {
     ui->setupUi(this);
@@ -71,7 +54,6 @@ void DataInvaildView::showEvent(QShowEvent *event){
             UIHandler::NotifyTitle(tr("测试结束"));
         else
             UIHandler::NotifyTitle("dataview",5);
-        //connect(HomeMain::getPtr(),SIGNAL(sig_UpdateUI()),this,SLOT(updateUI()));
     }
     else {
         updateUI();
@@ -109,12 +91,12 @@ void DataInvaildView::on_Data_InvalidView_btDelete_clicked()
 //    }
 }
 
-void DataInvaildView::updateUI()
+void DataInvaildView::updateUI(int machineNo)
 {
      int testId ;
      if (winIndex == 1)
      {
-        //testId = UIHandler::getSubCurTestId();
+        testId = UIHandler::getSubCurTestId(machineNo);
      }
      else
      {
