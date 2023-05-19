@@ -49,6 +49,7 @@ DataMenu::DataMenu(QWidget *parent) :
     ui->tableView->horizontalHeader()->hide();
     ui->tableView->verticalHeader()->setDefaultSectionSize(h);
     ui->tableView->horizontalHeader()->setVisible(false);
+    testModel.InitTest();
     ui->tableView->setModel(&testModel);
     ui->tableView->setAlternatingRowColors(true);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -103,25 +104,17 @@ void DataMenu::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
      ui->retranslateUi(this);
-     ui->Data_Menu_lbHeader1->setText(tr("序号") + "↓");
-     ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
-     ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
-     ui->Data_Menu_lbHeader4->setText(tr("通道名"));
-     ui->Data_Menu_lbHeader5->setText(tr("样本号"));
-     ui->Data_Menu_lbHeader6->setText(tr("操作员"));
-     ui->Data_Menu_lbHeader7->setText(tr("审核员"));
-     ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
 
      initPage();
-     testModel.InitTest();
+     updatePage();
      UIHandler::NotifyTitle("datamenu",5);
 }
 
 void DataMenu::on_tableView_clicked(const QModelIndex &index)
 {
-    TestModel::setCurrTestByIndex(index.row());
+    UIHandler::pTestModel->setCurrTestByIndex(index.row());
     UIHandler::setDataEntry(0);
-    if (TestModel::getTestResultType(TestModel::getCurrTestId()) >= 2)
+    if (UIHandler::pTestModel->getTestResultType(UIHandler::pTestModel->getCurrTestId()) >= 2)
       UIHandler::GoPage(UIHandler::PageId::Page_Data_View);
     else
       UIHandler::GoPage(UIHandler::PageId::Page_Data_InvalidView);
@@ -154,14 +147,7 @@ bool DataMenu::eventFilter(QObject *obj, QEvent *event)
             testModel.InitTest();
             ui->tableView->update();
 
-            ui->Data_Menu_lbHeader1->setText(tr("序号"));
-            ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
-            ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
-            ui->Data_Menu_lbHeader4->setText(tr("通道名"));
-            ui->Data_Menu_lbHeader5->setText(tr("样本号"));
-            ui->Data_Menu_lbHeader6->setText(tr("操作员"));
-            ui->Data_Menu_lbHeader7->setText(tr("审核员"));
-            ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
+            resetTableHead();
 
             QLabel *label = qobject_cast<QLabel *>(obj);
             QString text = label->text();
@@ -178,21 +164,34 @@ bool DataMenu::eventFilter(QObject *obj, QEvent *event)
 
 void DataMenu::initPage()
 {
+    searchFilter = "";
     bAsc = true;
     currPage = 1;
     pageNum = ui->tableView->geometry().height()/80;
-    totalRecord = UIHandler::pTestModel->rowCount();
+
+    testModel.setLimit(0, pageNum);
+    testModel.setOrder("Testid", bAsc);
+    testModel.setFilter(searchFilter);
+    testModel.InitTest();
+
+    totalRecord = testModel.getFilterRowCount();
     totalPage = (totalRecord+pageNum-1)/pageNum;
     ui->Data_Menu_EditPage->setText("1");
     ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
-    testModel.setLimit(0, pageNum);
+
+    resetTableHead();
+    ui->Data_Menu_lbHeader1->setText(tr("序号") + "↓");
 }
 
 void DataMenu::updatePage()
 {
+    testModel.setFilter(searchFilter);
     testModel.setLimit(pageNum*(currPage-1), pageNum);
     testModel.InitTest();
     ui->tableView->update();
+
+    totalRecord = testModel.getFilterRowCount();
+    totalPage = (totalRecord+pageNum-1)/pageNum;
     ui->Data_Menu_EditPage->setText(QString::number(currPage));
     ui->Data_Menu_lbPage->setText(QString("第 %1 页/共 %2 页").arg(currPage).arg(totalPage));
 }
@@ -223,4 +222,36 @@ void DataMenu::on_Data_Menu_btnJump_clicked()
         currPage = page;
         updatePage();
     }
+}
+
+void DataMenu::resetTableHead()
+{
+    ui->Data_Menu_lbHeader1->setText(tr("序号"));
+    ui->Data_Menu_lbHeader2->setText(tr("是否异常"));
+    ui->Data_Menu_lbHeader3->setText(tr("测试项目"));
+    ui->Data_Menu_lbHeader4->setText(tr("通道名"));
+    ui->Data_Menu_lbHeader5->setText(tr("样本号"));
+    ui->Data_Menu_lbHeader6->setText(tr("操作员"));
+    ui->Data_Menu_lbHeader7->setText(tr("审核员"));
+    ui->Data_Menu_lbHeader8->setText(tr("测试时间"));
+}
+void DataMenu::on_Data_Menu_btnFilter_clicked()
+{
+    if(dataSearch.exec() == QDialog::Accepted)
+    {
+        currPage = 1;
+        searchFilter = dataSearch.searchFilter;
+
+        qDebug()<<"DataMenu::on_Data_Menu_btnFilter_clicked"<<searchFilter;
+        pageNum = ui->tableView->geometry().height()/80;
+        totalPage = (totalRecord+pageNum-1)/pageNum;
+
+        updatePage();
+    }
+}
+
+void DataMenu::on_Data_Menu_btnAll_clicked()
+{
+    initPage();
+    updatePage();
 }

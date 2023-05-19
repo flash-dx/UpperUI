@@ -1,4 +1,4 @@
-#include "hometest.h"
+﻿#include "hometest.h"
 #include "ui_hometest.h"
 
 #include <QLineSeries>
@@ -43,7 +43,7 @@ HomeTest::~HomeTest()
 void HomeTest::showEvent(QShowEvent *event){
     Q_UNUSED(event);
 
-    TestModel::setCurrTestById(UIHandler::getSubCurTestId());
+    UIHandler::pTestModel->setCurrTestById(UIHandler::getSubCurTestId());
 
     ui->Home_HomeTest_lbTestName->setText(UIHandler::PanelName());
     ui->Home_HomeTest_lbTestSerial->setText(UIHandler::BoxSerial());
@@ -114,10 +114,10 @@ void HomeTest::on_OneBtnMessageBox_Ack(int ack ,QString name)
 void HomeTest::on_Item_clicked()
 {
     qDebug()<<"on_Item_clicked"<<focusWidget()->objectName();
-    TestModel::setCurrItemName(focusWidget()->objectName());
+    UIHandler::pTestModel->setCurrItemName(focusWidget()->objectName());
     foreach (QPushButton *pBtn, list)
     {
-        if(pBtn->objectName() == TestModel::getCurrItemName())
+        if(pBtn->objectName() == UIHandler::pTestModel->getCurrItemName())
         {
             pBtn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF");
         }
@@ -166,15 +166,15 @@ void HomeTest::initUi()
 
 void HomeTest::updateChart()
 {
-    chart->setTitle(TestModel::getCurrItemName());
+    chart->setTitle(UIHandler::pTestModel->getCurrItemName());
     chart->removeAllSeries();
     axisY->setRange(-10,50);
-    QString itemName = TestModel::getCurrItemName();
-    int testid = TestModel::getCurrTestId();
-    int ct = TestModel::getItemCT(testid,itemName);
+    QString itemName = UIHandler::pTestModel->getCurrItemName();
+    int testid = UIHandler::pTestModel->getCurrTestId();
+    int ct = UIHandler::pTestModel->getItemCT(testid,itemName);
     qDebug()<<"HomeTest showEvent testid="<<testid<<"ct="<<ct<<"itemName"<<itemName;
     axisY->append(QString::number(ct),ct);
-    TestData *data = TestModel::getTestData(testid);
+    TestData *data = UIHandler::pTestModel->getTestData(testid);
     if (data == nullptr)
         return;
     for(auto it : data->PosId){
@@ -201,7 +201,7 @@ void HomeTest::updateItem()
         delete btn;
     list.clear();
 
-    QStringList itemName = TestModel::getTestName(UIHandler::getSubCurTestId());
+    QStringList itemName = UIHandler::pTestModel->getTestName(UIHandler::getSubCurTestId());
     //itemName<<"HRV/HEV"<<"RSV"<<"SARS-CoV-2"<<"PIV"<<"MP"<<"ADV"<<"Flu-B"<<"Flu-A";
 
     int tempWidth = 250;
@@ -217,7 +217,7 @@ void HomeTest::updateItem()
         btn->setGeometry(tempx+(tempWidth+xSpacing)*int(i%4),tempy + (tempHeight+ySpacing)*int(i/4),tempWidth,tempHeight);
         btn->setObjectName(itemName[i]);
         btn->setText(itemName[i]);
-        if(itemName[i] == TestModel::getCurrItemName())
+        if(itemName[i] == UIHandler::pTestModel->getCurrItemName())
         {
             btn->setStyleSheet("border-radius:10px;background-color:#3584E4;color:#FFFFFF;font:bold 10px");
         }

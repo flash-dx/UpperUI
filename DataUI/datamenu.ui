@@ -223,7 +223,7 @@
     <string notr="true">border-image: url(:/images/btnbk.png);</string>
    </property>
    <property name="text">
-    <string>筛选</string>
+    <string>查找</string>
    </property>
   </widget>
   <widget class="QPushButton" name="Data_Menu_btnAll">
@@ -239,7 +239,7 @@
     <string notr="true">border-image: url(:/images/btnbk.png);</string>
    </property>
    <property name="text">
-    <string>全部显示</string>
+    <string>显示全部</string>
    </property>
   </widget>
  </widget>

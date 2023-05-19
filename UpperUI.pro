@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    DataUI/datasearch.cpp \
         main.cpp \
         mainwindow.cpp \
     logindlg.cpp \
@@ -78,6 +79,7 @@ SOURCES += \
     globalapplication.cpp
 
 HEADERS += \
+    DataUI/datasearch.h \
         mainwindow.h \
     logindlg.h \
     uihandler.h \
@@ -130,6 +132,7 @@ HEADERS += \
     globalapplication.h
 
 FORMS += \
+    DataUI/datasearch.ui \
         mainwindow.ui \
     logindlg.ui \
     mainwin.ui \
