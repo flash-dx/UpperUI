@@ -126,7 +126,13 @@ public:
     static QString PanelCode();
     static QString BoxSerial();
     static QString getSampleTypeName(int type);
-    static void setPanelName(const QString name);
+    static QStringList getSubTestName(const int machiNo = getCurrMachineId());
+    static void setSubCurrItemName(const QString& name);
+    static QString getSubCurrItemName(const int machiNo = getCurrMachineId());
+    static map<int,int> getSubOneCycleData(const int machiNo);
+    static list<int> getSubTestlistId(const int machiNo);
+    static int getSubIndexToId(int index,const int machiNo = getCurrMachineId());
+    static void setPanelName(const QString& name);
     static void setPanelCode(const QString code);
     static void setBoxSerial(const QString serial);
     static void setBoxCode(const QString code);    
@@ -290,6 +296,10 @@ public:
 
     static int getSubCurTestId();
 
+    static int getSubCurItemCt(const QString& itemName);
+
+    static int getSubCurrItemId(const int machiNo = getCurrMachineId() );
+
     static void TestResultGoWin(int WinID = 0);
 
     static void dealTestData(const int testId, map<int,TestData> &testData);
@@ -313,6 +323,7 @@ private:
     void slot_DoorKeyDown(int machineNo);
     void slot_senorUpdate(int type,int machineNo);
     void slot_tcpStatus(int status,int machineNo);
+    void slot_updateChart(int machineNo, int cycle);
 signals:
     void EnterLogin(bool bEnter);
     void Go(PageId id);
@@ -333,6 +344,7 @@ signals:
     void sig_senorUpdate(int type, int machineNo);
     void sig_tcpStatus(int status, int machineNo);
     void sig_updateMsgIcon(int machineNo);
+    void sig_updateChart(int machineNo,int cycle);
 };
 
 #endif // UIHANDLER_H

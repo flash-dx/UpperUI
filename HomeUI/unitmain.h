@@ -17,6 +17,7 @@ public:
     explicit UnitMain(QWidget *parent = nullptr);
     ~UnitMain();
     void UpdateUI(int machineNo);
+    void updateChart(int machineNo,int cycle);
 
 private:
     Ui::UnitMain *ui;

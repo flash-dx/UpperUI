@@ -2,6 +2,7 @@
 #define HOMETEST_H
 
 #include <QDialog>
+#include <QLineSeries>
 #include "uihandler.h"
 #include <QtCharts/QChart>
 #include <QValueAxis>
@@ -21,6 +22,9 @@ public:
     explicit HomeTest(QWidget *parent = nullptr);
     ~HomeTest();
     void UpdateUI(int machineNo);
+    void updateChart(int machineNo ,int cycle);
+    void resetUi();
+
 
 protected:
     void showEvent(QShowEvent *event);
@@ -38,8 +42,9 @@ private:
     QChartView *chartView;
     QValueAxis *axisX;
     QCategoryAxis *axisY;
-    QList<QPushButton*> list;
-    void updateChart();
+    QList<QPushButton*> listBtn;
+    QList<QLineSeries*> listLine;
+
     void updateItem();
 
 };

@@ -22,9 +22,10 @@ protected:
 
 private slots:
     void UpdateUI(int machineNo);
+
     void on_HomeSubMachine_btHome_clicked();
 
-    void on_tabWidget_currentChanged(int index);
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::HomeSubMachine *ui;
